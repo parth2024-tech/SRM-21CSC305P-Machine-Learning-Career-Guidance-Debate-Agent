@@ -26,6 +26,7 @@ cells.append(nbf.v4.new_markdown_cell("""# 🎓 PBL 1: Debate-Based Career Guida
 * **Course:** Machine Learning - Project-Based Learning 1 (PBL 1)
 * **Total Marks:** **20 Marks**
 * **Assigned Topic:** **Debate-Based Career Guidance Agent with Complementary Personas**
+* **Kaggle Dataset Source:** [College Student Placement Factors & Career Dataset](https://www.kaggle.com/datasets/sahilislam007/college-student-placement-factors-dataset) *(20,000 records, 39 features, 0 nulls)*
 * **Target Objective:** Create Planner, Critic, and Ethics-Reviewer personas that debate career pathways using empirical role and skill data, delivering balanced recommendations with calibrated uncertainty and human counselor override.
 
 ---
@@ -365,18 +366,76 @@ print("Unit 2 Practice 2: Classification Model Performance & 5-Fold Cross Valida
 display(pd.DataFrame(clf_perf).T.round(4))
 """))
 
-# Rubric 4 & 5: Multi-Persona Debate Engine
+# Rubric 4 & 5: Multi-Persona Debate Engine & Career-Skill Knowledge Graph
 cells.append(nbf.v4.new_markdown_cell("""---
-## 4 & 5. Multi-Persona Debate Engine & Comparative Evaluation (8 Marks)
+## 4 & 5. Career-Skill Knowledge Graph & Multi-Persona Debate Engine (8 Marks)
 
-### Multi-Agent Dialectical Debate Architecture
-Rather than trusting a single model, three complementary personas independently evaluate the student profile:
-* **Round 1 (Planner):** Promotes highest career upside and compensation using Bayesian regression predictions.
-* **Round 2 (Critic):** Stress-tests against daily workload ($\ge 10$h flags burnout) and practical deficits (coding rating $<6$).
-* **Round 3 (Ethics-Reviewer):** Verifies socioeconomic accessibility, quantifies epistemic uncertainty, and triggers a **Human Counselor Override**.
-* **Round 4 (Dialectical Consensus):** Reconciles ambitions and risks into a balanced recommendation."""))
+### 4.1 Career-Skill Knowledge Graph (Role & Skill Ontology)
+As specified in the topic architecture, the debate agents ground their arguments in a **Career-Skill Knowledge Graph** that links Strategic Career Tracks to:
+* **Core Competencies** (Skills required for success)
+* **Curated Open Courses** (Educational pathways)
+* **Systemic Market Risks & Bottlenecks**"""))
 
-cells.append(nbf.v4.new_code_cell("""# [Cell 8] Multi-Persona Debate Agent Implementation
+cells.append(nbf.v4.new_code_cell("""# [Cell 8] Career-Skill Knowledge Graph Construction & Visualization (NetworkX)
+import networkx as nx
+
+# Define Knowledge Graph Ontology
+kg_data = {
+    "Software & Systems": {
+        "skills": ["Algorithms", "Distributed Systems", "Cloud Arch"],
+        "courses": ["CS50x CS", "AWS Sol Arch", "Full Stack Open"]
+    },
+    "Data & Analytics": {
+        "skills": ["SQL Tuning", "ETL Pipelines", "Bayesian Stats"],
+        "courses": ["CS229 ML", "Postgres Mastery", "Data Eng Camp"]
+    },
+    "Security & Networks": {
+        "skills": ["TCP/IP", "Pen Testing", "Linux Kernel"],
+        "courses": ["Cisco CCNA", "CompTIA Sec+", "OSCP Labs"]
+    },
+    "Management & Business": {
+        "skills": ["Agile/Scrum", "Process Models", "Stakeholder Comm"],
+        "courses": ["Google PMP", "Scrum Master", "Enterprise BPMN"]
+    },
+    "QA, UX & Operations": {
+        "skills": ["E2E Automation", "UX Research", "WCAG A11y"],
+        "courses": ["IDF UX Design", "Playwright Auto", "SRE Fundamentals"]
+    }
+}
+
+G = nx.Graph()
+for domain, content in kg_data.items():
+    G.add_node(domain, node_type="Domain")
+    for s in content["skills"]:
+        G.add_node(s, node_type="Skill")
+        G.add_edge(domain, s, rel="REQUIRES")
+    for c in content["courses"]:
+        G.add_node(c, node_type="Course")
+        G.add_edge(domain, c, rel="PREPARES")
+
+plt.figure(figsize=(12, 8))
+pos = nx.spring_layout(G, seed=42, k=0.8)
+
+# Color nodes by type
+domain_nodes = [n for n, d in G.nodes(data=True) if d.get('node_type') == 'Domain']
+skill_nodes = [n for n, d in G.nodes(data=True) if d.get('node_type') == 'Skill']
+course_nodes = [n for n, d in G.nodes(data=True) if d.get('node_type') == 'Course']
+
+nx.draw_networkx_nodes(G, pos, nodelist=domain_nodes, node_color='#1d3557', node_size=1800, label='Career Domain')
+nx.draw_networkx_nodes(G, pos, nodelist=skill_nodes, node_color='#2a9d8f', node_size=800, label='Required Skill')
+nx.draw_networkx_nodes(G, pos, nodelist=course_nodes, node_color='#e76f51', node_size=800, label='Curated Course')
+nx.draw_networkx_edges(G, pos, edge_color='#cccccc', width=1.2)
+nx.draw_networkx_labels(G, pos, font_size=8, font_family='sans-serif', font_weight='bold')
+
+plt.title("Career-Skill Knowledge Graph Ontology (Personas Grounding Network)", fontsize=13, fontweight='bold', pad=12)
+plt.legend(scatterpoints=1, loc='upper left', frameon=True)
+plt.axis('off')
+plt.tight_layout()
+plt.show()
+"""))
+
+# Debate Agent Implementation
+cells.append(nbf.v4.new_code_cell("""# [Cell 9] Multi-Persona Debate Agent Implementation
 def run_persona_debate(student_profile):
     print("=" * 80)
     print(f"  MULTI-PERSONA CAREER DEBATE: {student_profile['name'].upper()}")
@@ -426,7 +485,7 @@ def run_persona_debate(student_profile):
     print("-" * 80)
 """))
 
-cells.append(nbf.v4.new_code_cell("""# [Cell 9] Evaluation across 4 Diverse Synthetic Student Archetypes
+cells.append(nbf.v4.new_code_cell("""# [Cell 10] Evaluation across 4 Diverse Synthetic Student Archetypes
 test_profiles = [
     {
         "name": "Student A (High Academic / Developing Practical)",
@@ -454,8 +513,8 @@ for profile in test_profiles:
     run_persona_debate(profile)
 """))
 
-# Cell 10: Human Override Simulation & Rubric Summary
-cells.append(nbf.v4.new_code_cell("""# [Cell 10] Multi-Agent Governance Benchmarks & Rubric Mark Self-Assessment
+# Cell 11: Human Override Simulation & Rubric Summary
+cells.append(nbf.v4.new_code_cell("""# [Cell 11] Multi-Agent Governance Benchmarks & Rubric Mark Self-Assessment
 debate_governance_metrics = pd.DataFrame([
     {"Governance Metric": "Evidence Diversity Index", "Score": "0.88 / 1.00", "Target": "> 0.75", "Status": "Exceeds Target ✅"},
     {"Governance Metric": "Contradiction Resolution Rate", "Score": "94.2%", "Target": "> 85.0%", "Status": "Exceeds Target ✅"},

@@ -13,6 +13,49 @@ import numpy as np
 from typing import Dict, Any, List, Tuple
 
 
+class CareerSkillKnowledgeGraph:
+    """
+    Career-Skill Knowledge Graph (Network-based Skill/Role ontology).
+    Maps Strategic Career Domains to Essential Skills, Course Pathways, and Failure Modes.
+    """
+    def __init__(self):
+        self.graph = {
+            "Software & Systems Engineering": {
+                "core_skills": ["Distributed Systems", "Cloud Architecture", "Data Structures & Algorithms", "Low-level Systems"],
+                "recommended_courses": ["CS50x: Computer Science", "AWS Certified Solutions Architect", "Full Stack Open"],
+                "bottlenecks": ["Lack of practical GitHub portfolio", "Weak systems algorithmic mastery"],
+                "market_risk": "High saturation in entry-level frontend; high upside in backend systems"
+            },
+            "Data Science & Database Systems": {
+                "core_skills": ["SQL Optimization", "Data Warehousing", "Statistical Modeling", "Bayesian Inference"],
+                "recommended_courses": ["Stanford CS229: Machine Learning", "PostgreSQL High Performance", "Data Engineering Zoomcamp"],
+                "bottlenecks": ["Theoretical knowledge without real ETL pipelines", "Weak SQL performance tuning"],
+                "market_risk": "Moderate saturation; high demand for data infrastructure"
+            },
+            "Network Architecture & Cybersecurity": {
+                "core_skills": ["TCP/IP Protocols", "Penetration Testing", "Threat Modeling", "Linux Kernel Security"],
+                "recommended_courses": ["Cisco CCNA Networking", "CompTIA Security+", "Offensive Security Certified Professional"],
+                "bottlenecks": ["Insufficient hands-on networking lab practice", "Lacking incident response triage"],
+                "market_risk": "Recession-resilient, severe talent shortage"
+            },
+            "Business, Systems & Management": {
+                "core_skills": ["Agile Project Delivery", "Business Process Modeling", "Stakeholder Communication", "Financial ROI"],
+                "recommended_courses": ["Google Project Management Professional", "Scrum Master Certification", "Enterprise BPMN"],
+                "bottlenecks": ["Underdeveloped technical translation to business outcomes", "Low public speaking confidence"],
+                "market_risk": "Vulnerable to restructuring without technical grounding"
+            },
+            "Quality Assurance, UX & Operations": {
+                "core_skills": ["Automated E2E Testing", "User Interaction Design", "Accessibility WCAG", "Observability/SRE"],
+                "recommended_courses": ["Interaction Design Foundation UX", "Playwright & Test Automation Bootcamp", "Site Reliability Engineering"],
+                "bottlenecks": ["Pure manual testing without scripting", "Weak visual design systems mastery"],
+                "market_risk": "Automation reducing manual QA roles; high demand for SDETs"
+            }
+        }
+
+    def get_track_knowledge(self, track_name: str) -> Dict[str, Any]:
+        return self.graph.get(track_name, self.graph["Software & Systems Engineering"])
+
+
 class DebatePersona:
     """Base class for complementary debate agents."""
     def __init__(self, name: str, role: str, perspective: str):
@@ -29,6 +72,7 @@ class PlannerPersona(DebatePersona):
             role="Upside & Pathway Architect",
             perspective="Focuses on highest career trajectory, salary potential, and aspirational growth."
         )
+        self.kg = CareerSkillKnowledgeGraph()
 
     def formulate_argument(
         self,
@@ -40,6 +84,7 @@ class PlannerPersona(DebatePersona):
         top_track, top_prob = sorted_tracks[0]
         runner_up_track, runner_up_prob = sorted_tracks[1]
         mean_sal, std_sal, (ci_low, ci_high) = salary_pred
+        kg_info = self.kg.get_track_knowledge(top_track)
         
         claims = [
             f"Primary trajectory recommended is '{top_track}' with {top_prob*100:.1f}% probabilistic model alignment.",
@@ -50,11 +95,11 @@ class PlannerPersona(DebatePersona):
         evidence = [
             f"Academic strength in core subjects (Average: {student_profile.get('academic_avg', 75):.1f}%)",
             f"Technical rating: {student_profile.get('coding_skills', 5)}/9, Logical quotient: {student_profile.get('logical_quotient', 5)}/9",
-            f"Participation in {student_profile.get('hackathons', 0)} hackathons indicates practical initiative."
+            f"Knowledge Graph Core Competencies: {', '.join(kg_info['core_skills'])}"
         ]
         
         recommended_actions = [
-            f"Enroll in advanced capstone course for {top_track}.",
+            f"Enroll in recommended curriculum: {', '.join(kg_info['recommended_courses'])}.",
             "Build 2 production-grade GitHub projects demonstrating system architecture.",
             f"Target Tier-1 tech and enterprise roles targeting the ${ci_high}k upper percentile."
         ]
@@ -77,6 +122,7 @@ class CriticPersona(DebatePersona):
             role="Pragmatic Reality Checker",
             perspective="Audits bottleneck risks, market saturation, skill deficits, and work-life strain."
         )
+        self.kg = CareerSkillKnowledgeGraph()
 
     def formulate_critique(
         self,
@@ -87,6 +133,14 @@ class CriticPersona(DebatePersona):
         hours_worked = student_profile.get('hours_worked', 8)
         coding_skill = student_profile.get('coding_skills', 5)
         can_work_long = student_profile.get('can_work_long', 'yes')
+        
+        # Extract recommended track from planner claims
+        top_track = "Software & Systems Engineering"
+        for cl in planner_arg.get("claims", []):
+            if "Primary trajectory recommended is '" in cl:
+                top_track = cl.split("'")[1]
+                break
+        kg_info = self.kg.get_track_knowledge(top_track)
         
         critiques = []
         bottlenecks = []
@@ -99,9 +153,9 @@ class CriticPersona(DebatePersona):
             critiques.append(f"Skill Deficit: Coding skill rating ({coding_skill}/9) is insufficient for top-tier competitive software engineering roles.")
             bottlenecks.append("Practical coding implementation deficiency")
             
-        if student_profile.get('public_speaking', 5) < 4:
-            critiques.append("Communication Gap: Public speaking score is below median, threatening team leadership viability.")
-            bottlenecks.append("Client-facing communication deficit")
+        # Add Knowledge Graph market risk
+        critiques.append(f"Market Friction: {kg_info['market_risk']}.")
+        bottlenecks.append(kg_info['bottlenecks'][0])
             
         mean_sal, std_sal, (ci_low, ci_high) = salary_pred
         critiques.append(f"Downside Risk: In market downturns, compensation could drop to ${ci_low}k rather than Planner's target ${ci_high}k.")

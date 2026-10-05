@@ -1,0 +1,278 @@
+{
+  "regression_benchmarks": {
+    "OLS_Linear_Regression": {
+      "MSE": 6.8381,
+      "RMSE": 2.615,
+      "MAE": 2.0876,
+      "R2_Score": 0.8731
+    },
+    "Ridge_Regression_alpha_1.0": {
+      "MSE": 6.8381,
+      "RMSE": 2.615,
+      "MAE": 2.0876,
+      "R2_Score": 0.8731
+    },
+    "Ridge_Regression_alpha_10.0": {
+      "MSE": 6.8382,
+      "RMSE": 2.615,
+      "MAE": 2.0879,
+      "R2_Score": 0.8731
+    },
+    "Bayesian_Linear_Regression": {
+      "MSE": 6.8381,
+      "RMSE": 2.615,
+      "MAE": 2.0877,
+      "R2_Score": 0.8731
+    },
+    "Polynomial_Curve_Fitting_deg2": {
+      "MSE": 6.0458,
+      "RMSE": 2.4588,
+      "MAE": 1.9671,
+      "R2_Score": 0.8878
+    },
+    "Analytical_Bayesian_Linear_Regression": {
+      "MSE": 6.8405,
+      "RMSE": 2.6154,
+      "MAE": 2.0878,
+      "R2_Score": 0.873,
+      "Mean_Predictive_StdDev": 2.2375
+    }
+  },
+  "classification_benchmarks": {
+    "Logistic_Regression_Discriminative": {
+      "Accuracy": 0.2855,
+      "Precision_Weighted": 0.0815,
+      "Recall_Weighted": 0.2855,
+      "F1_Macro": 0.0889,
+      "F1_Weighted": 0.1268,
+      "CV_Mean_Accuracy": 0.2505,
+      "CV_Std_Accuracy": 0.0091,
+      "Confusion_Matrix": [
+        [
+          0,
+          0,
+          0,
+          806,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          569,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          694,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1142,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          788,
+          0
+        ]
+      ]
+    },
+    "Bayesian_Generative_Classifier": {
+      "Accuracy": 0.2855,
+      "Precision_Weighted": 0.18,
+      "Recall_Weighted": 0.2855,
+      "F1_Macro": 0.0893,
+      "F1_Weighted": 0.1273,
+      "CV_Mean_Accuracy": 0.2555,
+      "CV_Std_Accuracy": 0.0073,
+      "Confusion_Matrix": [
+        [
+          0,
+          0,
+          0,
+          806,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          569,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          694,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1141,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          787,
+          1
+        ]
+      ]
+    },
+    "SVM_Linear_Kernel": {
+      "Accuracy": 0.2855,
+      "Precision_Weighted": 0.0815,
+      "Recall_Weighted": 0.2855,
+      "F1_Macro": 0.0888,
+      "F1_Weighted": 0.1268,
+      "CV_Mean_Accuracy": 0.2805,
+      "CV_Std_Accuracy": 0.001,
+      "Confusion_Matrix": [
+        [
+          0,
+          0,
+          0,
+          806,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          570,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          694,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1142,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          788,
+          0
+        ]
+      ]
+    },
+    "SVM_RBF_Kernel_Trick": {
+      "Accuracy": 0.2672,
+      "Precision_Weighted": 0.1753,
+      "Recall_Weighted": 0.2672,
+      "F1_Macro": 0.1254,
+      "F1_Weighted": 0.1615,
+      "CV_Mean_Accuracy": 0.2595,
+      "CV_Std_Accuracy": 0.0073,
+      "Confusion_Matrix": [
+        [
+          76,
+          1,
+          5,
+          688,
+          36
+        ],
+        [
+          74,
+          0,
+          4,
+          469,
+          23
+        ],
+        [
+          82,
+          1,
+          4,
+          578,
+          29
+        ],
+        [
+          122,
+          1,
+          15,
+          956,
+          48
+        ],
+        [
+          81,
+          0,
+          6,
+          668,
+          33
+        ]
+      ]
+    }
+  },
+  "synthetic_profiles_evaluation": [
+    {
+      "profile": "Profile A: High Academic / Moderate Practical",
+      "archetype": "Strong theoretical foundation, developing coding portfolio",
+      "recommended_track": "Quality Assurance, UX & Operations",
+      "confidence": 0.29,
+      "uncertainty": 0.763,
+      "salary_range": "$51.42k - $60.19k (Median: $55.81k)",
+      "override_recommended": true,
+      "override_reasons": [
+        "Narrow margin between top candidate career domains requires human counselor mediation."
+      ]
+    },
+    {
+      "profile": "Profile B: Self-Taught Coder / Non-Traditional",
+      "archetype": "Exceptional practical hacker, academic struggle, high burnout risk",
+      "recommended_track": "Quality Assurance, UX & Operations",
+      "confidence": 0.284,
+      "uncertainty": 0.768,
+      "salary_range": "$56.4k - $65.18k (Median: $60.79k)",
+      "override_recommended": true,
+      "override_reasons": [
+        "Narrow margin between top candidate career domains requires human counselor mediation.",
+        "Severe workload indicators require human advisor mental health check."
+      ]
+    },
+    {
+      "profile": "Profile C: Balanced All-Rounder / Tech Lead Aspirant",
+      "archetype": "Strong technical and interpersonal skills suitable for architecture/management",
+      "recommended_track": "Quality Assurance, UX & Operations",
+      "confidence": 0.283,
+      "uncertainty": 0.769,
+      "salary_range": "$60.31k - $69.08k (Median: $64.69k)",
+      "override_recommended": true,
+      "override_reasons": [
+        "Narrow margin between top candidate career domains requires human counselor mediation."
+      ]
+    },
+    {
+      "profile": "Profile D: Ambiguous Skill Boundary / Exploratory",
+      "archetype": "Borderline performance across multiple tracks requiring calibrated uncertainty",
+      "recommended_track": "Quality Assurance, UX & Operations",
+      "confidence": 0.283,
+      "uncertainty": 0.768,
+      "salary_range": "$41.01k - $49.78k (Median: $45.4k)",
+      "override_recommended": true,
+      "override_reasons": [
+        "Narrow margin between top candidate career domains requires human counselor mediation."
+      ]
+    }
+  ]
+}

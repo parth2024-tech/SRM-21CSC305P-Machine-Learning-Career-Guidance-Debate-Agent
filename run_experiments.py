@@ -1,181 +1,229 @@
 """
-Master Experiment Runner & Evaluation Pipeline
-Executes end-to-end:
-  1. Data Loading & Statistical Summaries (Unit 1 Practice 1 & 2)
-  2. Exploratory Data Analysis & Visualizations (Rubric 2)
-  3. Regression Suite Training (Unit 2 Practice 1: OLS, Ridge, Bayesian, Poly)
-  4. Classification Suite Training (Unit 2 Practice 2: Logistic, Bayes, SVM Linear & RBF)
-  5. Multi-Persona Debate Simulation & Calibrated Uncertainty
-  6. Synthetic Profile Stress-Testing & Metrics Reporting (Rubrics 4 & 5)
+Master Experiment Runner for Unit 3 & Unit 4
+Executes:
+1. Data loading and summary statistics
+2. Unit 3 Unsupervised Learning Pipeline:
+   - PCA (eigenvalues, scree plot, Kaiser criterion)
+   - Factor Analysis (latent factor loadings, noise variance)
+   - K-Means (Elbow method, WCSS, Silhouette)
+   - Gaussian Mixture Models (EM soft clustering, responsibilities, BIC/AIC)
+   - Hierarchical Clustering (Agglomerative, Ward linkage)
+   - Dissimilarity analysis (Euclidean vs Mahalanobis)
+3. Unit 4 Sequential & Markov Pipeline:
+   - Markov Chain Career Transitions (A, A^k multi-step, Stationary distribution pi*)
+   - Hidden Markov Model (Forward-Backward with scaling factors, Viterbi decoding)
+   - Linear Dynamical System / Kalman Filter (trajectory tracking, Kalman gain)
+4. Multi-Persona Dialectical Debate Engine synthesis
+5. Generates publication-grade evaluation charts
 """
 
 import os
 import json
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import train_test_split
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-from src.data_loader import (
-    load_raw_dataset,
-    compute_summary_statistics,
-    prepare_dataset_for_modeling
-)
-from src.eda import generate_eda_visualizations
-from src.models_regression import RegressionSuite
-from src.models_classification import ClassificationSuite
-from src.debate_agent import MultiPersonaDebateCoordinator
-from src.metrics_evaluator import (
-    generate_synthetic_test_profiles,
-    format_markdown_comparison_tables
-)
+from src.data_loader import load_raw_dataset, compute_summary_statistics
+from src.unit3_unsupervised import Unit3UnsupervisedPipeline
+from src.unit4_sequential import CareerMarkovChain, CareerHiddenMarkovModel, CareerKalmanFilter
+from src.debate_agent import MultiPersonaDebateEngine
 
-
-def main():
-    print("=" * 80)
-    print("  PBL 1: DEBATE-BASED CAREER GUIDANCE AGENT WITH COMPLEMENTARY PERSONAS")
-    print("=" * 80)
+def run_all_experiments():
+    print("=" * 70)
+    print("🚀 STARTING UNIT 3 & UNIT 4 EXPERIMENTATION PIPELINE")
+    print("=" * 70)
     
-    # -------------------------------------------------------------
-    # Step 1: Unit 1 Practice 1 & 2 - Data Loading & Statistics
-    # -------------------------------------------------------------
-    print("\n[Step 1/5] Loading Dataset & Computing Unit 1 Statistical Summaries...")
-    df_raw = load_raw_dataset()
-    stats = compute_summary_statistics(df_raw)
-    print(f"  -> Total Samples: {stats['num_samples']}")
-    print(f"  -> Numeric Features: {len(stats['numeric_features'])}")
-    print(f"  -> Categorical Features: {len(stats['categorical_features'])}")
-    print(f"  -> Sample Feature Mean & Quantiles (Algorithms):")
-    algo_stats = stats['feature_statistics']['percentage in Algorithms']
-    print(f"     Mean: {algo_stats['mean']:.2f}, Var: {algo_stats['variance']:.2f}, Q25: {algo_stats['q25']}, Median: {algo_stats['median']}, Q75: {algo_stats['q75']}")
-
-    # -------------------------------------------------------------
-    # Step 2: Feature Engineering & Preprocessing
-    # -------------------------------------------------------------
-    print("\n[Step 2/5] Preparing Features for Regression & Classification...")
-    df_processed, metadata = prepare_dataset_for_modeling()
-    print(f"  -> Engineered Target 1 (Regression): 'Expected_Salary_k' & 'Career_Readiness_Score'")
-    print(f"  -> Target 2 (Classification): 'Career_Track' with {len(metadata['career_tracks'])} Strategic Domains")
-
-    # Save EDA plots
-    print("  -> Generating Publication-Quality EDA Visualizations...")
-    fig_paths = generate_eda_visualizations(df_processed)
-    for k, v in fig_paths.items():
-        print(f"     Saved {k}: {v}")
-
-    # -------------------------------------------------------------
-    # Step 3: Train Unit 2 Regression Models
-    # -------------------------------------------------------------
-    print("\n[Step 3/5] Executing Unit 2 Linear Models for Regression...")
-    feature_cols = [
-        'Acedamic percentage in Operating Systems',
-        'percentage in Algorithms',
-        'Percentage in Programming Concepts',
-        'Percentage in Software Engineering',
-        'Percentage in Computer Networks',
-        'Percentage in Electronics Subjects',
-        'Percentage in Computer Architecture',
-        'Percentage in Mathematics',
-        'Percentage in Communication skills',
-        'Hours working per day',
-        'Logical quotient rating',
-        'hackathons',
-        'coding skills rating',
-        'public speaking points',
-        'can work long time before system?_encoded',
-        'self-learning capability?_encoded',
-        'Extra-courses did_encoded',
-        'reading_writing_encoded',
-        'memory_capability_encoded'
+    os.makedirs("figures", exist_ok=True)
+    
+    # 1. Dataset Loading
+    df = load_raw_dataset("data/career_guidance_dataset.csv")
+    print(f"✅ Loaded dataset: {df.shape[0]} rows, {df.shape[1]} columns")
+    
+    numeric_cols = [
+        "Acedamic percentage in Operating Systems",
+        "percentage in Algorithms",
+        "Percentage in Programming Concepts",
+        "Percentage in Software Engineering",
+        "Percentage in Computer Networks",
+        "Percentage in Electronics Subjects",
+        "Percentage in Computer Architecture",
+        "Percentage in Mathematics",
+        "Percentage in Communication skills",
+        "Hours working per day",
+        "Logical quotient rating",
+        "hackathons",
+        "coding skills rating",
+        "public speaking points"
     ]
     
-    X = df_processed[feature_cols].values
-    y_reg = df_processed['Expected_Salary_k'].values
-    y_clf = df_processed['Career_Track'].values
-
-    X_train, X_test, y_reg_train, y_reg_test, y_clf_train, y_clf_test = train_test_split(
-        X, y_reg, y_clf, test_size=0.20, random_state=42, stratify=y_clf
+    X_raw = df[numeric_cols].values
+    # Standardize features
+    mean_vec = np.mean(X_raw, axis=0)
+    std_vec = np.std(X_raw, axis=0) + 1e-12
+    X_scaled = (X_raw - mean_vec) / std_vec
+    
+    # 2. UNIT 3: UNSUPERVISED LEARNING
+    print("\n--- [UNIT 3] Running PCA, Factor Analysis, Clustering & GMM ---")
+    u3 = Unit3UnsupervisedPipeline(random_state=42)
+    
+    # PCA
+    X_pca, pca_stats = u3.fit_transform_pca(X_scaled, n_components=6)
+    print(f"PCA Kaiser Criterion (>1.0): {pca_stats['kaiser_criterion_count']} components retained.")
+    print(f"Total Variance Explained (6 components): {pca_stats['total_variance_explained']:.2%}")
+    
+    # Factor Analysis
+    X_fa, fa_stats = u3.fit_factor_analysis(X_scaled, n_factors=3)
+    print(f"Factor Analysis Log-Likelihood: {fa_stats['log_likelihood']:.2f}")
+    
+    # K-Means & Elbow
+    wcss = u3.run_kmeans_elbow(X_scaled, k_range=range(2, 8))
+    km_labels, km_stats = u3.fit_kmeans(X_scaled, n_clusters=4)
+    print(f"K-Means (k=4) Silhouette Score: {km_stats['silhouette_score']:.4f}")
+    
+    # GMM with EM
+    gmm_labels, gmm_probs, gmm_stats = u3.fit_gmm_em(X_scaled, n_components=4)
+    print(f"GMM EM Converged in {gmm_stats['n_iter']} iterations. BIC: {gmm_stats['bic']:.1f}, Mean Entropy: {gmm_stats['mean_assignment_entropy']:.4f}")
+    
+    # Hierarchical Clustering
+    hc_labels, hc_stats = u3.fit_hierarchical(X_scaled, n_clusters=4, linkage='ward')
+    print(f"Hierarchical (Ward) Silhouette Score: {hc_stats['silhouette_score']:.4f}")
+    
+    # 3. UNIT 4: SEQUENTIAL DATA & MARKOV MODELS
+    print("\n--- [UNIT 4] Running Markov Chains, HMM, and Kalman Filter ---")
+    # Markov Chain
+    mc = CareerMarkovChain()
+    pi_star = mc.compute_stationary_distribution()
+    step3_pred = mc.multi_step_prediction(initial_state_idx=0, steps=3)
+    print(f"Markov Chain Stationary Distribution: {np.round(pi_star, 3)}")
+    print(f"Junior Multi-step (3-yr) Transition: Most likely role -> {step3_pred['most_likely_role']}")
+    
+    # HMM Forward-Backward and Viterbi Decoding
+    hmm = CareerHiddenMarkovModel()
+    sample_obs = [0, 1, 1, 2, 2] # Obs: Academic -> Project -> Project -> Innovation -> Innovation
+    log_lik, gamma_posteriors, c_scales = hmm.forward_backward_scaled(sample_obs)
+    viterbi_states, viterbi_log_prob = hmm.viterbi_decode(sample_obs)
+    print(f"HMM Log Likelihood (Scaled Forward-Backward): {log_lik:.3f}")
+    print(f"HMM Viterbi Decoded Path: {' -> '.join(viterbi_states)} (Score: {viterbi_log_prob:.3f})")
+    
+    # Kalman Filter
+    kf = CareerKalmanFilter(dt=1.0, q_var=0.08, r_var=0.40)
+    noisy_ratings = [65.0, 68.5, 71.0, 75.0, 79.5, 84.0]
+    kf_res = kf.filter_trajectory(noisy_ratings, init_proficiency=62.0)
+    print(f"Kalman Filter Estimated Proficiency: {kf_res['final_estimated_proficiency']:.2f} (Velocity: +{kf_res['final_estimated_growth_velocity']:.2f})")
+    
+    # 4. MULTI-PERSONA DEBATE ENGINE
+    print("\n--- [DEBATE ENGINE] Executing Dialectical Persona Consensus ---")
+    engine = MultiPersonaDebateEngine(entropy_threshold=1.25, mahalanobis_threshold=4.0)
+    
+    # Calculate dissimilarity for student 0
+    dissimilarities = u3.compute_dissimilarity_profiles(X_scaled[0])
+    student0_entropy = float(-np.sum(gmm_probs[0] * np.log(gmm_probs[0] + 1e-12)))
+    
+    debate_result = engine.execute_debate(
+        student_id="STUDENT_42_CANDIDATE",
+        student_profile={"target_role": df["Suggested Job Role"].iloc[0]},
+        unit3_metrics={
+            "primary_cluster": int(gmm_labels[0]),
+            "soft_responsibilities": gmm_probs[0].tolist(),
+            "assignment_entropy": student0_entropy,
+            "mahalanobis_distance": dissimilarities.get(f"Cluster_{gmm_labels[0]}_Mahalanobis", 2.1)
+        },
+        unit4_metrics={
+            "viterbi_path": viterbi_states,
+            "viterbi_log_prob": viterbi_log_prob,
+            "markov_multi_step": step3_pred,
+            "kalman_filter": kf_res
+        }
     )
-
-    reg_suite = RegressionSuite()
-    reg_results = reg_suite.train_and_evaluate(X_train, y_reg_train, X_test, y_reg_test)
-    print("  -> Regression Model Evaluation Completed.")
-    for name, m in reg_results.items():
-        print(f"     * {name:38s} | RMSE: {m.get('RMSE'):.4f} | R²: {m.get('R2_Score'):.4f}")
-
-    # -------------------------------------------------------------
-    # Step 4: Train Unit 2 Classification Models
-    # -------------------------------------------------------------
-    print("\n[Step 4/5] Executing Unit 2 Linear Models for Classification...")
-    clf_suite = ClassificationSuite()
-    clf_results = clf_suite.train_and_evaluate(X_train, y_clf_train, X_test, y_clf_test)
-    print("  -> Classification Model Evaluation Completed.")
-    for name, m in clf_results.items():
-        print(f"     * {name:35s} | Accuracy: {m.get('Accuracy')*100:.2f}% | F1-Macro: {m.get('F1_Macro'):.4f} | 5-Fold CV: {m.get('CV_Mean_Accuracy'):.4f}")
-
-    # -------------------------------------------------------------
-    # Step 5: Multi-Persona Debate Agent Simulation & Stress Testing
-    # -------------------------------------------------------------
-    print("\n[Step 5/5] Launching Multi-Persona Debate Agent Harness...")
-    coordinator = MultiPersonaDebateCoordinator()
-    synthetic_profiles = generate_synthetic_test_profiles()
+    print(f"Debate Arbiter Verdict: {debate_result['consensus_synthesis']['recommendation']}")
+    print(f"Confidence Score: {debate_result['consensus_synthesis']['confidence_score']:.2%}")
     
-    debate_summaries = []
-    for prof in synthetic_profiles:
-        # Construct feature vector for synthetic student
-        # [OS, Algo, Prog, SE, Net, Elec, Arch, Math, Comm, Hours, LQ, Hack, Code, Speak, LongWork, SelfLearn, Extra, ReadWrite, Memory]
-        acad = prof['academic_avg']
-        sample_vec = np.array([[
-            acad, acad, acad, acad, acad, acad, acad, acad, 80.0,
-            prof['hours_worked'], prof['logical_quotient'], prof['hackathons'],
-            prof['coding_skills'], prof['public_speaking'],
-            1 if prof['can_work_long'] == 'yes' else 0, 1, 1, 3, 3
-        ]])
-        
-        # ML Inference
-        class_probs = clf_suite.predict_probabilities(sample_vec)
-        salary_pred = reg_suite.predict_with_uncertainty(sample_vec)
-        
-        # Multi-Persona Debate
-        debate_result = coordinator.run_debate(prof, class_probs, salary_pred)
-        debate_summaries.append({
-            "profile": prof['profile_name'],
-            "archetype": prof['archetype'],
-            "recommended_track": debate_result['recommended_career_track'],
-            "confidence": debate_result['confidence_probability'],
-            "uncertainty": debate_result['calibrated_uncertainty'],
-            "salary_range": debate_result['expected_salary_range'],
-            "override_recommended": debate_result['human_override_status']['override_recommended'],
-            "override_reasons": debate_result['human_override_status']['reasons']
-        })
-        
-        print(f"\n  [Debate Run] -> {prof['profile_name']}")
-        print(f"    - Consensus Track: {debate_result['recommended_career_track']} (Confidence: {debate_result['confidence_probability']*100:.1f}%)")
-        print(f"    - Calibrated Uncertainty: {debate_result['calibrated_uncertainty']*100:.1f}%")
-        print(f"    - Expected Compensation: {debate_result['expected_salary_range']}")
-        print(f"    - Human Override Required: {'YES ⚠️' if debate_result['human_override_status']['override_recommended'] else 'NO (Autonomous Approval)'}")
-        if debate_result['human_override_status']['reasons']:
-            for r in debate_result['human_override_status']['reasons']:
-                print(f"      * Trigger: {r}")
-
-    # Save comprehensive evaluation results
-    full_eval = {
-        "regression_benchmarks": reg_results,
-        "classification_benchmarks": clf_results,
-        "synthetic_profiles_evaluation": debate_summaries
+    # 5. VISUALIZATIONS GENERATION
+    print("\n--- Generating Publication Charts for PBL Presentation ---")
+    plt.style.use('seaborn-v0_8-whitegrid')
+    
+    # Figure 1: Unit 3 PCA Scree Plot & Kaiser Criterion
+    fig, ax = plt.subplots(figsize=(8, 4.5))
+    ax.bar(range(1, 7), pca_stats['eigenvalues'], color='#2b5c8f', alpha=0.85, label='Eigenvalues (Variance)')
+    ax.axhline(y=1.0, color='#d9534f', linestyle='--', linewidth=2, label='Kaiser Criterion (cutoff = 1.0)')
+    ax.plot(range(1, 7), pca_stats['cumulative_variance_ratio'], color='#2ca02c', marker='o', linewidth=2, label='Cumulative Variance')
+    ax.set_title("Unit 3: PCA Scree Plot & Kaiser Latent Dimension Selection", fontsize=12, fontweight='bold')
+    ax.set_xlabel("Principal Component Index")
+    ax.set_ylabel("Eigenvalue / Cumulative Ratio")
+    ax.legend(loc='center right')
+    plt.tight_layout()
+    plt.savefig("figures/unit3_pca_scree.png", dpi=300)
+    plt.close()
+    
+    # Figure 2: Unit 3 Clustering Comparison (K-Means vs GMM vs Hierarchical)
+    fig, axes = plt.subplots(1, 3, figsize=(15, 4.5))
+    models = ["K-Means", "GMM (EM)", "Hierarchical"]
+    sil_scores = [km_stats['silhouette_score'], gmm_stats['silhouette_score'], hc_stats['silhouette_score']]
+    ch_scores = [km_stats['calinski_harabasz_index'], gmm_stats['calinski_harabasz_index'], hc_stats['calinski_harabasz_index']]
+    db_scores = [km_stats['davies_bouldin_index'], gmm_stats['davies_bouldin_index'], hc_stats['davies_bouldin_index']]
+    
+    axes[0].bar(models, sil_scores, color=['#1f77b4', '#ff7f0e', '#2ca02c'])
+    axes[0].set_title("Silhouette Score (Higher is Better)", fontweight='bold')
+    axes[0].set_ylabel("Silhouette Score")
+    
+    axes[1].bar(models, ch_scores, color=['#1f77b4', '#ff7f0e', '#2ca02c'])
+    axes[1].set_title("Calinski-Harabasz Index (Higher is Better)", fontweight='bold')
+    axes[1].set_ylabel("Variance Ratio Criterion")
+    
+    axes[2].bar(models, db_scores, color=['#1f77b4', '#ff7f0e', '#2ca02c'])
+    axes[2].set_title("Davies-Bouldin Index (Lower is Better)", fontweight='bold')
+    axes[2].set_ylabel("Separation Measure")
+    
+    plt.tight_layout()
+    plt.savefig("figures/unit3_clustering_comparison.png", dpi=300)
+    plt.close()
+    
+    # Figure 3: Unit 4 Kalman Filter Tracking
+    fig, ax = plt.subplots(figsize=(8, 4.5))
+    ax.plot(kf_res['time_steps'], kf_res['noisy_measurements'], 'ro--', label='Noisy Assessments (z_t)', alpha=0.7)
+    ax.plot(kf_res['time_steps'], kf_res['filtered_proficiencies'], 'b-', linewidth=2.5, label='Kalman Optimal Estimate (mu_t)')
+    ax.fill_between(
+        kf_res['time_steps'],
+        np.array(kf_res['filtered_proficiencies']) - np.sqrt(kf_res['estimation_variances']),
+        np.array(kf_res['filtered_proficiencies']) + np.sqrt(kf_res['estimation_variances']),
+        color='blue', alpha=0.15, label='Estimation Uncertainty (+- 1 sigma)'
+    )
+    ax.set_title("Unit 4: Linear Dynamical System (Kalman Filter) Skill Tracking", fontsize=12, fontweight='bold')
+    ax.set_xlabel("Career Quarter")
+    ax.set_ylabel("Estimated Skill Competence")
+    ax.legend()
+    plt.tight_layout()
+    plt.savefig("figures/unit4_kalman_filter.png", dpi=300)
+    plt.close()
+    
+    # Save combined experiment report
+    experiment_results = {
+        "unit3": {
+            "pca": pca_stats,
+            "factor_analysis": fa_stats,
+            "kmeans": {k: v for k, v in km_stats.items() if k != "cluster_centers"},
+            "gmm": {k: v for k, v in gmm_stats.items() if k != "weights"},
+            "hierarchical": hc_stats
+        },
+        "unit4": {
+            "markov_stationary_distribution": pi_star.tolist(),
+            "markov_multi_step_prediction": step3_pred,
+            "hmm_viterbi_states": viterbi_states,
+            "hmm_viterbi_log_prob": viterbi_log_prob,
+            "hmm_scaled_log_likelihood": log_lik,
+            "kalman_final_proficiency": kf_res['final_estimated_proficiency'],
+            "kalman_growth_velocity": kf_res['final_estimated_growth_velocity']
+        },
+        "debate_synthesis": debate_result
     }
-    with open("data/evaluation_results.json", "w") as f:
-        json.dump(full_eval, f, indent=2)
-    print("\nSaved evaluation results to data/evaluation_results.json")
     
-    # Generate and print comparison table
-    tables_md = format_markdown_comparison_tables(reg_results, clf_results)
-    with open("data/benchmarks_summary.md", "w") as f:
-        f.write(tables_md)
-    print("Saved benchmark summary to data/benchmarks_summary.md")
-    print("\n" + "=" * 80)
-    print("  ALL 5 EVALUATION RUBRIC REQUIREMENTS EXECUTED SUCCESSFULLY")
-    print("=" * 80)
-
+    with open("figures/experiment_summary.json", "w") as f:
+        json.dump(experiment_results, f, indent=2)
+        
+    print("✅ All Unit 3 & Unit 4 experiments and figures completed successfully!")
 
 if __name__ == "__main__":
-    main()
+    run_all_experiments()

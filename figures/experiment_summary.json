@@ -1,0 +1,176 @@
+{
+  "unit3": {
+    "pca": {
+      "n_components": 6,
+      "eigenvalues": [
+        1.03811979659363,
+        1.0304019160189433,
+        1.028755210009811,
+        1.0192994409204494,
+        1.0188476907989596,
+        1.0101826953484478
+      ],
+      "explained_variance_ratio": [
+        0.07414770647173126,
+        0.07359645685168403,
+        0.0734788408749817,
+        0.07280346256777377,
+        0.07277119631534636,
+        0.07215229901529328
+      ],
+      "cumulative_variance_ratio": [
+        0.07414770647173126,
+        0.14774416332341528,
+        0.22122300419839697,
+        0.2940264667661707,
+        0.36679766308151707,
+        0.43894996209681036
+      ],
+      "kaiser_criterion_count": 6,
+      "total_variance_explained": 0.43894996209681036
+    },
+    "factor_analysis": {
+      "n_factors": 3,
+      "loadings_shape": [
+        3,
+        14
+      ],
+      "log_likelihood": -19.86419106728096,
+      "noise_variance_mean": 0.9912585750777057,
+      "noise_variance_min": 0.9800911849393145,
+      "noise_variance_max": 0.998101968252063
+    },
+    "kmeans": {
+      "n_clusters": 4,
+      "wcss_inertia": 248166.8298751949,
+      "silhouette_score": 0.04822393015926435,
+      "calinski_harabasz_index": 854.9973286005304,
+      "davies_bouldin_index": 3.433475879069328
+    },
+    "gmm": {
+      "n_components": 4,
+      "converged": true,
+      "n_iter": 9,
+      "log_likelihood": -393841.9209715749,
+      "bic": 792427.6124808146,
+      "aic": 788641.8419431498,
+      "mean_assignment_entropy": 0.3218517764044973,
+      "silhouette_score": 0.0428848516413313,
+      "calinski_harabasz_index": 824.4132663668428,
+      "davies_bouldin_index": 3.8952575631210395
+    },
+    "hierarchical": {
+      "n_clusters": 4,
+      "linkage": "ward",
+      "sample_size": 2000,
+      "silhouette_score": 0.011499387465114717,
+      "calinski_harabasz_index": 46.2023792696523,
+      "davies_bouldin_index": 4.867297067427839
+    }
+  },
+  "unit4": {
+    "markov_stationary_distribution": [
+      0.009499597465831887,
+      0.040160640102750035,
+      0.11569187737475348,
+      0.28028285467413655,
+      0.554365030382528
+    ],
+    "markov_multi_step_prediction": {
+      "steps": 3,
+      "starting_state": "1_Junior_Associate",
+      "transition_matrix_power_k": [
+        [
+          0.050761,
+          0.21803699999999995,
+          0.334344,
+          0.268167,
+          0.128691
+        ],
+        [
+          0.029648,
+          0.126599,
+          0.26744399999999996,
+          0.33606300000000006,
+          0.24024600000000002
+        ],
+        [
+          0.018080000000000002,
+          0.07082999999999999,
+          0.18574600000000002,
+          0.35113400000000006,
+          0.37421000000000004
+        ],
+        [
+          0.0104,
+          0.039969,
+          0.11893300000000001,
+          0.311991,
+          0.518707
+        ],
+        [
+          0.005087,
+          0.024547000000000003,
+          0.084693,
+          0.24563200000000002,
+          0.6400410000000001
+        ]
+      ],
+      "predicted_distribution": {
+        "1_Junior_Associate": 0.050761,
+        "2_Mid_Engineer": 0.21803699999999995,
+        "3_Senior_Specialist": 0.334344,
+        "4_Lead_Architect": 0.268167,
+        "5_Director_CTO": 0.128691
+      },
+      "most_likely_role": "3_Senior_Specialist"
+    },
+    "hmm_viterbi_states": [
+      "Novice",
+      "Competent",
+      "Competent",
+      "Expert",
+      "Expert"
+    ],
+    "hmm_viterbi_log_prob": -5.846695335966641,
+    "hmm_scaled_log_likelihood": -4.409646881879259,
+    "kalman_final_proficiency": 83.45634483133364,
+    "kalman_growth_velocity": 4.1019624122377785
+  },
+  "debate_synthesis": {
+    "student_id": "STUDENT_42_CANDIDATE",
+    "persona_planner": {
+      "role": "Strategic Career Pathway Architect",
+      "stance": "STRONGLY ACCELERATE",
+      "arguments": [
+        "GMM Latent Cluster 2 assigned with primary probability 86.89%.",
+        "Viterbi MAP optimal career advancement path decoded: Novice -> Competent -> Competent -> Expert -> Expert (Log-Likelihood: -5.85).",
+        "3-year Markov multi-step transition forecasts dominant progression into '3_Senior_Specialist'.",
+        "Kalman state tracker identifies positive continuous skill velocity: +4.10 proficiency units/quarter."
+      ]
+    },
+    "persona_critic": {
+      "role": "Rigorous Feasibility & Metric Auditor",
+      "stance": "ELEVATED FRICTION - HARDEN PREREQUISITES",
+      "critique": [
+        "Mahalanobis dissimilarity to centroid is high (4.17 > 4.00). Profile lies in low-density feature space."
+      ],
+      "is_approved": false
+    },
+    "persona_ethics": {
+      "role": "Calibrated Uncertainty & Fairness Sentinel",
+      "escalation_status": "CLEARED: Automated Guidance Validated",
+      "flags": [
+        "Assignment entropy H(gamma) = 0.389 is well-calibrated (low ambiguity).",
+        "Audit confirms no absorbing trap states detected in career transition topology."
+      ],
+      "override_triggered": false
+    },
+    "consensus_synthesis": {
+      "confidence_score": 0.8,
+      "recommendation": "Conditional Progression: Follow Viterbi roadmap toward Expert with targeted skill remediation to reduce Mahalanobis gap to cluster core.",
+      "target_career_milestone": "Expert",
+      "expected_velocity": 4.1019624122377785
+    }
+  }
+}

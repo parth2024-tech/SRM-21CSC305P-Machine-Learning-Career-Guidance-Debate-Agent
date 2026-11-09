@@ -3,7 +3,9 @@ Generates the complete, self-contained Google Colab & Kaggle Notebook for PBL (U
 Includes complete code for:
 - Data download & familiarization
 - Unit 3: PCA, Factor Analysis, K-Means, GMM (EM), Hierarchical Clustering, Dissimilarity
+- Unit 3 Visualizations: PCA Scree Plot + GMM Soft Responsibilities Heatmap
 - Unit 4: Markov Chain, HMM (Forward-Backward, Viterbi), Linear Dynamical System (Kalman Filter)
+- Unit 4 Visualizations: Markov 1-Step & 3-Step Transition Heatmaps + Kalman Filter Trajectory
 - Multi-Persona Debate Engine (Planner, Critic, Ethics Sentinel, Arbiter)
 """
 import nbformat as nbf
@@ -73,10 +75,10 @@ display(df[numeric_cols].describe().T[['mean', 'std', 'min', '50%', 'max']].roun
 
 # Cell 3: Rubric 2 & 3 - Unit 3 Unsupervised Learning
 cells.append(nbf.v4.new_markdown_cell("""## Rubric 2 & 3: Unit 3 Unsupervised Learning Implementation
-- **PCA**: Maximum variance projection, Eigenvalues & Kaiser Criterion ($\lambda > 1$).
-- **Factor Analysis**: Continuous latent factors $x = W z + \mu + \epsilon$.
+- **PCA**: Maximum variance projection, Eigenvalues & Kaiser Criterion ($\\lambda > 1$).
+- **Factor Analysis**: Continuous latent factors $x = W z + \\mu + \\epsilon$.
 - **K-Means Clustering**: Lloyd's algorithm minimizing WCSS.
-- **Gaussian Mixture Models (GMM)**: Expectation-Maximization (EM) algorithm computing soft responsibilities $\gamma_{nk}$.
+- **Gaussian Mixture Models (GMM)**: Expectation-Maximization (EM) algorithm computing soft responsibilities $\\gamma_{nk}$.
 - **Hierarchical Clustering**: Agglomerative bottom-up clustering with Ward linkage.
 """))
 
@@ -97,7 +99,7 @@ eigenvalues = pca.explained_variance_
 plt.figure(figsize=(8, 4))
 plt.bar(range(1, 7), eigenvalues, color='#2b5c8f', alpha=0.8, label='Eigenvalues')
 plt.axhline(y=1.0, color='red', linestyle='--', label='Kaiser Cutoff (1.0)')
-plt.title("Unit 3: PCA Scree Plot & Kaiser Criterion")
+plt.title("Unit 3 Graph 1: PCA Scree Plot & Kaiser Criterion", fontsize=11, fontweight='bold')
 plt.xlabel("Component Index")
 plt.ylabel("Eigenvalue")
 plt.legend()
@@ -149,10 +151,23 @@ print("\\nUnit 3 Clustering Benchmark:")
 display(comp_df.round(4))
 """))
 
-# Cell 4: Unit 4 Implementation
+# Cell 5: Additional Graph 1 - GMM Soft Responsibilities Heatmap
+cells.append(nbf.v4.new_code_cell("""# Unit 3 Graph 2: GMM Soft Responsibilities Heatmap (Soft Probabilistic Assignments)
+plt.figure(figsize=(10, 4.8))
+sns.heatmap(gmm_probs[:20], annot=True, fmt='.2f', cmap='Blues',
+            xticklabels=[f'Cluster {k} (gamma_{k})' for k in range(4)],
+            yticklabels=[f'Candidate {i+1}' for i in range(20)])
+plt.title('Unit 3 Graph 2: GMM Soft Responsibilities Heatmap (gamma_{nk} = P(Z_k=1 | x_n))', fontsize=11, fontweight='bold')
+plt.xlabel('Mixture Components (Latent Career Archetypes)')
+plt.ylabel('Candidate Index')
+plt.tight_layout()
+plt.show()
+"""))
+
+# Cell 6: Unit 4 Implementation
 cells.append(nbf.v4.new_markdown_cell("""## Rubric 3 (Contd): Unit 4 Sequential Data & Markov Models
-- **First-Order Markov Chain**: Career transition matrix $A$, stationary distribution $\pi^* = \pi^* A$, and multi-step prediction $A^k$.
-- **Hidden Markov Model (HMM)**: Scaled Forward-Backward evaluation ($\log P(X|\lambda)$) and Viterbi MAP trajectory decoding.
+- **First-Order Markov Chain**: Career transition matrix $A$, stationary distribution $\\pi^* = \\pi^* A$, and multi-step prediction $A^k$.
+- **Hidden Markov Model (HMM)**: Scaled Forward-Backward evaluation ($\\log P(X|\\lambda)$) and Viterbi MAP trajectory decoding.
 - **Linear Dynamical System (LDS) / Kalman Filter**: Tracks continuous skill velocity under noisy quarterly assessments.
 """))
 
@@ -178,6 +193,28 @@ for s, p in zip(states, pi_star):
 # 3-step transition from Junior
 A3 = np.linalg.matrix_power(A, 3)
 print(f"\\n3-Year Projection for Junior: Most likely role -> {states[np.argmax(A3[0])]}")
+"""))
+
+# Cell 8: Additional Graph 2 - Markov 1-Step & 3-Step Heatmaps
+cells.append(nbf.v4.new_code_cell("""# Unit 4 Graph 1: Markov Chain Longitudinal State Transition Dynamics (A and A^3)
+state_labels = ['Junior', 'Mid', 'Senior', 'Lead Arch', 'Director']
+fig, axes = plt.subplots(1, 2, figsize=(13, 4.5))
+
+sns.heatmap(A, annot=True, fmt='.2f', cmap='Oranges', ax=axes[0],
+            xticklabels=state_labels, yticklabels=state_labels)
+axes[0].set_title('1-Step Career Transition Matrix (A)', fontweight='bold')
+axes[0].set_xlabel('Next State S_{t+1}')
+axes[0].set_ylabel('Current State S_t')
+
+sns.heatmap(A3, annot=True, fmt='.2f', cmap='Purples', ax=axes[1],
+            xticklabels=state_labels, yticklabels=state_labels)
+axes[1].set_title('3-Step Projection Matrix (A^3)', fontweight='bold')
+axes[1].set_xlabel('Projected State S_{t+3}')
+axes[1].set_ylabel('Origin State S_t')
+
+plt.suptitle('Unit 4 Graph 1: Markov Chain State Dynamics Across Time Horizons', fontsize=12, fontweight='bold')
+plt.tight_layout()
+plt.show()
 """))
 
 cells.append(nbf.v4.new_code_cell("""# 2. Hidden Markov Model: Scaled Forward-Backward & Viterbi Decoding
@@ -232,7 +269,7 @@ for z in measurements:
 plt.figure(figsize=(8, 4))
 plt.plot(measurements, 'ro--', label='Noisy Assessments')
 plt.plot(filtered, 'b-', linewidth=2.5, label='Kalman Optimal State (Proficiency)')
-plt.title("Unit 4: Linear Dynamical System (Kalman Filter)")
+plt.title("Unit 4 Graph 2: Linear Dynamical System (Kalman Filter)", fontsize=11, fontweight='bold')
 plt.xlabel("Quarter")
 plt.ylabel("Estimated Skill Competence")
 plt.legend()
@@ -242,12 +279,12 @@ print(f"Final Estimated Proficiency: {filtered[-1]:.2f}")
 print(f"Estimated Skill Growth Velocity: +{mu[1, 0]:.2f} proficiency units/quarter")
 """))
 
-# Cell 5: Rubric 4 & 5 - Multi-Persona Debate Engine
+# Cell 11: Rubric 4 & 5 - Multi-Persona Debate Engine
 cells.append(nbf.v4.new_markdown_cell("""## Rubric 4 & 5: Multi-Persona Debate Guidance Engine
 Dialectical debate protocol integrating Unit 3 and Unit 4 outputs:
 - **Planner**: Optimizes aspirational growth via Viterbi path & GMM component assignment.
 - **Critic**: Audits feasibility using Mahalanobis dissimilarity distance & transition bottlenecks.
-- **Ethics Reviewer**: Evaluates cluster assignment entropy $H(\gamma)$ to detect student ambiguity.
+- **Ethics Reviewer**: Evaluates cluster assignment entropy $H(\\gamma)$ to detect student ambiguity.
 - **Arbiter Consensus**: Synthesizes the debate into an actionable, confidence-weighted roadmap.
 """))
 

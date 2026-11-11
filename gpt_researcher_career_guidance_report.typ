@@ -27,18 +27,18 @@
   },
   header: context {
     if here().page() > 1 {
-      text(8.5pt, fill: luma(110), font: "Times New Roman")[
+      text(8.5pt, fill: luma(110), font: "Liberation Serif")[
         *GPT Researcher Technical Investigation* #h(1fr) Autonomous Decision Support Systems
       ]
     }
   },
   footer: context {
-    align(center, text(9.5pt, font: "Times New Roman")[#here().page()])
+    align(center, text(9.5pt, font: "Liberation Serif")[#here().page()])
   }
 )
 
 #set text(
-  font: "Times New Roman",
+  font: "Liberation Serif",
   size: 11pt,
   lang: "en"
 )

@@ -27,18 +27,18 @@
   },
   header: context {
     if here().page() > 3 {
-      text(9pt, fill: luma(100), font: "Times New Roman")[
+      text(9pt, fill: luma(100), font: "Liberation Serif")[
         21CSC305P Machine Learning Project Report #h(1fr) SRM Institute of Science & Technology
       ]
     }
   },
   footer: context {
-    align(center, text(10pt, font: "Times New Roman")[#here().page()])
+    align(center, text(10pt, font: "Liberation Serif")[#here().page()])
   }
 )
 
 #set text(
-  font: "Times New Roman",
+  font: "Liberation Serif",
   size: 12pt,
   lang: "en"
 )

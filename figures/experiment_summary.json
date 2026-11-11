@@ -42,7 +42,7 @@
     },
     "kmeans": {
       "n_clusters": 4,
-      "wcss_inertia": 248166.8298751949,
+      "wcss_inertia": 248166.82987519488,
       "silhouette_score": 0.04822393015926435,
       "calinski_harabasz_index": 854.9973286005304,
       "davies_bouldin_index": 3.433475879069328

@@ -1,0 +1,1202 @@
+SRM INSTITUTE OF SCIENCE AND
+TECHNOLOGY
+FACULTY OF ENGINEERING AND TECHNOLOGY
+SCHOOL OF COMPUTING
+
+COURSE PLAN
+21CSC305P- MACHINE LEARNING
+JULY – NOVEMBER 2026
+
+Revision History:
+Date
+17.07.2026
+20.07.2026
+
+Version
+
+Modification
+done
+
+Modified by
+
+Reviewed by
+
+1.0
+
+Initial Release
+
+Dr S SHANMUGAM
+
+Dr. Murugan
+
+2.0
+
+Authorized by
+
+SRM Institute of Science and Technology, Kattankulathur
+
+Table of Contents
+1.0
+
+General Details............................................................................................................................ 3
+
+2.0
+
+Reference Books ......................................................................................................................... 3
+
+3.0
+
+Prerequisites ................................................................................................................................ 3
+
+4.0
+
+Instructional Objectives .............................................................................................................. 3
+
+5.0
+
+Overall Assessment Plan............................................................................................................. 4
+
+6.0
+
+Tentative Test Schedule .............................................................................................................. 4
+
+7.0
+
+Detailed Test Plan ....................................................................................................................... 5
+
+8.0
+
+List of practice experiments ........................................................................................................ 5
+
+9.0
+
+Mini Project Details…………………………………………………………………………….6
+
+10.0
+
+Quiz/Puzzles/Scenario Based Assignments ................................................................................ 6
+
+11.0
+
+Course Certification .................................................................................................................... 7
+
+12.0
+
+Detailed Session Plan .................................................................................................................. 7
+
+13.0
+
+Overall Execution Plan ............................................................................................................... 9
+
+2
+
+SRM Institute of Science and Technology, Kattankulathur
+
+1.0
+
+General Details
+
+Course Code: 21CSC305P
+Course Title: MACHINE LEARNING
+Semester: V
+Course Time: JULY – NOVEMBER 2026
+Slot: F
+
+Batch
+Day
+Day order 1
+Day order 2
+Day order 3
+
+Hour
+3,4
+-
+
+Batch 1
+Timing
+09.45 - 11.30
+-
+
+Hour
+8,9
+-
+
+Day order 4
+Day order 5
+
+4
+
+10.40 -11.30
+
+9
+
+Batch 2
+Timing
+2.20 - 4.00
+3.10 - 4.00
+
+Location: Tech Park/University Building
+
+2.0
+
+Reference Books
+
+1. Pattern Recognition and Machine Learning, Christopher M. Bishop,Springer, 2006
+2. Machine Learning: a Probabilistic Perspective, Kevin Patrick Murphy. MIT Press, 2012
+
+3.0
+
+Prerequisites
+Nil
+
+4.0
+
+Instructional Objectives
+
+1. Explore the fundamental mathematical concepts of machine learning algorithms
+2. Apply linear machine learning models to perform regression and classification
+3. Utilize mixture models to group similar data items
+4. Develop machine learning models for time-series data prediction
+5. Design ensemble learning models using various machine learning algorithms
+
+3
+
+SRM Institute of Science and Technology, Kattankulathur
+
+5.0
+
+Overall Assessment Plan
+
+S.
+No
+
+Components
+
+1
+
+FP-I
+
+2
+
+FP-II
+
+3
+
+PBL-I
+
+CT1 (Unit 1 – Poster Presentation (5 Marks) – Chart
+based activity &Unit 2 – Mini Coding Task (5 marks))
+Practical Challenge
+CT2 (Unit-3 & 4 – Written Test)
+
+PBL-II
+
+5
+
+PBL-III
+
+6.0
+
+10
+
+24-9-2026
+
+10
+
+28-10-2026
+
+5
+
+Practice Experiments Demonstration and Viva (1 to 4)
+
+10
+
+12-10-2026
+
+5
+5
+
+Discover & Analyze ML Algorithms – Infographic
+Creation (Videos - Animations videos)
+
+5
+
+Practice Experiments Demonstration and Viva (5 to 9)
+
+10
+
+Project Review-3
+
+5
+
+CT3- Knowledge Check (Quiz)
+Certification course (NPTEL)
+12 Weeks Course-Introduction to Machine Learning –
+IIT Madras Certification course (NPTEL)
+Exam Date: 18 OCT 2026 IST
+Project Report (Max. 30 pages)
+
+5
+
+R21
+Report
+and Viva Viva Voce (5 marks)
+TOTAL
+
+6
+
+Portal Mark
+Entry Date
+
+Project Review-1
+
+Interactive Class Room Activities
+Research Paper Review & Kaggle Mini Challenge
+Project Review-2
+4
+
+Marks
+
+13-11-2026
+
+18-11-2026
+10
+15
+18-11-2026
+
+5
+100
+
+Tentative Test Schedule-
+
+S. No
+
+Tentative date
+
+Test
+
+Marks Portion
+
+Duration
+
+1
+
+Cycle Test-1
+Practical Challenge
+
+50
+
+Unit- 1 &2
+
+100 mins
+
+2
+
+18-08-2026
+(Poster) &
+10-092026(Coding)
+12-10-2026
+
+50
+
+Unit – 3 & 4
+
+100 mins
+
+3
+
+03-11-2026
+
+Cycle Test-2
+Written Test
+Cycle Test-3
+
+25
+
+Unit – 5
+
+50 mins
+
+Knowledge Check
+(Quiz)
+
+4
+
+SRM Institute of Science and Technology, Kattankulathur
+
+7.0
+
+Detailed Test Plan
+Test
+
+Tentative
+Date
+
+Type
+
+Marks
+
+Mode
+
+Total: 50 Marks
+Cycle Test – I
+
+18-08-2026
+(Poster) &
+10-092026(Codin
+g)
+
+Practical
+Challenge
+
+Chart Based Activity – 25
+Marks (Unit 1)
+Mini Coding Challenge –
+Unit 2 (25 Marks)
+
+Physical
+Exam
+
+Total: 50 Marks
+
+Cycle Test – II
+
+12-10-2026
+
+Written Test
+
+Exam Pattern:
+MCQs - 10
+Concept Understanding
+Questions – 4 out of 6 (4*5)
+Scenario based / HOTs
+Questions - 2 (Either -or
+Choice) (2*10)
+
+Physical
+Exam
+
+Total: 25 Marks
+
+Cycle Test
+– III
+
+03-11-2026
+
+Knowledge
+Check
+( Quiz )
+
+Exam Pattern:
+25 Questions
+
+Physical
+Exam
+
+(25*1)
+
+5
+
+SRM Institute of Science and Technology, Kattankulathur
+
+8.0
+
+List of Practice Experiments:
+
+S. No
+
+9.0
+
+List of practice experiments
+
+Dates
+
+1
+
+Devise a program to import, load, and view a dataset.
+
+2
+
+Create a program to display the summary and statistics of the dataset.
+
+3
+
+Implement linear regression to perform prediction.
+
+4
+
+Implement Bayesian logistic regression and SVM for classification.
+
+5
+
+Implement K-means clustering, mixtures of Gaussians, and hierarchical
+clustering algorithm to categorize data.
+
+6
+
+Create a program to perform PCA.
+
+7
+
+Implement HMM to predict the sequential data.
+
+8
+
+Implement CART learning algorithms to perform categorization.
+
+9
+
+Implement ensemble learning models to perform classification.
+
+Exp 1 to 4
+02-09-2026
+
+Exp 5 to 9
+12-10-2026
+
+Mini Project Details
+
+S.
+No
+
+Project
+Components
+
+1
+
+Project
+Review 1
+(Marks -5)
+
+2
+
+Project
+Review 2
+(Marks -5)
+
+3
+
+Project
+Review 3
+(Marks -5)
+
+4
+
+Report, Viva
+(Marks -15)
+
+Dates
+
+Evaluation method
+Understanding the problem
+statement – 2.5 Marks
+
+11.08.26
+
+Statistical analysis of
+dataset – 2.5Marks
+Mathematical Modelling of
+the algorithm-2Marks
+
+10.09.26
+
+Development of python
+script for the mathematical
+model - 3Marks
+Demo -3 Marks
+
+04.11.26
+
+Comparative Analysis -2
+Marks
+Report-10 Marks
+
+11.11.26
+Viva – 5 Marks
+
+Description
+Pertaining to unit-1 specific problem
+statements for a Batch of 4 students will
+be assigned as per the problem statements
+identified by the respective faculty
+members of the class.
+Pertaining to Unit-2 & 3, as per the
+algorithms taught in the class, the problem
+statement chosen by the team must draft
+the mathematical model for the problem
+and associated python script. (avoid
+python libraries)
+Pertaining to Unit-4 & 5, the problem
+chosen must be executed and the result
+has to be compared with the algorithms
+taught in Unit- 4 & 5. Github link has to
+be submitted for plagiarism check.
+A detailed project report has to be
+prepared for the problem statement,
+objectives, mathematical model, written
+python script, result with comparative
+analysis.
+6
+
+SRM Institute of Science and Technology, Kattankulathur
+The
+student’s
+knowledge
+on
+understanding the subject concepts will be
+evaluated through the presentation and
+his/her answering skills during the time of
+viva.
+10.0 Interactive Learning Split-up Plan
+
+Test
+
+Tentative
+date of
+evaluation
+
+Marks
+
+PBL-I
+
+Interactive Class
+Room Activities
+
+11.08.26
+
+5
+Marks
+
+Split-up
+Research Paper Review: Each team reviews one
+recent ML paper.
+Presentation (5 Marks)
+Problem Description (4 Marks)
+Dataset and Algorithm (4 Marks)
+Results and Discussion (4 Marks)
+Advantages & Limitations (4 Marks)
+Future work (4 Marks)
+Total: 25 Marks (Scale down to 6 marks)
+(Note: The team composition will be the same as
+that of the Mini Project teams)
+Kaggle Mini Challenge
+Students are required to develop a machine learning
+model to predict the target variable using the
+provided training dataset.
+Train a model (5 Marks)
+Improve accuracy(5 Marks)
+Submit predictions(5 Marks)
+(Note: The team composition will be the same as
+that of the Mini Project teams)
+
+PBL-II
+
+Discover & Analyze
+ML Algorithms –
+Infographic
+Animations videos
+Team of Four Students
+
+10.09.26
+
+5 Marks
+
+Conceptual Clarity (5 marks)
+Visual Communication & Design (5 marks)
+Technical Content & Accuracy (5 marks)
+Total: 15 Marks (Scale down to 5 marks)
+Video to be submitted
+(Note: The team composition will be the same as
+that of the Mini Project teams)
+
+7
+
+SRM Institute of Science and Technology, Kattankulathur
+
+11.0 Course Certification- NPTEL (ONLINE- Introduction to Machine Learning IITM - Duration (July – November 2026)
+S. No
+
+NPTEL Certification Split-up
+
+1
+
+>=50% and consistent Assignment submission (10 marks)
+
+2
+
+<50% and consistent Assignment submission (4 marks)
+
+3
+
+Not Enrolled (0 marks)
+
+Marks
+
+10
+
+NPTEL Course:
+1. 12 Weeks Course-Introduction to Machine Learning – IIT Madras
+Certification course (NPTEL) Exam Date: 18 OCT 2026 IST.
+https://onlinecourses.nptel.ac.in/e-learning/preview/noc26_cs133
+
+8
+
+SRM Institute of Science and Technology, Kattankulathur
+
+12.0 Detailed Session Plan
+HOURS
+
+TOPICS
+
+BOOK
+
+TEACHING
+METHOD
+
+TESTING
+METHOD
+
+UNIT-1 INTRODUCTION
+1
+
+Machine learning- What and Why
+
+B2
+
+BB/PPT
+
+2
+
+Supervised Learning, Unsupervised learning
+
+B2
+
+BB/PPT
+
+3
+
+Polynomial curve fitting
+
+B1
+
+BB/PPT
+
+4
+
+Probability theory- discrete random variables,
+Fundamental rules, Bayes rule
+
+B2
+
+BB/PPT
+
+5
+
+Independence and conditional independence
+
+B2
+
+BB/PPT
+
+6
+
+Continuous random variables, Quantiles, mean
+and variance
+Probability densities, Expectation and
+covariance
+Practice 1: Devise a program to import, load,
+and view a dataset.
+Practice 2: Create a program to display the
+summary and statistics of the dataset.
+Statistical Analyzer Poster
+
+B2
+
+BB/PPT
+
+B1
+
+BB/PPT
+
+7
+8
+
+9
+
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+
+Demo
+
+UNIT-2 LINEAR MODELS FOR REGRESSION
+10
+
+Maximum likelihood estimation- Least squares
+
+B2
+
+BB/PPT
+
+11
+
+Robust linear expression, ridge regression,
+Bayesian linear regression
+Linear models for classification: Discriminant
+function
+Probabilistic generative models, Probabilistic
+discriminative models
+Laplacian approximation, Bayesian logistic
+regression
+Kernel functions, using kernels in GLM,
+Kernel trick
+SVMs
+
+B2
+
+BB/PPT
+
+B1
+
+BB/PPT
+
+B1
+
+BB/PPT
+
+B1
+
+BB/PPT
+
+B2
+
+BB/PPT
+
+B2
+
+BB/PPT
+
+12
+13
+14
+15
+16
+17
+
+Practice 1:Implement linear regression to
+perform prediction.
+Practice 2:Implement Bayesian logistic
+regression and SVM for classification.
+
+18
+
+Discover & Analyze ML Algorithms –
+Infographic Creation ( Animations videos)
+
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+
+Demo
+
+UNIT-3 MIXTURE MODELS AND EM
+19
+
+K-means clustering
+
+B1
+
+BB/PPT
+
+20
+
+Mixtures of Gaussians
+
+B1
+
+BB/PPT
+
+21
+
+Alternative view of EM
+
+B1
+
+BB/PPT
+
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+9
+
+SRM Institute of Science and Technology, Kattankulathur
+22
+
+Factor analysis
+
+B2
+
+BB/PPT
+
+23
+
+PCA, Choosing the number of latent
+dimensions
+Clustering- measuring dissimilarity, Evaluating
+the output of clustering methods
+
+B2
+
+BB/PPT
+
+B2
+
+BB/PPT
+
+25
+
+Hierarchial clustering
+
+B2
+
+BB/PPT
+
+26
+
+Practice 1:Implement K-means clustering,
+mixtures of Gaussians, and hierarchical
+clustering algorithm to categorize data.
+Practice 2: Create a program to perform PCA.
+
+27
+
+Discover & Analyze ML Algorithms –
+Infographic Creation ( Animations videos)
+
+24
+
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+
+Demo
+
+28
+
+UNIT- 4 HIDDEN MARKOV MODELS
+Sequential data- Markov models
+B1
+BB/PPT
+
+29
+
+HMM
+
+B1
+
+BB/PPT
+
+30
+
+Maximum likelihood for the HMM
+
+B1
+
+BB/PPT
+
+31
+
+The forward and backward algorithm
+
+B1
+
+BB/PPT
+
+32
+
+The sum-product algorithm
+
+B1
+
+BB/PPT
+
+33
+
+Scaling factors, Viterbi algorithm
+
+B1
+
+BB/PPT
+
+34
+
+Linear dynamical systems
+
+B1
+
+BB/PPT
+
+35
+
+Practice 1: Implement HMM to predict the
+sequential data.
+
+36
+
+Discover & Analyze ML Algorithms –
+Infographic Creation (Animations videos)
+
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+
+Demo
+
+UNIT- 5 COMBINING MODELS
+37
+
+Bayesian model averaging
+
+B1
+
+BB/PPT
+
+38
+
+Boosting
+
+B1
+
+BB/PPT
+
+39
+
+Adaptive basis function models
+
+B2
+
+BB/PPT
+
+40
+
+Classification and regression trees (CART)
+
+B2
+
+BB/PPT
+
+41
+
+Generalized additive models
+
+B2
+
+BB/PPT
+
+42
+
+Ensemble learning
+
+B2
+
+BB/PPT
+
+43
+
+Practice 1: Implement CART learning
+algorithms to perform categorization.
+Practice 2: Implement ensemble learning
+models to perform classification.
+Quiz
+
+44
+45
+
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+Illustration
+using example
+
+Demo
+Demo
+
+10
+
+SRM Institute of Science and Technology, Kattankulathur
+
+13. Overall Execution Plan:
+#
+
+Activity
+
+1
+
+PPT Content
+Preparation
+
+2
+
+Question Bank
+Preparation
+
+4
+
+Question Bank
+Scrutiny
+
+5
+
+6
+
+Cycle Test
+
+Course File
+Preparation
+
+8
+
+Mini Project
+
+9
+
+Feedback
+Collection and
+Minutes of
+Meeting
+
+Target
+Dates
+
+Responsibilities
+
+Assigned
+to
+All
+faculties.
+
+31-07-26
+
+Individual faculty can have their own course materials following
+the given reference books
+
+15-08-26
+
+1. Each faculty to prepare for the respective units assigned.
+2. Questions must be framed on own and not to be taken as such
+from any other source. Other sources can be referred, but the
+question must be modified, say with different example program,
+and so on.
+3. Solution is required for all questions.
+Concept Understanding Questions - 4
+Scenario based / HOTs Questions - 2
+4. Team Heads are responsible for distributing topics to team
+members and no topics are missed.
+
+All
+faculties
+
+16-08-26
+
+1. Check for the quality of the questions as per the category in the
+question bank.
+2. Ensure there are no repetitions.
+3. Coordinate with CC.
+
+SPOC
+Team
+
+24-10-26
+
+1. Select the question from Question Bank
+2. Share the QP to audit professor for review
+SPOC
+3. Plan for cycle tests question paper printing, print and distribute. Team
+4. Coordinate with CC.
+
+10-11-26
+
+1. Responsible for the preparation of course file as per the
+checklist.
+2. At the end of each CT exam, files should be updated and got
+verified from the Team Head.
+3. Participate in result analysis activity.
+4. Course Files are to be prepared for each department and the
+faculties listed are responsible for the preparation including COPO Mapping, attainment of Cos, etc.
+5. Coordinate with CC.
+
+SPOC,
+Course File
+Team
+
+1. Number of students per team – 4.
+2. Ensure no repetition of projects in the class.
+3. Conduct periodic reviews to evaluate progress.
+4. Verify research papers during the review.
+
+All
+faculties
+
+1. Scribe and prepare minutes of meeting for all meetings
+conducted.
+2. Share the MoM to CC and Audit professors on the same day or
+the next of meeting.
+
+SPOC
+Team
+
+15-07-26
+
+13-11-26
+
+11
+
+

@@ -17,7 +17,7 @@ nb.metadata = {
 cells = []
 
 # Title & Metadata
-cells.append(nbf.v4.new_markdown_cell("""# 🎓 PBL 1: Debate-Based Career Guidance Agent with Complementary Personas
+cells.append(nbf.v4.new_markdown_cell(r"""# 🎓 PBL 1: Debate-Based Career Guidance Agent with Complementary Personas
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/)
 
 ---
@@ -84,15 +84,15 @@ cells.append(nbf.v4.new_markdown_cell("""---
 Traditional career guidance platforms issue black-box, deterministic recommendations that suffer from **single-objective over-optimism**—maximizing career prestige while ignoring practical skill deficiencies, burnout vulnerabilities, or epistemic uncertainty.
 
 To solve this, our system introduces **Three Complementary Personas**:
-1. **Planner Persona ($\mathcal{P}$):**
+1. **Planner Persona ($\\mathcal{P}$):**
    * *Objective:* Maximizes growth upside, aspirational salary potential, and career trajectory.
-   * *Mechanism:* Uses Unit 2 Linear Regression predictions ($\hat{y}_{\text{salary}}$) and Classification probabilities $P(Y = \text{Track} \mid x)$.
-2. **Critic Persona ($\mathcal{C}$):**
+   * *Mechanism:* Uses Unit 2 Linear Regression predictions ($\\hat{y}_{\text{salary}}$) and Classification probabilities $P(Y = \text{Track} \\mid x)$.
+2. **Critic Persona ($\\mathcal{C}$):**
    * *Objective:* Audits risk, failure modes, skill deficits, and lifestyle strain.
    * *Mechanism:* Evaluates daily working hours ($>9$h indicates burnout hazard) and identifies gaps in coding aptitude or public speaking.
-3. **Ethics-Reviewer Persona ($\mathcal{E}$):**
+3. **Ethics-Reviewer Persona ($\\mathcal{E}$):**
    * *Objective:* Enforces fairness, socioeconomic equity, calibrated uncertainty, and human agency.
-   * *Mechanism:* Calculates calibrated epistemic uncertainty and triggers a **Human Counselor Override** whenever classification margins are narrow ($\Delta P < 0.15$).
+   * *Mechanism:* Calculates calibrated epistemic uncertainty and triggers a **Human Counselor Override** whenever classification margins are narrow ($\\Delta P < 0.15$).
 
 ---
 
@@ -121,8 +121,8 @@ cells.append(nbf.v4.new_markdown_cell("""### 1.3 Unit 1 Practice 2: Summary Stat
 *Create a program to display the summary and statistics of the dataset.*
 
 Under Unit 1 Probability Theory:
-* **Sample Mean:** $\mu = \frac{1}{N} \sum_{i=1}^N x_i$
-* **Sample Variance:** $\sigma^2 = \frac{1}{N-1} \sum_{i=1}^N (x_i - \mu)^2$
+* **Sample Mean:** $\\mu = \frac{1}{N} \\sum_{i=1}^N x_i$
+* **Sample Variance:** $\\sigma^2 = \frac{1}{N-1} \\sum_{i=1}^N (x_i - \\mu)^2$
 * **Quantiles:** $Q_{0.25}$ (25th percentile), $Q_{0.50}$ (Median), $Q_{0.75}$ (75th percentile), $Q_{0.90}$
 * **Bayes Rule Prior Probabilities:** Unconditioned class probability $P(Y = c) = \frac{N_c}{N}$"""))
 
@@ -163,9 +163,9 @@ cells.append(nbf.v4.new_markdown_cell("""---
    * *Business, Systems & Management*
    * *Quality Assurance, UX & Operations*
 2. **Target 2 (Unit 2 Practice 1 Regression):** We formulate continuous targets:
-   * **Career Readiness Score:** Composite index ($50 - 100$) integrating academic mastery ($40\%$), technical programming skills ($35\%$), and practical hackathon/speaking experience ($25\%$).
-   * **Expected Starting Compensation ($\$k$ / annum):** Grounded industry starting salary:
-     $$y_{\text{salary}} = 40.0 + 0.85 \times (\text{Readiness} - 50.0) + \epsilon, \quad \epsilon \sim \mathcal{N}(0, 2.5^2)$$"""))
+   * **Career Readiness Score:** Composite index ($50 - 100$) integrating academic mastery ($40\\%$), technical programming skills ($35\\%$), and practical hackathon/speaking experience ($25\\%$).
+   * **Expected Starting Compensation ($\\$k$ / annum):** Grounded industry starting salary:
+     $$y_{\text{salary}} = 40.0 + 0.85 \times (\text{Readiness} - 50.0) + \\epsilon, \\quad \\epsilon \\sim \\mathcal{N}(0, 2.5^2)$$"""))
 
 cells.append(nbf.v4.new_code_cell("""# [Cell 4] Feature Engineering Pipeline & Domain Grouping
 career_track_mapping = {
@@ -265,11 +265,11 @@ We implement four regression architectures:
 2. **Ridge Regression (L2 Regularization):**
    $$w_{\text{Ridge}} = (X^T X + \alpha I)^{-1} X^T y$$
 3. **Polynomial Curve Fitting (Degree 2) from Unit 1:**
-   $$\phi(x) = [1, x_i, x_i^2, x_i x_j]$$
+   $$\\phi(x) = [1, x_i, x_i^2, x_i x_j]$$
 4. **Bayesian Linear Regression:**
    * Posterior precision: $S_N^{-1} = \alpha I + \beta X^T X$
    * Posterior mean: $m_N = \beta S_N X^T y$
-   * Predictive distribution: $p(y_* \mid x_*, \mathcal{D}) = \mathcal{N}(m_N^T x_*, \sigma_N^2(x_*))$
+   * Predictive distribution: $p(y_* \\mid x_*, \\mathcal{D}) = \\mathcal{N}(m_N^T x_*, \\sigma_N^2(x_*))$
    * Provides the **predictive variance** for calibrated uncertainty.
 
 ---
@@ -277,13 +277,13 @@ We implement four regression architectures:
 ### 3.2 Unit 2 Practice 2: Linear Models for Classification
 We implement four classification architectures:
 1. **Logistic Regression (Multinomial Discriminative Model):**
-   $$P(Y = k \mid x) = \frac{\exp(w_k^T x)}{\sum_{j=1}^K \exp(w_j^T x)}$$
+   $$P(Y = k \\mid x) = \frac{\\exp(w_k^T x)}{\\sum_{j=1}^K \\exp(w_j^T x)}$$
 2. **Bayesian Generative Classifier (Gaussian Naive Bayes):**
-   $$P(Y = k \mid x) \propto P(Y = k) \prod_{d=1}^D \mathcal{N}(x_d; \mu_{kd}, \sigma_{kd}^2)$$
+   $$P(Y = k \\mid x) \\propto P(Y = k) \\prod_{d=1}^D \\mathcal{N}(x_d; \\mu_{kd}, \\sigma_{kd}^2)$$
 3. **Support Vector Machine with Linear Kernel:**
-   $$\min_{w, b} \frac{1}{2} \|w\|^2 \quad \text{s.t.} \quad y_i(w^T x_i + b) \ge 1$$
+   $$\\min_{w, b} \frac{1}{2} \\|w\\|^2 \\quad \text{s.t.} \\quad y_i(w^T x_i + b) \\ge 1$$
 4. **Support Vector Machine with RBF Kernel (Kernel Trick from Unit 2):**
-   $$K(x, x') = \exp(-\gamma \|x - x'\|^2)$$"""))
+   $$K(x, x') = \\exp(-\\gamma \\|x - x'\\|^2)$$"""))
 
 cells.append(nbf.v4.new_code_cell("""# [Cell 6] Training & Evaluating Unit 2 Regression & Classification Suites
 from sklearn.model_selection import train_test_split, cross_val_score

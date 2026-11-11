@@ -8,9 +8,10 @@ Implements:
 """
 
 import os
+from typing import Any
+
 import numpy as np
 import pandas as pd
-from typing import Tuple, Dict, Any, List
 
 CAREER_TRACK_MAPPING = {
     # Software & Systems Engineering
@@ -69,7 +70,7 @@ def load_raw_dataset(filepath: str = "data/career_guidance_dataset.csv") -> pd.D
     return df
 
 
-def compute_summary_statistics(df: pd.DataFrame) -> Dict[str, Any]:
+def compute_summary_statistics(df: pd.DataFrame) -> dict[str, Any]:
     """
     Practice 2: Display the summary and statistics of the dataset.
     Computes mean, variance, quantiles (25%, 50%, 75%, 90%, 95%),
@@ -113,7 +114,7 @@ def compute_summary_statistics(df: pd.DataFrame) -> Dict[str, Any]:
 
 def prepare_dataset_for_modeling(
     filepath: str = "data/career_guidance_dataset.csv"
-) -> Tuple[pd.DataFrame, Dict[str, Any]]:
+) -> tuple[pd.DataFrame, dict[str, Any]]:
     """
     Full preprocessing pipeline:
       - Maps 34 fine-grained roles to 5 high-level Career Tracks

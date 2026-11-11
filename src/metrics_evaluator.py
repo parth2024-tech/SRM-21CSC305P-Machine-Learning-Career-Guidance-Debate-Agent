@@ -7,13 +7,10 @@ Runs quantitative benchmarking across:
   - Fairness & Stress Testing across Diverse Synthetic Student Profiles
 """
 
-import json
-import numpy as np
-import pandas as pd
-from typing import Dict, Any, List
+from typing import Any
 
 
-def generate_synthetic_test_profiles() -> List[Dict[str, Any]]:
+def generate_synthetic_test_profiles() -> list[dict[str, Any]]:
     """Generates 4 diverse synthetic student profiles to stress-test agent fairness & uncertainty."""
     return [
         {
@@ -64,8 +61,8 @@ def generate_synthetic_test_profiles() -> List[Dict[str, Any]]:
 
 
 def format_markdown_comparison_tables(
-    reg_metrics: Dict[str, Dict[str, float]],
-    clf_metrics: Dict[str, Dict[str, Any]]
+    reg_metrics: dict[str, dict[str, float]],
+    clf_metrics: dict[str, dict[str, Any]]
 ) -> str:
     """Formats comparative results into academic Markdown tables."""
     md = []

@@ -9,11 +9,10 @@ Generates publication-quality visualizations and quantitative statistical insigh
 """
 
 import os
+
 import matplotlib.pyplot as plt
-import seaborn as sns
-import numpy as np
 import pandas as pd
-from typing import Dict, Any
+import seaborn as sns
 
 # Set styling
 plt.style.use('seaborn-v0_8-whitegrid' if 'seaborn-v0_8-whitegrid' in plt.style.available else 'default')
@@ -22,7 +21,7 @@ plt.rcParams['axes.edgecolor'] = '#333333'
 plt.rcParams['axes.linewidth'] = 0.8
 
 
-def generate_eda_visualizations(df_processed: pd.DataFrame, output_dir: str = "figures") -> Dict[str, str]:
+def generate_eda_visualizations(df_processed: pd.DataFrame, output_dir: str = "figures") -> dict[str, str]:
     """Generates and saves all 5 key EDA figures for academic presentation."""
     os.makedirs(output_dir, exist_ok=True)
     generated_figures = {}

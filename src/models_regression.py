@@ -8,12 +8,12 @@ Implements:
 Practice 1: Implement linear regression to perform prediction.
 """
 
+
 import numpy as np
-from typing import Dict, Any, Tuple
-from sklearn.linear_model import LinearRegression, Ridge, BayesianRidge
-from sklearn.preprocessing import PolynomialFeatures, StandardScaler
+from sklearn.linear_model import BayesianRidge, LinearRegression, Ridge
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.pipeline import Pipeline
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+from sklearn.preprocessing import PolynomialFeatures, StandardScaler
 
 
 class CustomBayesianLinearRegression:
@@ -46,7 +46,7 @@ class CustomBayesianLinearRegression:
         self.m_N = self.beta * (self.S_N @ (X_design.T @ y))
         return self
 
-    def predict(self, X: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
+    def predict(self, X: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
         N, D = X.shape
         X_design = np.hstack([np.ones((N, 1)), X])
         
@@ -81,7 +81,7 @@ class RegressionSuite:
         y_train: np.ndarray,
         X_test: np.ndarray,
         y_test: np.ndarray
-    ) -> Dict[str, Dict[str, float]]:
+    ) -> dict[str, dict[str, float]]:
         """Fits all regression models and evaluates on test split."""
         X_train_scaled = self.scaler.fit_transform(X_train)
         X_test_scaled = self.scaler.transform(X_test)
@@ -119,7 +119,7 @@ class RegressionSuite:
         
         return metrics_summary
 
-    def predict_with_uncertainty(self, X_input: np.ndarray) -> Tuple[float, float, Tuple[float, float]]:
+    def predict_with_uncertainty(self, X_input: np.ndarray) -> tuple[float, float, tuple[float, float]]:
         """
         Predicts expected salary with 95% Bayesian Credible Interval.
         Returns: (predictive_mean, standard_deviation, (ci_lower, ci_upper))

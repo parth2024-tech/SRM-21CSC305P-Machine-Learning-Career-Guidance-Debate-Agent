@@ -17,19 +17,24 @@ Executes:
 5. Generates publication-grade evaluation charts
 """
 
-import os
 import json
-import numpy as np
-import pandas as pd
+import os
+
 import matplotlib
+import numpy as np
+
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import seaborn as sns
 
-from src.data_loader import load_raw_dataset, compute_summary_statistics
-from src.unit3_unsupervised import Unit3UnsupervisedPipeline
-from src.unit4_sequential import CareerMarkovChain, CareerHiddenMarkovModel, CareerKalmanFilter
+from src.data_loader import load_raw_dataset
 from src.debate_agent import MultiPersonaDebateEngine
+from src.unit3_unsupervised import Unit3UnsupervisedPipeline
+from src.unit4_sequential import (
+    CareerHiddenMarkovModel,
+    CareerKalmanFilter,
+    CareerMarkovChain,
+)
+
 
 def run_all_experiments():
     print("=" * 70)

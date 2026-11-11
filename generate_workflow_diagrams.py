@@ -4,9 +4,11 @@ Matches Chapters 2, 3 (Unit 3 & Unit 4), 4, and 5 requirements.
 """
 
 import matplotlib
+
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import matplotlib.patches as patches
+from matplotlib import patches
+
 
 def create_unit2_workflow():
     fig, ax = plt.subplots(figsize=(10, 3.2), dpi=200)

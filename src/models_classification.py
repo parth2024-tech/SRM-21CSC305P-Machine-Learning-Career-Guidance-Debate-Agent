@@ -8,14 +8,21 @@ Implements:
 Practice 2: Implement Bayesian logistic regression and SVM for classification.
 """
 
+from typing import Any
+
 import numpy as np
-from typing import Dict, Any, Tuple, List
 from sklearn.linear_model import LogisticRegression
-from sklearn.naive_bayes import GaussianNB
-from sklearn.svm import SVC
-from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.metrics import (
+    accuracy_score,
+    confusion_matrix,
+    f1_score,
+    precision_score,
+    recall_score,
+)
 from sklearn.model_selection import cross_val_score
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
+from sklearn.naive_bayes import GaussianNB
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.svm import SVC
 
 
 class ClassificationSuite:
@@ -54,7 +61,7 @@ class ClassificationSuite:
         X_test: np.ndarray,
         y_test: np.ndarray,
         cv_folds: int = 5
-    ) -> Dict[str, Dict[str, Any]]:
+    ) -> dict[str, dict[str, Any]]:
         """Fits all classification models and computes comparative performance metrics."""
         y_train_enc = self.label_encoder.fit_transform(y_train)
         y_test_enc = self.label_encoder.transform(y_test)
@@ -94,7 +101,7 @@ class ClassificationSuite:
             
         return metrics_summary
 
-    def predict_probabilities(self, X_input: np.ndarray, model_name: str = "SVM_RBF_Kernel_Trick") -> Dict[str, float]:
+    def predict_probabilities(self, X_input: np.ndarray, model_name: str = "SVM_RBF_Kernel_Trick") -> dict[str, float]:
         """Predicts class probability distribution for student profile."""
         model = self.fitted_models.get(model_name, list(self.fitted_models.values())[0])
         X_scaled = self.scaler.transform(X_input)

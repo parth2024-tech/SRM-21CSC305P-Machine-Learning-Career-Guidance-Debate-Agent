@@ -7,8 +7,10 @@ Strictly aligned with Unit 4 Syllabus:
 - Linear Dynamical Systems (LDS) / Kalman Filter (Continuous state evolution, Kalman Gain, Predict/Update steps)
 """
 
+from typing import Any
+
 import numpy as np
-from typing import Dict, Any, Tuple, List
+
 
 class CareerMarkovChain:
     """
@@ -18,7 +20,7 @@ class CareerMarkovChain:
     - Transition matrix A where sum_j A_{ij} = 1
     - Stationary distribution pi* satisfying pi* = pi* A
     """
-    def __init__(self, states: List[str] = None):
+    def __init__(self, states: list[str] = None):
         if states is None:
             self.states = [
                 "1_Junior_Associate",
@@ -44,7 +46,7 @@ class CareerMarkovChain:
         # Ensure row-normalization
         return A / A.sum(axis=1, keepdims=True)
 
-    def multi_step_prediction(self, initial_state_idx: int, steps: int = 3) -> Dict[str, Any]:
+    def multi_step_prediction(self, initial_state_idx: int, steps: int = 3) -> dict[str, Any]:
         """Calculates A^k multi-step transition probability and distribution."""
         A_k = np.linalg.matrix_power(self.transition_matrix, steps)
         state_dist = A_k[initial_state_idx]
@@ -101,7 +103,7 @@ class CareerHiddenMarkovModel:
             [0.05, 0.35, 0.60]   # Expert: high innovation awards
         ])
 
-    def forward_backward_scaled(self, obs_seq: List[int]) -> Tuple[float, np.ndarray, np.ndarray]:
+    def forward_backward_scaled(self, obs_seq: list[int]) -> tuple[float, np.ndarray, np.ndarray]:
         """
         Scaled Forward-Backward Algorithm:
         Computes forward variables alpha_t(i) and backward variables beta_t(i)
@@ -141,7 +143,7 @@ class CareerHiddenMarkovModel:
 
         return log_likelihood, gamma, c
 
-    def viterbi_decode(self, obs_seq: List[int]) -> Tuple[List[str], float]:
+    def viterbi_decode(self, obs_seq: list[int]) -> tuple[list[str], float]:
         """
         Viterbi Algorithm (Decoding Problem):
         Finds the single most likely hidden career competency trajectory:
@@ -210,7 +212,7 @@ class CareerKalmanFilter:
         self.R = np.array([[r_var]])
         self.I = np.eye(2)
 
-    def filter_trajectory(self, noisy_measurements: List[float], init_proficiency: float = 50.0) -> Dict[str, Any]:
+    def filter_trajectory(self, noisy_measurements: list[float], init_proficiency: float = 50.0) -> dict[str, Any]:
         """Runs the Kalman filter over a sequence of noisy performance ratings."""
         T = len(noisy_measurements)
         mu = np.array([[init_proficiency], [1.0]])  # Initial state [prof, velocity]

@@ -14,8 +14,8 @@ Strictly maps Complementary Personas to ML Algorithmic Invariants:
      - Calibrated consensus score and final actionable career roadmap
 """
 
-import numpy as np
-from typing import Dict, Any, List
+from typing import Any
+
 
 class MultiPersonaDebateEngine:
     def __init__(self, entropy_threshold: float = 1.25, mahalanobis_threshold: float = 4.0):
@@ -25,10 +25,10 @@ class MultiPersonaDebateEngine:
     def execute_debate(
         self,
         student_id: str,
-        student_profile: Dict[str, Any],
-        unit3_metrics: Dict[str, Any],
-        unit4_metrics: Dict[str, Any]
-    ) -> Dict[str, Any]:
+        student_profile: dict[str, Any],
+        unit3_metrics: dict[str, Any],
+        unit4_metrics: dict[str, Any]
+    ) -> dict[str, Any]:
         """
         Executes a 3-agent dialectical debate protocol grounded in Unit 3 and Unit 4 outputs:
         - Planner proposes optimal trajectory based on Viterbi decoding & GMM primary cluster.

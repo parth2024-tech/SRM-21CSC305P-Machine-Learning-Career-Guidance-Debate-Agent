@@ -8,12 +8,22 @@ Strictly aligned with SRM 21CSC305P Syllabus:
 - Dialectical Persona Debate Integration (Persona 1: Planner, Persona 2: Critic, Persona 3: Ethics Reviewer)
 """
 
+from typing import Any
+
 import numpy as np
-import pandas as pd
-from typing import Dict, Any, Tuple, List
-from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, log_loss
+from sklearn.ensemble import (
+    AdaBoostClassifier,
+    GradientBoostingClassifier,
+    RandomForestClassifier,
+)
+from sklearn.metrics import (
+    accuracy_score,
+    f1_score,
+    precision_score,
+    recall_score,
+)
+from sklearn.tree import DecisionTreeClassifier
+
 
 class Unit5EnsemblePipeline:
     def __init__(self, random_state: int = 42):
@@ -23,7 +33,7 @@ class Unit5EnsemblePipeline:
         self.rf_model = None
         self.gb_model = None
 
-    def fit_cart_classifier(self, X_train: np.ndarray, y_train: np.ndarray, max_depth: int = 5) -> Tuple[Any, Dict[str, Any]]:
+    def fit_cart_classifier(self, X_train: np.ndarray, y_train: np.ndarray, max_depth: int = 5) -> tuple[Any, dict[str, Any]]:
         """CART (Classification and Regression Trees) using Gini impurity criterion."""
         self.cart_model = DecisionTreeClassifier(
             criterion='gini',
@@ -39,7 +49,7 @@ class Unit5EnsemblePipeline:
             "feature_importances": feature_importance.tolist()
         }
 
-    def fit_adaboost(self, X_train: np.ndarray, y_train: np.ndarray, n_estimators: int = 50, learning_rate: float = 0.8) -> Tuple[Any, Dict[str, Any]]:
+    def fit_adaboost(self, X_train: np.ndarray, y_train: np.ndarray, n_estimators: int = 50, learning_rate: float = 0.8) -> tuple[Any, dict[str, Any]]:
         """Adaptive Boosting (AdaBoost): Sequentially reweights misclassified sample points."""
         base_estimator = DecisionTreeClassifier(max_depth=2, random_state=self.random_state)
         self.adaboost_model = AdaBoostClassifier(
@@ -55,7 +65,7 @@ class Unit5EnsemblePipeline:
             "estimator_weights": self.adaboost_model.estimator_weights_.tolist() if hasattr(self.adaboost_model, "estimator_weights_") else []
         }
 
-    def fit_random_forest(self, X_train: np.ndarray, y_train: np.ndarray, n_estimators: int = 100) -> Tuple[Any, Dict[str, Any]]:
+    def fit_random_forest(self, X_train: np.ndarray, y_train: np.ndarray, n_estimators: int = 100) -> tuple[Any, dict[str, Any]]:
         """Random Forest: Bagging + Random Subspace method."""
         self.rf_model = RandomForestClassifier(
             n_estimators=n_estimators,
@@ -70,7 +80,7 @@ class Unit5EnsemblePipeline:
             "feature_importances": self.rf_model.feature_importances_.tolist()
         }
 
-    def fit_gradient_boosting(self, X_train: np.ndarray, y_train: np.ndarray, n_estimators: int = 100, learning_rate: float = 0.1) -> Tuple[Any, Dict[str, Any]]:
+    def fit_gradient_boosting(self, X_train: np.ndarray, y_train: np.ndarray, n_estimators: int = 100, learning_rate: float = 0.1) -> tuple[Any, dict[str, Any]]:
         """Gradient Boosted Decision Trees (GBDT): Gradient descent in function space."""
         self.gb_model = GradientBoostingClassifier(
             n_estimators=n_estimators,
@@ -82,10 +92,10 @@ class Unit5EnsemblePipeline:
         return self.gb_model, {
             "n_estimators": n_estimators,
             "learning_rate": learning_rate,
-            "train_loss": [float(l) for l in self.gb_model.train_score_]
+            "train_loss": [float(loss_val) for loss_val in self.gb_model.train_score_]
         }
 
-    def bayesian_model_averaging(self, models: List[Any], model_priors: List[float], X: np.ndarray) -> np.ndarray:
+    def bayesian_model_averaging(self, models: list[Any], model_priors: list[float], X: np.ndarray) -> np.ndarray:
         """
         Bayesian Model Averaging (BMA):
         P(y | x, D) = sum_{m=1}^M P(y | x, M_m) * P(M_m | D)
@@ -99,7 +109,7 @@ class Unit5EnsemblePipeline:
             
         return prob_accum
 
-    def evaluate_all(self, X_test: np.ndarray, y_test: np.ndarray) -> Dict[str, Dict[str, float]]:
+    def evaluate_all(self, X_test: np.ndarray, y_test: np.ndarray) -> dict[str, dict[str, float]]:
         """Calculates Accuracy, Precision, Recall, Macro F1, Weighted F1 across models."""
         models = {
             "Single Decision Tree (CART)": self.cart_model,

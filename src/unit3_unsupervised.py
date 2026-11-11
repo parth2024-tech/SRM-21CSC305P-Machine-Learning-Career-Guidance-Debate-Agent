@@ -9,18 +9,20 @@ Strictly aligned with Unit 3 Syllabus & Practice:
 - Clustering Evaluation & Dissimilarity Measures (Silhouette, Calinski-Harabasz, Davies-Bouldin, Euclidean vs Mahalanobis)
 """
 
-import numpy as np
-import pandas as pd
-from typing import Dict, Any, Tuple, List
-from sklearn.decomposition import PCA, FactorAnalysis
-from sklearn.cluster import KMeans, AgglomerativeClustering
-from sklearn.mixture import GaussianMixture
-from sklearn.metrics import silhouette_score, calinski_harabasz_score, davies_bouldin_score
-from scipy.spatial.distance import mahalanobis
+from typing import Any
+
 import matplotlib
+import numpy as np
+from sklearn.cluster import AgglomerativeClustering, KMeans
+from sklearn.decomposition import PCA, FactorAnalysis
+from sklearn.metrics import (
+    calinski_harabasz_score,
+    davies_bouldin_score,
+    silhouette_score,
+)
+from sklearn.mixture import GaussianMixture
+
 matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-import os
 
 class Unit3UnsupervisedPipeline:
     def __init__(self, random_state: int = 42):
@@ -33,7 +35,7 @@ class Unit3UnsupervisedPipeline:
         self.scaler_mean = None
         self.scaler_std = None
 
-    def fit_transform_pca(self, X: np.ndarray, n_components: int = 5) -> Tuple[np.ndarray, Dict[str, Any]]:
+    def fit_transform_pca(self, X: np.ndarray, n_components: int = 5) -> tuple[np.ndarray, dict[str, Any]]:
         """
         Principal Component Analysis:
         - Maximum variance projection
@@ -60,7 +62,7 @@ class Unit3UnsupervisedPipeline:
         }
         return X_pca, pca_summary
 
-    def fit_factor_analysis(self, X: np.ndarray, n_factors: int = 3) -> Tuple[np.ndarray, Dict[str, Any]]:
+    def fit_factor_analysis(self, X: np.ndarray, n_factors: int = 3) -> tuple[np.ndarray, dict[str, Any]]:
         """
         Factor Analysis (Continuous Latent Variable Model):
         x = W * z + mu + epsilon, where z ~ N(0, I), epsilon ~ N(0, Psi)
@@ -82,7 +84,7 @@ class Unit3UnsupervisedPipeline:
         }
         return X_fa, fa_summary
 
-    def run_kmeans_elbow(self, X: np.ndarray, k_range: range = range(2, 9)) -> Dict[int, float]:
+    def run_kmeans_elbow(self, X: np.ndarray, k_range: range = range(2, 9)) -> dict[int, float]:
         """
         K-Means Clustering: WCSS (Within-Cluster Sum of Squares) / Elbow Curve
         Objective: min sum_{k} sum_{i in S_k} ||x_i - mu_k||^2
@@ -94,7 +96,7 @@ class Unit3UnsupervisedPipeline:
             wcss_dict[k] = float(km.inertia_)
         return wcss_dict
 
-    def fit_kmeans(self, X: np.ndarray, n_clusters: int = 5) -> Tuple[np.ndarray, Dict[str, Any]]:
+    def fit_kmeans(self, X: np.ndarray, n_clusters: int = 5) -> tuple[np.ndarray, dict[str, Any]]:
         """K-Means Hard Assignment Clustering."""
         self.kmeans_model = KMeans(n_clusters=n_clusters, random_state=self.random_state, n_init=10)
         labels = self.kmeans_model.fit_predict(X)
@@ -114,7 +116,7 @@ class Unit3UnsupervisedPipeline:
         }
         return labels, metrics
 
-    def fit_gmm_em(self, X: np.ndarray, n_components: int = 5) -> Tuple[np.ndarray, np.ndarray, Dict[str, Any]]:
+    def fit_gmm_em(self, X: np.ndarray, n_components: int = 5) -> tuple[np.ndarray, np.ndarray, dict[str, Any]]:
         """
         Gaussian Mixture Model (GMM) with Expectation-Maximization (EM):
         - E-step: Posterior responsibilities gamma(z_{nk}) = P(z_k = 1 | x_n)
@@ -162,7 +164,7 @@ class Unit3UnsupervisedPipeline:
         }
         return hard_labels, responsibilities, metrics
 
-    def fit_hierarchical(self, X: np.ndarray, n_clusters: int = 5, linkage: str = 'ward') -> Tuple[np.ndarray, Dict[str, Any]]:
+    def fit_hierarchical(self, X: np.ndarray, n_clusters: int = 5, linkage: str = 'ward') -> tuple[np.ndarray, dict[str, Any]]:
         """
         Hierarchical Agglomerative Clustering (Bottom-Up AGNES):
         Computes pairwise dissimilarity distance matrix and merges clusters
@@ -189,7 +191,7 @@ class Unit3UnsupervisedPipeline:
         }
         return labels, metrics
 
-    def compute_dissimilarity_profiles(self, sample_x: np.ndarray) -> Dict[str, float]:
+    def compute_dissimilarity_profiles(self, sample_x: np.ndarray) -> dict[str, float]:
         """
         Unit 3 Dissimilarity Metrics:
         Calculates Euclidean vs Mahalanobis distance from cluster centroids.

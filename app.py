@@ -7,24 +7,31 @@ Supervisors: Dr. Divya Mohan, Dr. G. Niranjana
 """
 
 import os
-import json
+
+import matplotlib
 import numpy as np
 import pandas as pd
-import matplotlib
+
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
-
-from sklearn.preprocessing import StandardScaler, LabelEncoder
-from sklearn.linear_model import LinearRegression, Ridge, BayesianRidge, LogisticRegression
-from sklearn.naive_bayes import GaussianNB
-from sklearn.svm import SVC
-from sklearn.decomposition import PCA, FactorAnalysis
 from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
+from sklearn.ensemble import (
+    AdaBoostClassifier,
+    RandomForestClassifier,
+)
+from sklearn.linear_model import (
+    BayesianRidge,
+    LinearRegression,
+    LogisticRegression,
+    Ridge,
+)
 from sklearn.mixture import GaussianMixture
+from sklearn.naive_bayes import GaussianNB
+from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier
 
 st.set_page_config(
     page_title="SRMIST 21CSC305P - Dialectical Career Guidance Agent",

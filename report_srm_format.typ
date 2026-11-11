@@ -49,9 +49,33 @@
   first-line-indent: 0pt
 )
 
-// Configure Table Captions on TOP and Figure Captions on BOTTOM as per SRM Guidelines
+// Configure Chapter-Wise Figure and Table Numbering (e.g. Figure 2.1, Table 3.1)
+#show heading.where(level: 1): it => {
+  counter(figure.where(kind: image)).update(0)
+  counter(figure.where(kind: table)).update(0)
+  it
+}
+
+#show figure.where(kind: image): set figure(numbering: (..num) => {
+  let ch = counter(heading).get().first()
+  if ch > 0 { str(ch) + "." + str(num.pos().first()) } else { str(num.pos().first()) }
+})
+
+#show figure.where(kind: table): set figure(numbering: (..num) => {
+  let ch = counter(heading).get().first()
+  if ch > 0 { str(ch) + "." + str(num.pos().first()) } else { str(num.pos().first()) }
+})
+
+// SRM Table and Figure Caption Placements
 #show figure.where(kind: table): set figure.caption(position: top)
 #show figure.where(kind: image): set figure.caption(position: bottom)
+
+// Global Table Style: Professional institutional borders, clean padding, fitting 100% width
+#set table(
+  stroke: 0.5pt + rgb("#002147"),
+  fill: (x, y) => if y == 0 { rgb("#f1f5f9") } else { none },
+  inset: (x: 5pt, y: 6pt)
+)
 
 // Title Page
 #align(center)[
@@ -210,7 +234,7 @@ Conventional machine learning decision-support systems in career counseling rely
 - *Figure 3.1*: PCA Scree Plot and Kaiser Criterion Latent Dimension Cutoff
 - *Figure 3.2*: Clustering Separation Comparison across Evaluation Indices
 - *Figure 3.3*: Proposed Unit 3 Unsupervised Workflow Architecture
-- *Figure 3.4*: GMM Soft Posterior Responsibilities Heatmap ($gamma_(n,k)$)
+- *Figure 3.4*: GMM Soft Posterior Responsibilities Heatmap ($gamma_(n,k) = P(Z_k=1 | x_n)$)
 - *Figure 3.5*: Markov Chain Longitudinal Transition Dynamics ($A$ vs $A^3$)
 - *Figure 3.6*: Proposed Unit 4 Sequential Workflow Architecture
 - *Figure 3.7*: Linear Dynamical System (Kalman Filter) Proficiency Tracking
@@ -244,9 +268,10 @@ Conventional machine learning decision-support systems in career counseling rely
 
 #pagebreak()
 
-// Main Chapters
+// Main Chapters with Arabic Page Numbering & 1.1 Section Numbering
 #set page(numbering: "1")
 #counter(page).update(1)
+#set heading(numbering: "1.1")
 
 = Introduction
 
@@ -276,8 +301,7 @@ The specific mathematical and computational objectives across all five curricula
 == Unit-Wise Topic and Dataset Allocation
 #figure(
   table(
-    columns: (1.2in, 0.8in, 2.5in, 1.8in),
-    inset: 8pt,
+    columns: (1.2fr, 0.8fr, 2.5fr, 1.8fr),
     align: (center, center, left, left),
     [*PBL Phase*], [*Unit*], [*Allotted Algorithmic Scope*], [*Dataset Employed*],
     [PBL 1], [Unit 1], [Random Variables, Quantiles, Covariance, Bayes Priors], [Kaggle Career Benchmark (20k rows)],
@@ -311,7 +335,7 @@ Data audit verified zero missing values, zero structural duplicate records, and 
 
 == Data Preprocessing
 Continuous features were normalized using z-score standardization:
-$ z_{n,d} = frac{x_{n,d} - mu_d}{sigma_d} $
+$ z_(n,d) = (x_(n,d) - mu_d) / sigma_d $
 Categorical targets were encoded into discrete class integers $y in {0, dots, C-1}$. For supervised classification and regression benchmarks, the data was partitioned into an 80% training subset ($N_"train" = 16,000$) and a 20% test subset ($N_"test" = 4,000$) using stratified sampling to preserve track prior distributions.
 
 == Exploratory Data Analysis (EDA)
@@ -319,8 +343,7 @@ Summary statistics and quantile distributions were computed across the continuou
 
 #figure(
   table(
-    columns: (2in, 0.8in, 0.8in, 0.8in, 0.8in, 0.8in),
-    inset: 6pt,
+    columns: (2.2fr, 1fr, 1fr, 1fr, 1fr, 1fr),
     align: (left, center, center, center, center, center),
     [*Feature Name*], [*Mean*], [*Std Dev*], [*Q1 (25%)*], [*Median*], [*Q3 (75%)*],
     [Operating Systems %], [77.00], [5.37], [73.00], [77.00], [81.00],
@@ -383,24 +406,23 @@ Under Maximum Likelihood Estimation (OLS):
 $ w_"OLS" = (X^T X)^(-1) X^T y $
 Ridge regression imposes an $L_2$ penalty to control parameter shrinkage in collinear spaces:
 $ w_"Ridge" = (X^T X + lambda I)^(-1) X^T y $
-Bayesian Linear Regression places a conjugate Gaussian prior over weights $p(w) = cal(N)(w mid 0, alpha^(-1) I)$, yielding the posterior distribution $p(w mid y) = cal(N)(w mid m_N, S_N)$:
+Bayesian Linear Regression places a conjugate Gaussian prior over weights $p(w) = cal(N)(w | 0, alpha^(-1) I)$, yielding the posterior distribution $p(w | y) = cal(N)(w | m_N, S_N)$:
 $ S_N^(-1) = alpha I + beta X^T X, quad m_N = beta S_N X^T y $
 The predictive distribution for a novel candidate query $x_*$ evaluates to:
-$ p(y_* mid x_*, cal(D)) = cal(N)(m_N^T x_*, sigma_N^2(x_*)), quad sigma_N^2(x_*) = frac{1}{beta} + x_*^T S_N x_* $
+$ p(y_* | x_*, cal(D)) = cal(N)(m_N^T x_*, sigma_N^2(x_*)), quad sigma_N^2(x_*) = 1/beta + x_*^T S_N x_* $
 
 === Supervised Classification
 *Logistic Regression* models posterior probabilities through the sigmoid link function:
-$ P(y = 1 mid x) = sigma(w^T x) = frac{1}{1 + e^(-w^T x)} $
+$ P(y = 1 | x) = sigma(w^T x) = 1 / (1 + e^(-w^T x)) $
 *Gaussian Naive Bayes* adopts a generative stance by invoking class-conditional independence:
-$ P(y = c mid x) prop P(y = c) product_(d=1)^D frac{1}{sqrt(2 pi sigma_(c,d)^2)} exp(-frac{(x_d - mu_(c,d))^2}{2 sigma_(c,d)^2}) $
-*Support Vector Machines (SVM)* maximize the separation margin $frac{2}{||w||}$. Using the dual formulation with an RBF kernel $K(x_i, x_j) = exp(-gamma ||x_i - x_j||^2)$, non-linear decision boundaries are constructed via the kernel trick:
+$ P(y = c | x) prop P(y = c) product_(d=1)^D 1 / sqrt(2 pi sigma_(c,d)^2) exp(- (x_d - mu_(c,d))^2 / (2 sigma_(c,d)^2)) $
+*Support Vector Machines (SVM)* maximize the separation margin $frac / ||w||$. Using the dual formulation with an RBF kernel $K(x_i, x_j) = exp(-gamma ||x_i - x_j||^2)$, non-linear decision boundaries are constructed via the kernel trick:
 $ f(x) = op("sign")(sum_(i=1)^N alpha_i y_i K(x_i, x) + b) $
 
 == Results and Performance Evaluation
 #figure(
   table(
-    columns: (2.5in, 1in, 1in, 1in, 1in),
-    inset: 7pt,
+    columns: (2.4fr, 1fr, 1fr, 1fr, 1.1fr),
     align: (left, center, center, center, center),
     [*Regression Model*], [*MSE*], [*RMSE*], [*MAE*], [*$R^2$ Score*],
     [Ordinary Least Squares (OLS)], [14.28], [3.78], [3.01], [0.8812],
@@ -419,8 +441,7 @@ $ f(x) = op("sign")(sum_(i=1)^N alpha_i y_i K(x_i, x) + b) $
 #v(0.1in)
 #figure(
   table(
-    columns: (2.5in, 1.2in, 1.2in, 1.2in),
-    inset: 7pt,
+    columns: (2.5fr, 1.1fr, 1.1fr, 1.1fr),
     align: (left, center, center, center),
     [*Classification Algorithm*], [*Accuracy*], [*Macro $F_1$*], [*Weighted $F_1$*],
     [Logistic Regression (Multinomial)], [0.8415], [0.8380], [0.8410],
@@ -455,7 +476,7 @@ Dimensionality analysis through PCA reveals the eigenvalue spectrum of the corre
 === Principal Component Analysis (PCA)
 Given standardized centered matrix $X in bb(R)^(N times D)$, PCA seeks orthogonal projection directions $u_1, dots, u_M$ maximizing projected variance:
 $ max_(u_1) u_1^T Sigma u_1 quad "s.t." quad u_1^T u_1 = 1 $
-where $Sigma = frac{1}{N} X^T X$ is the empirical sample covariance matrix. Eigenvalue decomposition yields:
+where $Sigma = 1/N X^T X$ is the empirical sample covariance matrix. Eigenvalue decomposition yields:
 $ Sigma u_m = lambda_m u_m $
 Under the *Kaiser-Guttman criterion*, components with eigenvalues $lambda_m > 1.0$ are retained as statistically meaningful latent dimensions.
 
@@ -467,13 +488,13 @@ $ x tilde.op cal(N)(mu, C), quad C = W W^T + Psi $
 
 === Gaussian Mixture Models (GMM) and Expectation-Maximization (EM)
 A mixture of $K$ Gaussians defines the density:
-$ p(x) = sum_(k=1)^K pi_k cal(N)(x mid mu_k, Sigma_k) $
+$ p(x) = sum_(k=1)^K pi_k cal(N)(x | mu_k, Sigma_k) $
 The incomplete data log-likelihood is maximized via the two-step EM algorithm:
-- *E-Step*: Compute the posterior probability of responsibility $gamma_(n,k) = P(z_(n,k) = 1 mid x_n)$:
-  $ gamma_(n,k) = frac{pi_k cal(N)(x_n mid mu_k, Sigma_k)}{sum_(j=1)^K pi_j cal(N)(x_n mid mu_j, Sigma_j)} $
+- *E-Step*: Compute the posterior probability of responsibility $gamma_(n,k) = P(z_(n,k) = 1 | x_n)$:
+  $ gamma_(n,k) = (pi_k cal(N)(x_n | mu_k, Sigma_k)) / (sum_(j=1)^K pi_j cal(N)(x_n | mu_j, Sigma_j)) $
 - *M-Step*: Update parameters using the calculated responsibilities:
-  $ N_k = sum_(n=1)^N gamma_(n,k), quad mu_k = frac{1}{N_k} sum_(n=1)^N gamma_(n,k) x_n $
-  $ Sigma_k = frac{1}{N_k} sum_(n=1)^N gamma_(n,k) (x_n - mu_k)(x_n - mu_k)^T, quad pi_k = frac{N_k}{N} $
+  $ N_k = sum_(n=1)^N gamma_(n,k), quad mu_k = 1/N_k sum_(n=1)^N gamma_(n,k) x_n $
+  $ Sigma_k = 1/N_k sum_(n=1)^N gamma_(n,k) (x_n - mu_k)(x_n - mu_k)^T, quad pi_k = N_k / N $
 
 === Mahalanobis Distance Dissimilarity
 To detect profile anomalies, the Mahalanobis distance from candidate $x$ to cluster center $mu_k$ is computed using the covariance matrix:
@@ -503,21 +524,23 @@ $ D_M(x, mu_k) = sqrt((x - mu_k)^T Sigma_k^(-1) (x - mu_k)) $
 #v(0.1in)
 #figure(
   image("figures/unit3_gmm_responsibilities_heatmap.png", width: 85%),
-  caption: [GMM Soft Posterior Responsibilities Heatmap ($gamma_(n,k) = P(Z_k=1 mid x_n)$)]
+  caption: [GMM Soft Posterior Responsibilities Heatmap ($gamma_(n,k) = P(Z_k=1 | x_n)$)]
 )
 
+#v(0.1in)
 #figure(
   table(
-    columns: (2in, 1.1in, 1.1in, 1.1in, 1.5in),
-    inset: 7pt,
+    columns: (1.6fr, 1fr, 1.1fr, 1.1fr, 1.8fr),
     align: (left, center, center, center, left),
-    [*Clustering Method*], [*Silhouette* (arrow.t)], [*Calinski-H.* (arrow.t)], [*Davies-Bouldin* (arrow.b)], [*Assignment Characteristic*],
-    [K-Means (Lloyd)], [*0.0482*], [*874.2*], [*2.84*], [Hard Voronoi Euclidean],
+    [*Clustering Method*], [*Silhouette (↑)*], [*Calinski-H. (↑)*], [*Davies-Bouldin (↓)*], [*Assignment Type*],
+    [K-Means (Lloyd)], [*0.0482*], [*874.2*], [*2.84*], [Hard Voronoi Partition],
     [GMM (EM Algorithm)], [0.0431], [812.5], [2.91], [Soft Probabilistic ($gamma_(n,k)$)],
-    [Hierarchical (Ward)], [0.0115], [645.1], [3.42], [Deterministic Agglomerative]
+    [Hierarchical (Ward)], [0.0115], [645.1], [3.42], [Agglomerative Tree Cut]
   ),
   caption: [Unit 3 Clustering Algorithmic Benchmark across Separation Metrics]
 ) <tab_unit3_eval>
+
+#pagebreak()
 
 == Unit 4 – Sequential Dataset Description
 To model temporal dynamics, longitudinal candidate progression sequences across 5 consecutive academic review intervals ($t = 1, dots, 5$) were synthesized from corporate milestone benchmarks. States span five professional ranks: Junior Associate ($s_1$), Mid-Level Engineer ($s_2$), Senior Specialist ($s_3$), Lead Architect ($s_4$), and Director/CTO ($s_5$).
@@ -529,14 +552,14 @@ Autocorrelation analysis verified high first-order dependency between successive
 
 === First-Order Discrete Markov Chains
 Let $S_t in {s_1, dots, s_K}$ denote the candidate's career level at period $t$. The first-order Markov property implies:
-$ P(S_t mid S_1, dots, S_(t-1)) = P(S_t mid S_(t-1)) $
-The stochastic transition matrix $A in bb(R)^(K times K)$ has entries $A_(i,j) = P(S_(t+1) = s_j mid S_t = s_i)$ where $sum_j A_(i,j) = 1$. Multi-step transitions over horizon $k$ satisfy $A^k$. The long-term stationary distribution $pi^*$ satisfies:
+$ P(S_t | S_1, dots, S_(t-1)) = P(S_t | S_(t-1)) $
+The stochastic transition matrix $A in bb(R)^(K times K)$ has entries $A_(i,j) = P(S_(t+1) = s_j | S_t = s_i)$ where $sum_j A_(i,j) = 1$. Multi-step transitions over horizon $k$ satisfy $A^k$. The long-term stationary distribution $pi^*$ satisfies:
 $ pi^* = pi^* A, quad sum_i pi_i^* = 1 $
 
 === Hidden Markov Models (HMM)
 An HMM represents system dynamics via unobserved hidden states $Z_t$ generating observable milestone emissions $X_t$. The model is parameterized by $lambda = (pi, A, B)$:
-- *Scaled Forward-Backward Algorithm*: Normalizers $c_t = frac{1}{sum_i alpha_t(i)}$ prevent underflow, yielding $ln P(X mid lambda) = -sum_t ln c_t = -4.410$.
-- *Viterbi MAP Decoding*: Solves $z^* = op("argmax")_z P(z, X mid lambda)$, outputting the progression sequence:
+- *Scaled Forward-Backward Algorithm*: Normalizers $c_t = 1 / (sum_i alpha_t(i))$ prevent underflow, yielding $ln P(X | lambda) = -sum_t ln c_t = -4.410$.
+- *Viterbi MAP Decoding*: Solves $z^* = op("argmax")_z P(z, X | lambda)$, outputting the progression sequence:
   $ "Novice" arrow "Competent" arrow "Competent" arrow "Expert" arrow "Expert" quad ("log-score" = -5.847) $
 
 === Linear Dynamical Systems (Discrete Kalman Filter)
@@ -555,8 +578,7 @@ Continuous skill velocity $z_t = [p_t, v_t]^T$ is tracked from noisy evaluations
 == Results and Performance Evaluation
 #figure(
   table(
-    columns: (1.5in, 1.2in, 1.2in, 1.2in, 1.2in),
-    inset: 7pt,
+    columns: (1.2fr, 1fr, 1.2fr, 1.1fr, 1.1fr),
     align: center,
     [*Junior Associate*], [*Mid Engineer*], [*Senior Specialist*], [*Lead Architect*], [*Director/CTO*],
     [0.90%], [4.00%], [11.60%], [28.00%], [*55.40%*]
@@ -607,25 +629,24 @@ Feature importance analysis across decision tree estimators demonstrates that `c
 
 === Classification and Regression Trees (CART)
 CART partitions the feature space using Gini impurity reduction:
-$ Delta I(m) = I_G(m) - frac{N_L}{N_m} I_G(m_L) - frac{N_R}{N_m} I_G(m_R), quad I_G(m) = 1 - sum_(c=1)^C p_(m,c)^2 $
+$ Delta I(m) = I_G(m) - N_L / N_m I_G(m_L) - N_R / N_m I_G(m_R), quad I_G(m) = 1 - sum_(c=1)^C p_(m,c)^2 $
 
 === Adaptive Boosting (AdaBoost)
 AdaBoost minimizes exponential loss by adjusting sample weights:
-$ alpha_m = frac{1}{2} ln(frac{1 - epsilon_m}{epsilon_m}), quad D_(m+1)(n) = frac{D_m(n) exp(-alpha_m y_n h_m(x_n))}{Z_m} $
+$ alpha_m = 1/2 ln((1 - epsilon_m) / epsilon_m), quad D_(m+1)(n) = (D_m(n) exp(-alpha_m y_n h_m(x_n))) / Z_m $
 
 === Random Forests (Bagging + Feature Subspace)
 Random Forests construct $B$ decorrelated trees with sub-space randomization $m = sqrt(D)$:
-$ "Var"(bar(T)) = rho sigma^2 + frac{1 - rho}{B} sigma^2 $
+$ "Var"(bar(T)) = rho sigma^2 + (1 - rho) / B sigma^2 $
 
 === Bayesian Model Averaging (BMA)
 Marginalizes model uncertainty through posterior evidence weighting:
-$ p(y mid x, cal(D)) = sum_(m=1)^M p(y mid x, cal(M)_m) P(cal(M)_m mid cal(D)) $
+$ p(y | x, cal(D)) = sum_(m=1)^M p(y | x, cal(M)_m) P(cal(M)_m | cal(D)) $
 
 == Results and Performance Evaluation
 #figure(
   table(
-    columns: (2.2in, 0.9in, 1.1in, 1.1in, 1in),
-    inset: 7pt,
+    columns: (2.2fr, 1fr, 1.1fr, 1.1fr, 1.1fr),
     align: (left, center, center, center, center),
     [*Ensemble Model*], [*Accuracy*], [*Precision (W)*], [*Recall (W)*], [*Weighted $F_1$*],
     [Single Decision Tree (CART)], [0.2784], [0.2455], [0.2784], [0.1540],
@@ -673,8 +694,7 @@ The dialectical debate architecture coordinates three specialized personas to el
 #v(0.1in)
 #figure(
   table(
-    columns: (1.5in, 2.5in, 2.2in),
-    inset: 8pt,
+    columns: (1.3fr, 2.4fr, 2.3fr),
     align: (left, left, left),
     [*Debate Persona*], [*Mathematical Core & Syllabus Mapping*], [*Operational Stance in Career Guidance*],
     [*Persona 1: The Planner*], [Unit 3 GMM cluster responsibility $gamma_(n,k)$ & Unit 4 HMM Viterbi decoding.], [Proposes maximum-growth career trajectories and aspirational milestones.],

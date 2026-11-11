@@ -57,9 +57,11 @@
   
   #v(0.15in)
   #text(10.5pt)[
-    *Author:* Autonomous Research System (Engineered under `gpt-researcher` Protocol)\
+    *Investigators / Team:* Parth Gupta (RA2311026010001), Mokshith Penna (RA2411003010044), Ishu Gurtu (RA2411003010015)\
+    *Methodology:* Autonomous Research System (Engineered under `gpt-researcher` Protocol)\
     *Document Category:* Comprehensive Technical Investigation & State-of-the-Art Deep Dive\
-    *Date:* November 11, 2026 #h(1em) | #h(1em) *Status:* Peer-Reviewed Formulation
+    *Date:* November 11, 2026 #h(1em) | #h(1em) *Course:* 21CSC305P Machine Learning\
+    *Affiliation:* Department of Computational Intelligence, SRMIST, Kattankulathur
   ]
   
   #v(0.1in)

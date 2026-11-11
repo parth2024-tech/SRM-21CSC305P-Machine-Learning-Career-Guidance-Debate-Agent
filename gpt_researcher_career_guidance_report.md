@@ -1,6 +1,11 @@
 # Research Report: Dialectical Multi-Agent Debate with Complementary Personas for Career Guidance Decision Support
 
 **Author:** Autonomous Research System (Engineered under `gpt-researcher` Protocol)  
+**Investigators / Team Members:**  
+- **Parth Gupta** (RA2311026010001)  
+- **Mokshith Penna** (RA2411003010044)  
+- **Ishu Gurtu** (RA2411003010015)  
+**Affiliation:** Department of Computational Intelligence, SRMIST, Kattankulathur  
 **Date:** November 11, 2026  
 **Document Category:** Comprehensive Technical Investigation & State-of-the-Art Deep Dive  
 **Keywords:** Multi-Agent Debate (MAD), Dialectical Decision Support, Gaussian Mixture Models, Hidden Markov Models, Kalman Filtering, Ensemble Learning, Algorithmic Recourse  

@@ -57,11 +57,12 @@
   
   #v(0.15in)
   #text(10.5pt)[
-    *Investigators / Team:* Parth Gupta (RA2311026010001), Mokshith Penna (RA2411003010044), Ishu Gurtu (RA2411003010015)\
+    *Investigators / Team:* Parth Gupta [RA2311026010001], Mokshith Penna [RA2411003010044], Ishu Gurtu [RA2411003010015]\
+    *Under the Guidance of:* Dr. Divya Mohan (Assistant Professor, Department of Computing Technologies)\
+    *Head of Department:* Dr. G. Niranjana (Professor and Head, Department of Computing Technologies)\
+    *Institution:* SRM Institute of Science and Technology, Kattankulathur\
     *Methodology:* Autonomous Research System (Engineered under `gpt-researcher` Protocol)\
-    *Document Category:* Comprehensive Technical Investigation & State-of-the-Art Deep Dive\
-    *Date:* November 11, 2026 #h(1em) | #h(1em) *Course:* 21CSC305P Machine Learning\
-    *Affiliation:* Department of Computational Intelligence, SRMIST, Kattankulathur
+    *Date:* November 11, 2026 #h(1em) | #h(1em) *Course:* 21CSC305P Machine Learning
   ]
   
   #v(0.1in)

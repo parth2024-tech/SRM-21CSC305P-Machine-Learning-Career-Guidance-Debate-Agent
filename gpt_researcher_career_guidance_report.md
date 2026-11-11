@@ -2,10 +2,12 @@
 
 **Author:** Autonomous Research System (Engineered under `gpt-researcher` Protocol)  
 **Investigators / Team Members:**  
-- **Parth Gupta** (RA2311026010001)  
-- **Mokshith Penna** (RA2411003010044)  
-- **Ishu Gurtu** (RA2411003010015)  
-**Affiliation:** Department of Computational Intelligence, SRMIST, Kattankulathur  
+- **Parth Gupta** [RA2311026010001]  
+- **Mokshith Penna** [RA2411003010044]  
+- **Ishu Gurtu** [RA2411003010015]  
+**Under the Guidance of:** Dr. Divya Mohan, Assistant Professor, Department of Computing Technologies  
+**Head of Department:** Dr. G. Niranjana, Professor and Head, Department of Computing Technologies  
+**Institution:** SRM Institute of Science and Technology, Kattankulathur - 603 203  
 **Date:** November 11, 2026  
 **Document Category:** Comprehensive Technical Investigation & State-of-the-Art Deep Dive  
 **Keywords:** Multi-Agent Debate (MAD), Dialectical Decision Support, Gaussian Mixture Models, Hidden Markov Models, Kalman Filtering, Ensemble Learning, Algorithmic Recourse  

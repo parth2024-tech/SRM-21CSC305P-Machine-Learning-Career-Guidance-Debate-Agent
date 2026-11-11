@@ -51,51 +51,63 @@
 
 // Title Page
 #align(center)[
-  #v(0.5in)
+  #v(0.2in)
   #text(16pt, weight: "bold")[
-    DEBATE-BASED CAREER GUIDANCE AGENT WITH COMPLEMENTARY PERSONAS: AN INTEGRATED MACHINE LEARNING FRAMEWORK
+    DEBATE-BASED CAREER GUIDANCE AGENT WITH COMPLEMENTARY PERSONAS
   ]
   
-  #v(0.3in)
+  #v(0.15in)
   #text(13pt, weight: "bold")[
-    21CSC305P - MACHINE LEARNING PROJECT REPORT
+    A PROJECT REPORT
+  ]
+  
+  #v(0.15in)
+  #text(12pt, style: "italic")[Submitted by]
+  
+  #v(0.1in)
+  #text(11pt, weight: "bold")[
+    PARTH GUPTA [RA2311026010001]\
+    MOKSHITH PENNA [RA2411003010044]\
+    ISHU GURTU [RA2411003010015]
   ]
   
   #v(0.2in)
+  #text(12pt, style: "italic")[Under the Guidance of]
+  
+  #v(0.1in)
+  #text(12pt, weight: "bold")[
+    Dr. DIVYA MOHAN\
+  ]
   #text(11pt)[
-    Submitted in partial fulfillment of the requirements for the degree of\
-    *BACHELOR OF TECHNOLOGY*\
-    in\
-    *COMPUTER SCIENCE AND ENGINEERING*\
-    (Specialization in Artificial Intelligence and Machine Learning)
+    Assistant Professor, Department of Computing Technologies
   ]
   
-  #v(0.4in)
-  #text(12pt, weight: "bold")[Submitted by:]\
-  #text(11pt)[
-    *PARTH GUPTA* (RA2311026010001)\
-    *MOKSHITH PENNA* (RA2411003010044)\
-    *ISHU GURTU* (RA2411003010015)\
-    *TEAM ML-PBL* (Batch 2023 - 2027)
+  #v(0.15in)
+  #text(11pt, style: "italic")[
+    in partial fulfillment of the requirements for the degree of
   ]
   
-  #v(0.4in)
-  #text(12pt, weight: "bold")[Under the Guidance of:]\
-  #text(11pt)[
-    *FACULTY OF COMPUTATIONAL INTELLIGENCE*\
-    Department of Computational Intelligence\
-    School of Computing
+  #v(0.1in)
+  #text(12pt, weight: "bold")[
+    BACHELOR OF TECHNOLOGY
+  ]
+  #text(11pt)[in]
+  #text(12pt, weight: "bold")[
+    COMPUTER SCIENCE ENGINEERING
   ]
   
-  #v(0.6in)
-  #text(13pt, weight: "bold")[
-    DEPARTMENT OF COMPUTATIONAL INTELLIGENCE\
+  #v(0.2in)
+  #image("figures/srm_logo.jpeg", width: 42%)
+  
+  #v(0.15in)
+  #text(11pt, weight: "bold")[
+    DEPARTMENT OF COMPUTING TECHNOLOGIES\
     COLLEGE OF ENGINEERING AND TECHNOLOGY\
     SRM INSTITUTE OF SCIENCE AND TECHNOLOGY\
     KATTANKULATHUR - 603 203
   ]
   
-  #v(0.2in)
+  #v(0.15in)
   #text(11pt, weight: "bold")[NOVEMBER 2026]
 ]
 
@@ -110,22 +122,24 @@
 ]
 #v(0.3in)
 
-Certified that this project report titled *"DEBATE-BASED CAREER GUIDANCE AGENT WITH COMPLEMENTARY PERSONAS"* is the bonafide work of *PARTH GUPTA* (RA2311026010001), *MOKSHITH PENNA* (RA2411003010044), and *ISHU GURTU* (RA2411003010015) who carried out the project work under my supervision for the course *21CSC305P - Machine Learning* during the Academic Year 2026–2027.
+Certified that this project report titled *"DEBATE-BASED CAREER GUIDANCE AGENT WITH COMPLEMENTARY PERSONAS"* is the bonafide work of *PARTH GUPTA* [RA2311026010001], *MOKSHITH PENNA* [RA2411003010044], and *ISHU GURTU* [RA2411003010015] who carried out the project work under my supervision for the course *21CSC305P - Machine Learning* during the Academic Year 2026–2027.
 
-#v(1.2in)
+#v(1.0in)
 #grid(
   columns: (1fr, 1fr),
   align: (left, right),
   [
     #line(length: 2in)\
-    *SIGNATURE OF GUIDE*\
-    Department of Computational Intelligence\
+    *Dr. DIVYA MOHAN*\
+    Assistant Professor\
+    Department of Computing Technologies\
     SRMIST, Kattankulathur
   ],
   [
     #line(length: 2in)\
-    *HEAD OF DEPARTMENT*\
-    Department of Computational Intelligence\
+    *Dr. G. NIRANJANA*\
+    Professor and Head\
+    Department of Computing Technologies\
     SRMIST, Kattankulathur
   ]
 )

@@ -1,0 +1,30 @@
+{
+  "Single Decision Tree (CART)": {
+    "Accuracy": 0.2784,
+    "Precision (Weighted)": 0.24547659115068313,
+    "Recall (Weighted)": 0.2784,
+    "Macro F1": 0.11773119756000958,
+    "Weighted F1": 0.15396783272296807
+  },
+  "AdaBoost Ensemble": {
+    "Accuracy": 0.2824,
+    "Precision (Weighted)": 0.1244050078462545,
+    "Recall (Weighted)": 0.2824,
+    "Macro F1": 0.09302951108479258,
+    "Weighted F1": 0.13083674063548204
+  },
+  "Random Forest Ensemble": {
+    "Accuracy": 0.2866,
+    "Precision (Weighted)": 0.3489974883099532,
+    "Recall (Weighted)": 0.2866,
+    "Macro F1": 0.09099389738511576,
+    "Weighted F1": 0.1290831505783666
+  },
+  "Gradient Boosted Trees (GBDT)": {
+    "Accuracy": 0.265,
+    "Precision (Weighted)": 0.20352452626570347,
+    "Recall (Weighted)": 0.265,
+    "Macro F1": 0.13858948938728805,
+    "Weighted F1": 0.1720950449338361
+  }
+}

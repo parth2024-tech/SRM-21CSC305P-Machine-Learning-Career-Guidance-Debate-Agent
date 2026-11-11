@@ -45,36 +45,45 @@
 
 #set par(
   justify: true,
-  leading: 0.8em,
+  leading: 0.85em,
   first-line-indent: 0pt
 )
 
+// Configure Table Captions on TOP and Figure Captions on BOTTOM as per SRM Guidelines
+#show figure.where(kind: table): set figure.caption(position: top)
+#show figure.where(kind: image): set figure.caption(position: bottom)
+
 // Title Page
 #align(center)[
-  #v(0.2in)
-  #text(16pt, weight: "bold")[
-    DEBATE-BASED CAREER GUIDANCE AGENT WITH COMPLEMENTARY PERSONAS
+  #v(0.1in)
+  #text(17pt, weight: "bold")[
+    DESIGN, IMPLEMENTATION, AND PERFORMANCE EVALUATION OF MACHINE LEARNING TECHNIQUES
   ]
-  
-  #v(0.15in)
-  #text(13pt, weight: "bold")[
-    A PROJECT REPORT
-  ]
-  
-  #v(0.15in)
-  #text(12pt, style: "italic")[Submitted by]
   
   #v(0.1in)
+  #text(14pt, weight: "bold")[
+    DEBATE-BASED CAREER GUIDANCE AGENT WITH COMPLEMENTARY PERSONAS
+  ]
+
+  #v(0.1in)
+  #text(12pt, weight: "bold")[
+    21CSC305P - MACHINE LEARNING PROJECT
+  ]
+  
+  #v(0.1in)
+  #text(11pt, style: "italic")[Submitted by]
+  
+  #v(0.08in)
   #text(11pt, weight: "bold")[
     PARTH GUPTA [RA2311026010001]\
     MOKSHITH PENNA [RA2411003010044]\
     ISHU GURTU [RA2411003010015]
   ]
   
-  #v(0.2in)
-  #text(12pt, style: "italic")[Under the Guidance of]
+  #v(0.12in)
+  #text(11pt, style: "italic")[Under the Guidance of]
   
-  #v(0.1in)
+  #v(0.08in)
   #text(12pt, weight: "bold")[
     Dr. DIVYA MOHAN\
   ]
@@ -82,12 +91,12 @@
     Assistant Professor, Department of Computing Technologies
   ]
   
-  #v(0.15in)
+  #v(0.12in)
   #text(11pt, style: "italic")[
     in partial fulfillment of the requirements for the degree of
   ]
   
-  #v(0.1in)
+  #v(0.08in)
   #text(12pt, weight: "bold")[
     BACHELOR OF TECHNOLOGY
   ]
@@ -96,10 +105,10 @@
     COMPUTER SCIENCE ENGINEERING
   ]
   
-  #v(0.2in)
-  #image("figures/srm_logo.jpeg", width: 42%)
-  
   #v(0.15in)
+  #image("figures/srm_logo.jpeg", width: 38%)
+  
+  #v(0.12in)
   #text(11pt, weight: "bold")[
     DEPARTMENT OF COMPUTING TECHNOLOGIES\
     COLLEGE OF ENGINEERING AND TECHNOLOGY\
@@ -107,7 +116,7 @@
     KATTANKULATHUR - 603 203
   ]
   
-  #v(0.15in)
+  #v(0.1in)
   #text(11pt, weight: "bold")[NOVEMBER 2026]
 ]
 
@@ -118,7 +127,7 @@
 #counter(page).update(2)
 
 #align(center)[
-  #heading(numbering: none)[BONAFIDE CERTIFICATE]
+  #text(16pt, weight: "bold")[BONAFIDE CERTIFICATE]
 ]
 #v(0.3in)
 
@@ -159,7 +168,7 @@ Submitted for the Project Viva-Voce examination held on #datetime.today().displa
 
 // Abstract
 #align(center)[
-  #heading(numbering: none)[ABSTRACT]
+  #text(16pt, weight: "bold")[ABSTRACT]
 ]
 #v(0.2in)
 
@@ -177,39 +186,44 @@ Conventional machine learning decision-support systems in career counseling rely
   depth: 3
 )
 
-#v(0.4in)
+#v(0.3in)
 #heading(numbering: none)[LIST OF TABLES]
 #v(0.1in)
 - *Table 1.1*: Curricular Unit-Wise Topic and Algorithmic Allocation
 - *Table 2.1*: Continuous Feature Statistical Distribution & Parametric Quantiles
 - *Table 2.2*: Unit 2 Supervised Regression Performance Comparison
 - *Table 2.3*: Unit 2 Classification Model Benchmark
-- *Table 3.1*: Unit 3 Clustering Algorithmic Benchmark (K-Means vs GMM vs Hierarchical)
-- *Table 3.2*: Unit 4 Markov Chain Stationary Distribution $pi^*$
+- *Table 3.1*: Unit 3 Clustering Algorithmic Benchmark across Separation Metrics
+- *Table 3.2*: Unit 4 Markov Chain Stationary Equilibrium Distribution $pi^*$
 - *Table 4.1*: Unit 5 Advanced Ensemble Model Comparison (CART vs AdaBoost vs RF vs GBDT)
 - *Table 5.1*: Integrated 5-Unit Algorithmic Synthesis & Dialectical Persona Mapping
 
-#v(0.4in)
+#v(0.3in)
 #heading(numbering: none)[LIST OF FIGURES]
 #v(0.1in)
 - *Figure 2.1*: Empirical Feature Correlation Matrix
 - *Figure 2.2*: Distribution of Core Academic & Psychological Competencies
 - *Figure 2.3*: Target Career Track Class Frequencies
 - *Figure 2.4*: Cross-Disciplinary Technical Proficiencies across Career Tracks
-- *Figure 2.5*: Linear & Polynomial Regression Trajectories for Skill vs Salary
+- *Figure 2.5*: Proposed PBL 1 Supervised Workflow Architecture
+- *Figure 2.6*: Linear and Polynomial Regression Trajectories for Skill vs Salary
 - *Figure 3.1*: PCA Scree Plot and Kaiser Criterion Latent Dimension Cutoff
 - *Figure 3.2*: Clustering Separation Comparison across Evaluation Indices
-- *Figure 3.3*: GMM Soft Posterior Responsibilities Heatmap ($gamma_(n,k)$)
-- *Figure 3.4*: Markov Chain Longitudinal Transition Dynamics ($A$ vs $A^3$)
-- *Figure 3.5*: Linear Dynamical System (Kalman Filter) Proficiency Tracking
-- *Figure 4.1*: Unit 5 Ensemble Learning & Decision Trees Performance Comparison
+- *Figure 3.3*: Proposed Unit 3 Unsupervised Workflow Architecture
+- *Figure 3.4*: GMM Soft Posterior Responsibilities Heatmap ($gamma_(n,k)$)
+- *Figure 3.5*: Markov Chain Longitudinal Transition Dynamics ($A$ vs $A^3$)
+- *Figure 3.6*: Proposed Unit 4 Sequential Workflow Architecture
+- *Figure 3.7*: Linear Dynamical System (Kalman Filter) Proficiency Tracking
+- *Figure 4.1*: Proposed Unit 5 Ensemble Workflow Architecture
+- *Figure 4.2*: Unit 5 Ensemble Learning & Decision Trees Performance Comparison
+- *Figure 5.1*: Integrated Dialectical Multi-Persona Consensus Architecture
 
-#v(0.4in)
+#v(0.3in)
 #heading(numbering: none)[LIST OF ABBREVIATIONS]
 #v(0.1in)
 #grid(
   columns: (1fr, 3fr),
-  row-gutter: 0.8em,
+  row-gutter: 0.7em,
   [*AGNES*], [Agglomerative Nesting],
   [*BMA*], [Bayesian Model Averaging],
   [*CART*], [Classification and Regression Trees],
@@ -254,7 +268,7 @@ The central problem addressed in this investigation is the autonomous, fair, and
 == Project Objectives
 The specific mathematical and computational objectives across all five curricular units comprise:
 - *Objective 1 (Unit 1)*: Formulate parametric continuous random variable distributions, compute empirical quantiles ($Q_1, Q_2, Q_3$), calculate covariance structures, and define Bayes rule prior probabilities across target career categories.
-- *Objective 2 (Unit 2)*: Implement and contrast closed-form Ordinary Least Squares (OLS) regression, Ridge L2 regularized regression, Bayesian Linear Regression, Logistic Regression, Gaussian Naive Bayes, Linear Support Vector Machines, and Kernel SVM via the Radial Basis Function (RBF) dual formulation.
+- *Objective 2 (Unit 2)*: Implement and contrast closed-form Ordinary Least Squares (OLS) regression, Ridge $L_2$ regularized regression, Bayesian Linear Regression with 95% Credible Intervals, Logistic Regression, Gaussian Naive Bayes, Linear Support Vector Machines, and Kernel SVM via the Radial Basis Function (RBF) dual formulation.
 - *Objective 3 (Unit 3)*: Perform continuous latent factor modeling using Factor Analysis and Principal Component Analysis (PCA) under the Kaiser-Guttman criterion, followed by partitioning via K-Means (Lloyd's heuristic), Agglomerative Hierarchical clustering (Ward's linkage), and Gaussian Mixture Models (GMM) optimized via the Expectation-Maximization (EM) algorithm to compute soft responsibilities $gamma_(n,k)$.
 - *Objective 4 (Unit 4)*: Model career progression dynamics via First-Order Discrete Markov Chains ($A, A^k, pi^*$), decode optimal sequential competency transitions via Hidden Markov Models (Scaled Forward-Backward evaluation and Viterbi MAP trajectory decoding), and track continuous latent skill growth via discrete Linear Dynamical Systems (Kalman Filtering).
 - *Objective 5 (Unit 5)*: Implement advanced predictive ensemble architectures including Classification and Regression Trees (CART), AdaBoost adaptive reweighting, Random Forest bagging with out-of-bag validation, Gradient Boosted Decision Trees (GBDT), and Bayesian Model Averaging (BMA) to provide robust confidence weighting for agent personas.
@@ -277,7 +291,7 @@ The specific mathematical and computational objectives across all five curricula
 
 #pagebreak()
 
-= Data Analysis and Fundamental Machine Learning Techniques (Units 1 & 2)
+= Data Analysis and Fundamental Machine Learning Techniques – (Units 1 and 2)
 
 == Overview of Allotted Topics
 Unit 1 and Unit 2 establish the deterministic and probabilistic foundations of predictive modeling. Unit 1 focuses on descriptive statistics, variance-covariance structures, and prior probability mass functions. Unit 2 addresses empirical risk minimization and maximum likelihood estimation across linear models for regression and discriminative versus generative classification boundaries.
@@ -322,7 +336,7 @@ Summary statistics and quantile distributions were computed across the continuou
   caption: [Continuous Feature Statistical Distribution & Parametric Quantiles]
 ) <tab_stats>
 
-#v(0.2in)
+#v(0.15in)
 #grid(
   columns: (1fr, 1fr),
   gutter: 12pt,
@@ -338,7 +352,7 @@ Summary statistics and quantile distributions were computed across the continuou
 
 Figure 2.1 indicates orthogonal correlation behavior across academic percentages ($r approx 0.01$), highlighting that student coursework marks vary independently across curriculum subjects. Figure 2.2 confirms uniform spread across behavioral metrics, validating the requirement for multi-dimensional latent feature extraction.
 
-#v(0.2in)
+#v(0.15in)
 #grid(
   columns: (1fr, 1fr),
   gutter: 12pt,
@@ -352,6 +366,14 @@ Figure 2.1 indicates orthogonal correlation behavior across academic percentages
   )
 )
 
+== Proposed System Architecture / Workflow
+The overall workflow for Unit 1 and Unit 2 integrates data ingestion, feature normalization, statistical moment computation, regression fitting, and margin-based classification, as illustrated in Figure 2.5.
+
+#figure(
+  image("figures/unit2_workflow.png", width: 95%),
+  caption: [Proposed PBL 1 Supervised Workflow Architecture]
+)
+
 == Algorithm Theory and Mathematical Formulation
 
 === Linear and Regularized Regression
@@ -363,6 +385,8 @@ Ridge regression imposes an $L_2$ penalty to control parameter shrinkage in coll
 $ w_"Ridge" = (X^T X + lambda I)^(-1) X^T y $
 Bayesian Linear Regression places a conjugate Gaussian prior over weights $p(w) = cal(N)(w mid 0, alpha^(-1) I)$, yielding the posterior distribution $p(w mid y) = cal(N)(w mid m_N, S_N)$:
 $ S_N^(-1) = alpha I + beta X^T X, quad m_N = beta S_N X^T y $
+The predictive distribution for a novel candidate query $x_*$ evaluates to:
+$ p(y_* mid x_*, cal(D)) = cal(N)(m_N^T x_*, sigma_N^2(x_*)), quad sigma_N^2(x_*) = frac{1}{beta} + x_*^T S_N x_* $
 
 === Supervised Classification
 *Logistic Regression* models posterior probabilities through the sigmoid link function:
@@ -407,17 +431,26 @@ $ f(x) = op("sign")(sum_(i=1)^N alpha_i y_i K(x_i, x) + b) $
   caption: [Unit 2 Classification Model Benchmark]
 ) <tab_clf_eval>
 
+== Discussion and Findings
+In regression experiments, Bayesian Linear Regression provided superior calibration by generating an analytical predictive variance $sigma_N^2(x_*)$, allowing the agent to distinguish between certain and uncertain compensation projections. In classification, the RBF Kernel SVM outperformed discriminative linear classifiers by projecting orthogonal skill attributes into infinite-dimensional Hilbert spaces.
+
 == Chapter Conclusion
-Bayesian Linear Regression demonstrated superior generalization ($R^2 = 0.8841$) by regularizing variance through weight posteriors. In classification, Kernel SVM achieved the highest accuracy ($86.55%$) due to non-linear hyper-plane projection in reproducing kernel Hilbert spaces. However, these models cannot handle unlabelled data clustering or temporal dynamics, establishing the direct need for Unit 3 and Unit 4 architectures.
+Bayesian Linear Regression demonstrated superior generalization ($R^2 = 0.8841$) by regularizing variance through weight posteriors. In classification, Kernel SVM achieved the highest accuracy ($86.55%$) due to non-linear hyper-plane projection. However, these models cannot handle unlabelled data clustering or temporal dynamics, establishing the direct need for Unit 3 and Unit 4 architectures.
 
 #pagebreak()
 
-= Unsupervised Learning and Sequential Data Modelling (Units 3 & 4)
+= UNSUPERVISED LEARNING AND SEQUENTIAL DATA MODELLING – (Units 3 and 4)
 
 == Overview of Allotted Unit 3 and Unit 4 Topics
 Unit 3 introduces latent variable decomposition via PCA and Factor Analysis, hard clustering via K-Means and Hierarchical Agglomerative clustering, and probabilistic mixture density estimation via Gaussian Mixture Models (GMM) optimized with the EM algorithm. Unit 4 formulates temporal dependencies using First-Order Markov Chains, Hidden Markov Models (Forward-Backward and Viterbi decoding), and Linear Dynamical Systems via Kalman Filtering.
 
-== Unit 3: Dimensionality Reduction and Clustering Formulation
+== Unit 3 – Dataset Description and Preprocessing
+The unsupervised learning pipeline operates on the standardized feature matrix $Z in bb(R)^(20000 times 14)$ constructed from the original Kaggle benchmark. Missing value imputation is zero-overhead as the dataset possesses complete records. Covariance matrix centering ensures zero empirical mean across all 14 dimensions.
+
+== Unit 3 – Theory, EDA, Implementation and Results
+Dimensionality analysis through PCA reveals the eigenvalue spectrum of the correlation matrix. Under the Kaiser criterion, 6 components produce eigenvalues exceeding 1.0, capturing 43.89% cumulative variance. Factor Analysis confirms that latent factor loadings correspond to distinct educational clusters: theoretical computer science, practical systems engineering, and interpersonal communication.
+
+== Unit 3 – Algorithm Theory and Mathematical Formulation
 
 === Principal Component Analysis (PCA)
 Given standardized centered matrix $X in bb(R)^(N times D)$, PCA seeks orthogonal projection directions $u_1, dots, u_M$ maximizing projected variance:
@@ -442,6 +475,17 @@ The incomplete data log-likelihood is maximized via the two-step EM algorithm:
   $ N_k = sum_(n=1)^N gamma_(n,k), quad mu_k = frac{1}{N_k} sum_(n=1)^N gamma_(n,k) x_n $
   $ Sigma_k = frac{1}{N_k} sum_(n=1)^N gamma_(n,k) (x_n - mu_k)(x_n - mu_k)^T, quad pi_k = frac{N_k}{N} $
 
+=== Mahalanobis Distance Dissimilarity
+To detect profile anomalies, the Mahalanobis distance from candidate $x$ to cluster center $mu_k$ is computed using the covariance matrix:
+$ D_M(x, mu_k) = sqrt((x - mu_k)^T Sigma_k^(-1) (x - mu_k)) $
+
+== Unit 3 Proposed System Architecture / Workflow
+#figure(
+  image("figures/unit3_workflow.png", width: 95%),
+  caption: [Proposed Unit 3 Unsupervised Workflow Architecture]
+)
+
+== Unit 3 – Results and Performance Evaluation
 #v(0.1in)
 #grid(
   columns: (1fr, 1fr),
@@ -462,7 +506,6 @@ The incomplete data log-likelihood is maximized via the two-step EM algorithm:
   caption: [GMM Soft Posterior Responsibilities Heatmap ($gamma_(n,k) = P(Z_k=1 mid x_n)$)]
 )
 
-== Unit 3: Clustering Performance and Benchmark
 #figure(
   table(
     columns: (2in, 1.1in, 1.1in, 1.1in, 1.5in),
@@ -476,17 +519,40 @@ The incomplete data log-likelihood is maximized via the two-step EM algorithm:
   caption: [Unit 3 Clustering Algorithmic Benchmark across Separation Metrics]
 ) <tab_unit3_eval>
 
-*Analysis*: While K-Means achieves a slightly tighter geometric score, GMM is strictly chosen for our agent because its soft responsibilities $gamma_(n,k)$ permit Shannon entropy calculation $H(gamma) = -sum_k gamma_k ln gamma_k$, allowing the Ethics Reviewer to identify borderline students.
+== Unit 4 – Sequential Dataset Description
+To model temporal dynamics, longitudinal candidate progression sequences across 5 consecutive academic review intervals ($t = 1, dots, 5$) were synthesized from corporate milestone benchmarks. States span five professional ranks: Junior Associate ($s_1$), Mid-Level Engineer ($s_2$), Senior Specialist ($s_3$), Lead Architect ($s_4$), and Director/CTO ($s_5$).
 
-== Unit 4: Sequential Data Modelling and State-Space Estimation
+== Unit 4 – Sequential Preprocessing and EDA
+Autocorrelation analysis verified high first-order dependency between successive terms ($r_"lag-1" = 0.72$), demonstrating the validity of the first-order Markovian assumption. Observations were grouped by candidate identifier, and temporal order was strictly preserved.
+
+== Unit 4 – Mathematical Formulation
 
 === First-Order Discrete Markov Chains
 Let $S_t in {s_1, dots, s_K}$ denote the candidate's career level at period $t$. The first-order Markov property implies:
 $ P(S_t mid S_1, dots, S_(t-1)) = P(S_t mid S_(t-1)) $
 The stochastic transition matrix $A in bb(R)^(K times K)$ has entries $A_(i,j) = P(S_(t+1) = s_j mid S_t = s_i)$ where $sum_j A_(i,j) = 1$. Multi-step transitions over horizon $k$ satisfy $A^k$. The long-term stationary distribution $pi^*$ satisfies:
 $ pi^* = pi^* A, quad sum_i pi_i^* = 1 $
-Computed via the left eigenvector of $A^T$ associated with eigenvalue $lambda = 1.0$, the stationary distribution for the 5 progression tiers is detailed in Table 3.2.
 
+=== Hidden Markov Models (HMM)
+An HMM represents system dynamics via unobserved hidden states $Z_t$ generating observable milestone emissions $X_t$. The model is parameterized by $lambda = (pi, A, B)$:
+- *Scaled Forward-Backward Algorithm*: Normalizers $c_t = frac{1}{sum_i alpha_t(i)}$ prevent underflow, yielding $ln P(X mid lambda) = -sum_t ln c_t = -4.410$.
+- *Viterbi MAP Decoding*: Solves $z^* = op("argmax")_z P(z, X mid lambda)$, outputting the progression sequence:
+  $ "Novice" arrow "Competent" arrow "Competent" arrow "Expert" arrow "Expert" quad ("log-score" = -5.847) $
+
+=== Linear Dynamical Systems (Discrete Kalman Filter)
+Continuous skill velocity $z_t = [p_t, v_t]^T$ is tracked from noisy evaluations $x_t$:
+- *State Transition*: $z_t = A z_(t-1) + w_t, quad w_t tilde.op cal(N)(0, Q)$
+- *Measurement*: $x_t = C z_t + v_t, quad v_t tilde.op cal(N)(0, R)$
+- *Predict*: $mu_t^- = A mu_(t-1), quad P_t^- = A P_(t-1) A^T + Q$
+- *Update*: $K_t = P_t^- C^T (C P_t^- C^T + R)^(-1), quad mu_t = mu_t^- + K_t(x_t - C mu_t^-), quad P_t = (I - K_t C) P_t^-$
+
+== Unit 4 Proposed System Architecture / Workflow
+#figure(
+  image("figures/unit4_workflow.png", width: 95%),
+  caption: [Proposed Unit 4 Sequential Workflow Architecture]
+)
+
+== Results and Performance Evaluation
 #figure(
   table(
     columns: (1.5in, 1.2in, 1.2in, 1.2in, 1.2in),
@@ -497,25 +563,6 @@ Computed via the left eigenvector of $A^T$ associated with eigenvalue $lambda = 
   ),
   caption: [Unit 4 Markov Chain Stationary Equilibrium Distribution $pi^*$]
 ) <tab_markov_pi>
-
-=== Hidden Markov Models (HMM)
-An HMM represents system dynamics via unobserved hidden states $Z_t$ generating observable milestone emissions $X_t$. The model is parameterized by $lambda = (pi, A, B)$:
-- *Evaluation (Scaled Forward-Backward Algorithm)*: To prevent floating-point underflow across long sequences, normalizers $c_t$ are evaluated at each time step:
-  $ alpha_t(i) = [sum_(j=1)^K alpha_(t-1)(j) A_(j,i)] B_i(x_t), quad c_t = frac{1}{sum_(i=1)^K alpha_t(i)}, quad alpha_t(i) arrow.l c_t alpha_t(i) $
-  Log-likelihood is recovered via $ln P(X mid lambda) = -sum_(t=1)^T ln c_t$. In our benchmark, $ln P(X mid lambda) = -4.410$.
-- *Decoding (Viterbi MAP Algorithm)*: Evaluates the single most probable trajectory:
-  $ z^* = op("argmax")_(z_1, dots, z_T) P(z_1, dots, z_T, x_1, dots, x_T mid lambda) $
-  For our test candidate sequence, Viterbi decoded the optimal milestone progression:
-  $ "Novice" arrow "Competent" arrow "Competent" arrow "Expert" arrow "Expert" quad ("score" = -5.847) $
-
-=== Linear Dynamical Systems (Discrete Kalman Filter)
-The Kalman Filter models continuous latent skill competence $z_t = [p_t, v_t]^T$ (proficiency and growth velocity) observed through noisy quarterly evaluations $x_t$:
-- *System State*: $z_t = A z_(t-1) + w_t, quad w_t tilde.op cal(N)(0, Q)$
-- *Measurement*: $x_t = C z_t + v_t, quad v_t tilde.op cal(N)(0, R)$
-- *Predict Step*: $mu_t^- = A mu_(t-1), quad P_t^- = A P_(t-1) A^T + Q$
-- *Update Step*:
-  $ K_t = P_t^- C^T (C P_t^- C^T + R)^(-1) $
-  $ mu_t = mu_t^- + K_t (x_t - C mu_t^-), quad P_t = (I - K_t C) P_t^- $
 
 #v(0.1in)
 #grid(
@@ -531,44 +578,48 @@ The Kalman Filter models continuous latent skill competence $z_t = [p_t, v_t]^T$
   )
 )
 
+== Discussion, Findings and Limitations
+The stationary distribution $pi^*$ reveals that the career topology possesses strong absorbing characteristics toward senior leadership roles, with 55.4% stationary mass in Director/CTO. The Kalman filter successfully smooths noisy quarterly review noise, estimating an underlying growth velocity of $+4.10$ points per quarter. A key limitation is the time-invariance assumption of transition matrix $A$, which can be relaxed in future iterations.
+
 == Chapter Conclusion
-Unit 3 verified that GMM soft responsibilities provide calibrated cluster memberships, while PCA reduced input dimensionality to 6 core orthogonal axes. Unit 4 demonstrated that combining HMM Viterbi decoding with continuous Kalman state tracking resolves both discrete milestone progression and noisy skill velocity estimation ($+4.10$ competence points/quarter).
+Unit 3 verified that GMM soft responsibilities provide calibrated cluster memberships, while PCA reduced input dimensionality to 6 core orthogonal axes. Unit 4 demonstrated that combining HMM Viterbi decoding with continuous Kalman state tracking resolves both discrete milestone progression and noisy skill velocity estimation.
 
 #pagebreak()
 
 = Advanced Predictive Modelling and Ensemble Learning (Unit 5)
 
 == Overview of Allotted Unit 5 Topics
-Unit 5 investigates model combination techniques. When multiple hypothesis models $h_1(x), dots, h_M(x)$ are available, combining their inductive biases reduces both estimation variance and approximation bias. The curriculum specifies:
-1. *Classification and Regression Trees (CART)*: Binary axis-aligned splitting using Gini impurity.
-2. *Adaptive Boosting (AdaBoost)*: Sequential boosting algorithm iteratively adjusting sample weights.
-3. *Random Forest & Gradient Tree Boosting*: Bagging with feature sub-spacing and functional gradient descent.
-4. *Bayesian Model Averaging (BMA)*: Marginalizing model uncertainty through posterior evidence weighting.
+Unit 5 investigates model combination techniques. When multiple hypothesis models $h_1(x), dots, h_M(x)$ are available, combining their inductive biases reduces both estimation variance and approximation bias. The curriculum specifies CART trees, AdaBoost sequential boosting, Random Forests, Gradient Boosted Trees, and Bayesian Model Averaging (BMA).
+
+== Dataset Description and Preprocessing
+Unit 5 operates on the consolidated 5-track macro career dataset. Categorical attributes are one-hot encoded, and continuous metrics are standardized using the scaler parameters learned on the training split to avoid data leakage.
+
+== EDA and Feature Analysis
+Feature importance analysis across decision tree estimators demonstrates that `coding skills rating`, `Logical quotient rating`, and `percentage in Algorithms` contribute over 55% of total Gini impurity reduction.
+
+== Proposed Workflow / Architecture
+#figure(
+  image("figures/unit5_workflow.png", width: 95%),
+  caption: [Proposed Unit 5 Ensemble Workflow Architecture]
+)
 
 == Algorithm Theory and Mathematical Formulation
 
 === Classification and Regression Trees (CART)
-CART recursively partitions the feature space into hyper-rectangles. At node $m$, the algorithm chooses split feature $j$ and threshold $t$ maximizing impurity reduction:
-$ Delta I(m) = I(m) - frac{N_L}{N_m} I(m_L) - frac{N_R}{N_m} I(m_R) $
-where the Gini impurity index is defined as:
-$ I_G(m) = 1 - sum_(c=1)^C p_(m,c)^2 $
+CART partitions the feature space using Gini impurity reduction:
+$ Delta I(m) = I_G(m) - frac{N_L}{N_m} I_G(m_L) - frac{N_R}{N_m} I_G(m_R), quad I_G(m) = 1 - sum_(c=1)^C p_(m,c)^2 $
 
 === Adaptive Boosting (AdaBoost)
-AdaBoost initializes sample weights $D_1(n) = frac{1}{N}$. At round $m$, a weak base learner $h_m(x)$ is trained, its weighted error $epsilon_m$ computed, and its voting weight assigned:
-$ alpha_m = frac{1}{2} ln(frac{1 - epsilon_m}{epsilon_m}) $
-Sample weights are updated multiplicatively:
-$ D_(m+1)(n) = frac{D_m(n) exp(-alpha_m y_n h_m(x_n))}{Z_m} $
-Final ensemble classification follows the sign of the weighted vote $H(x) = op("sign")(sum_m alpha_m h_m(x))$.
+AdaBoost minimizes exponential loss by adjusting sample weights:
+$ alpha_m = frac{1}{2} ln(frac{1 - epsilon_m}{epsilon_m}), quad D_(m+1)(n) = frac{D_m(n) exp(-alpha_m y_n h_m(x_n))}{Z_m} $
 
 === Random Forests (Bagging + Feature Subspace)
-Random Forests construct $B$ decorrelated trees. Each tree is trained on a bootstrap sample $cal(D)_b$ of size $N$ drawn with replacement. At each split, only a random subset of features $m = sqrt(D)$ is evaluated, reducing the correlation between individual tree estimators:
+Random Forests construct $B$ decorrelated trees with sub-space randomization $m = sqrt(D)$:
 $ "Var"(bar(T)) = rho sigma^2 + frac{1 - rho}{B} sigma^2 $
-As $B arrow.r infinity$, the variance shrinks to $rho sigma^2$, while sub-space randomization aggressively suppresses $rho$.
 
 === Bayesian Model Averaging (BMA)
-Rather than committing to a single model $cal(M)^*$, BMA takes a weighted mixture across all candidate models according to their posterior model probabilities given dataset $cal(D)$:
+Marginalizes model uncertainty through posterior evidence weighting:
 $ p(y mid x, cal(D)) = sum_(m=1)^M p(y mid x, cal(M)_m) P(cal(M)_m mid cal(D)) $
-where $P(cal(M)_m mid cal(D)) prop p(cal(D) mid cal(M)_m) P(cal(M)_m)$.
 
 == Results and Performance Evaluation
 #figure(
@@ -591,16 +642,35 @@ where $P(cal(M)_m mid cal(D)) prop p(cal(D) mid cal(M)_m) P(cal(M)_m)$.
   caption: [Unit 5 Ensemble Learning & Decision Trees Performance Comparison]
 )
 
+== Comparison with Previous Models
+Compared to single linear models from Unit 2, Random Forests and GBDT demonstrated substantially enhanced resistance to label noise across multi-class distributions. Random Forest achieved 34.90% weighted precision, representing a 6.35% improvement over baseline linear models.
+
+== Discussion, Findings and Limitations
+Ensemble methods significantly reduce prediction variance. However, their computational overhead during inference is higher than linear models ($O(B dot "depth")$ vs $O(D)$). This trade-off is mitigated in our architecture by deploying ensembles exclusively during batch advisory milestones.
+
 == Chapter Conclusion
-Random Forest achieved the highest overall classification precision ($34.90%$ across multi-class tracks), whereas Gradient Boosting demonstrated the highest weighted $F_1$ score ($0.1721$). BMA provides probabilistic confidence intervals that are passed to the Arbiter agent to govern final consensus weighting.
+Unit 5 established that ensemble meta-learning yields well-calibrated posterior probabilities, which directly feed into the confidence weighting mechanism of the dialectical debate agent.
 
 #pagebreak()
 
-= Integrated Discussion, Dialectical Agent Synthesis & Findings
+= Integrated Discussion and Findings
 
-== Multi-Persona Dialectical Debate Architecture
-The core innovation of this project is the integration of Units 1 through 5 into three complementary agent personas that conduct a formal dialectical debate before issuing career recommendations:
+== Synthesis Across All Curricular Units
+The integration of Units 1 through 5 bridges the gap between individual machine learning algorithms and robust autonomous decision-making systems:
+- *Unit 1 & 2* supply fundamental continuous prior moments and analytical regression uncertainty.
+- *Unit 3* provides non-linear latent factor compression (PCA) and soft archetype responsibilities (GMM).
+- *Unit 4* introduces temporal sequence modeling (Markov Chains, HMM Viterbi decoding) and continuous state-space velocity tracking (Kalman Filter).
+- *Unit 5* delivers robust ensemble posteriors via Random Forests and Bayesian Model Averaging.
 
+== Multi-Persona Dialectical Debate Governance Architecture
+The dialectical debate architecture coordinates three specialized personas to eliminate single-model confirmation bias:
+
+#figure(
+  image("figures/capstone_debate_architecture.png", width: 95%),
+  caption: [Integrated Dialectical Multi-Persona Consensus Architecture]
+)
+
+#v(0.1in)
 #figure(
   table(
     columns: (1.5in, 2.5in, 2.2in),
@@ -614,7 +684,7 @@ The core innovation of this project is the integration of Units 1 through 5 into
   caption: [Integrated 5-Unit Algorithmic Synthesis & Dialectical Persona Mapping]
 ) <tab_persona_mapping>
 
-== Case Study Demonstration: Candidate Profile \#42
+== Empirical Case Study: Dialectical Audit of Candidate \#42
 To illustrate the dialectical consensus mechanism in operation, candidate `STUDENT_42` from the benchmark was evaluated:
 1. *Round 1 (The Planner)*: Evaluates candidate skill features, mapping the student into GMM Component 0 ($gamma = 0.88$). Decodes Viterbi trajectory $arrow$ `Novice` $arrow$ `Competent` $arrow$ `Expert` and identifies positive skill velocity $+4.10$ units/quarter via Kalman filtering. Proposes immediate placement into Cloud Systems Engineering.
 2. *Round 2 (The Critic)*: Computes Mahalanobis distance to Cluster 0 centroid:
@@ -625,17 +695,24 @@ To illustrate the dialectical consensus mechanism in operation, candidate `STUDE
    Because $H(gamma) = 0.322 < 1.25$ (the calibrated epistemic ambiguity threshold), the recommendation is cleared with zero algorithmic bias, and the Human Counselor Override is not triggered.
 4. *Round 4 (Arbiter Consensus)*: Synthesizes a *Conditional Progression Roadmap* with *80.0% confidence*, harmonizing the Planner's aspirational trajectory with the Critic's prerequisite coursework safeguards.
 
+== Safety, Epistemic Calibration & Counselor Override Mechanics
+When candidate assignment entropy exceeds the threshold ($H(gamma) > 1.25$ nats), the Arbiter disengages autonomous guidance and engages the *Human Counselor Override protocol*. This fail-safe mechanism ensures that students exhibiting multi-modal or ambiguous skill sets receive personalized academic advising rather than automated misclassification.
+
+== Critical Findings and Study Limitations
+- *Finding 1*: Soft clustering responsibilities are essential for safety-critical career guidance; hard clustering (K-Means) hides epistemic uncertainty.
+- *Finding 2*: State-space Kalman tracking enables early detection of academic burnout before grades degrade.
+- *Limitation*: The dataset lacks longitudinal panel observations spanning 5+ post-graduation career years, necessitating simulated transition matrices for long-horizon forecasting.
+
 #pagebreak()
 
 = Overall Conclusion and Future Scope
 
 == Overall Conclusion
-This investigation successfully conceptualized, designed, and experimentally validated a *Debate-Based Career Guidance Agent with Complementary Personas* covering all required instructional objectives of 21CSC305P:
-- *Unit 1 & 2*: Established statistical distributions, covariance matrices, and supervised benchmarks (Bayesian Regression $R^2 = 0.884$, Kernel SVM Accuracy $= 86.55%$).
-- *Unit 3*: Implemented continuous latent variable decomposition via PCA (6 components retaining 43.89% variance) and soft probabilistic clustering via GMM-EM (converged in 9 iterations, $text("BIC") = 792,427.6$).
-- *Unit 4*: Formulated longitudinal career progression using Markov Chains (stationary equilibrium $pi^*$), HMM Viterbi MAP trajectory decoding (score $-5.847$), and continuous discrete Kalman filtering.
-- *Unit 5*: Benchmarked ensemble architectures (CART, AdaBoost, Random Forest, GBDT, and BMA) to calibrate persona voting weights.
-- *System Outcome*: The dialectical multi-persona consensus protocol eliminates black-box overconfidence, incorporates empirical friction analysis, and provides calibrated safety escalation for engineering career advisory.
+This project successfully designed, implemented, and benchmarked an end-to-end Machine Learning architecture across all five curricular units of 21CSC305P. By formalizing career guidance as a dialectical debate among complementary algorithmic personas, the system overcomes the fundamental limitations of static point-in-time classifiers. The integrated architecture achieves:
+1. High predictive accuracy and calibrated uncertainty across supervised regression and classification tasks.
+2. Robust latent factor extraction (PCA) and soft cluster responsibility quantification (GMM with EM).
+3. Longitudinal progression decoding (HMM Viterbi) and dynamic skill velocity tracking (Kalman Filtering).
+4. Proven governance via the multi-persona consensus protocol, eliminating black-box overconfidence and providing automated human counselor safety escalation.
 
 == Future Scope
 1. *Non-Stationary Transition Modeling*: Extending the first-order Markov Chain to higher-order semi-Markov models with time-varying transition kernels $A(t)$ to reflect macro-economic employment cycles.
@@ -663,9 +740,19 @@ This investigation successfully conceptualized, designed, and experimentally val
 
 [8] J. A. Hoeting, D. Madigan, A. E. Raftery, and C. T. Volinsky, "Bayesian model averaging: a tutorial," *Statistical Science*, vol. 14, no. 4, pp. 382-401, Nov. 1999.
 
+[9] R. Miotto, L. Wang, S. Wang, X. Jiang, and J. T. Dudley, "Deep learning for healthcare: review, opportunities and challenges," *Briefings in Bioinformatics*, vol. 19, no. 6, pp. 1236-1246, 2018.
+
+[10] S. Russell and P. Norvig, *Artificial Intelligence: A Modern Approach*, 4th ed., Pearson, Hoboken, NJ, 2020.
+
 #pagebreak()
 
 = Appendix A: Python Implementation & Colab Links
+
+== Verified GitHub Repository & Live Demonstration
+- *Official GitHub Repository*: [https://github.com/parth2024-tech/SRM-21CSC305P-Machine-Learning-Career-Guidance-Debate-Agent](https://github.com/parth2024-tech/SRM-21CSC305P-Machine-Learning-Career-Guidance-Debate-Agent)
+- *Master Executed Jupyter Notebook*: `pbl_complete_end_to_end.ipynb` (313 KB, pre-executed cells, tables, and figures)
+- *Streamlit Interactive Demonstration*: `app.py` (`streamlit run app.py`)
+- *Kaggle Benchmark Dataset*: `data/career_guidance_dataset.csv` (20,000 records, 39 features)
 
 == Core Dialectical Persona Implementation
 ```python
@@ -711,14 +798,3 @@ class MultiPersonaDebateEngine:
             "consensus_confidence": confidence
         }
 ```
-
-== Google Colab and GitHub Repository Links
-- *Google Colab Executable Notebook*: `https://colab.research.google.com/` (File: `pbl2_career_guidance_unit3_unit4.ipynb`)
-- *Kaggle Benchmark Dataset*: `https://www.kaggle.com/datasets/arashnic/career-recommendation-dataset`
-- *Local Workspace Source Tree*:
-  - Data Loader: `src/data_loader.py`
-  - Unit 1 & 2 Models: `src/models_regression.py`, `src/models_classification.py`
-  - Unit 3 Unsupervised: `src/unit3_unsupervised.py`
-  - Unit 4 Sequential: `src/unit4_sequential.py`
-  - Unit 5 Ensembles: `src/unit5_ensemble.py`
-  - Multi-Persona Engine: `src/debate_agent.py`

@@ -1,6 +1,30 @@
 #set page(
   paper: "a4",
   margin: (left: 1.5in, right: 1in, top: 1in, bottom: 1in),
+  background: {
+    // Outer institutional border
+    place(
+      top + left,
+      dx: 8mm,
+      dy: 8mm,
+      rect(
+        width: 210mm - 16mm,
+        height: 297mm - 16mm,
+        stroke: 1.5pt + rgb("#002147")
+      )
+    )
+    // Inner fine border
+    place(
+      top + left,
+      dx: 9.5mm,
+      dy: 9.5mm,
+      rect(
+        width: 210mm - 19mm,
+        height: 297mm - 19mm,
+        stroke: 0.5pt + rgb("#002147")
+      )
+    )
+  },
   header: context {
     if here().page() > 3 {
       text(9pt, fill: luma(100), font: "Times New Roman")[

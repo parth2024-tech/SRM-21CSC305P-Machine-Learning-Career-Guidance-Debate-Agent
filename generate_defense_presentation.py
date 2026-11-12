@@ -15,10 +15,11 @@ Key Features:
 """
 
 import os
+
 from pptx import Presentation
-from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_SHAPE
+from pptx.util import Inches, Pt
 
 # ── Standard Academic Color Palette ───────────────────────────────────────────
 COLOR_NAVY_DARK   = RGBColor(0, 33, 71)      # Deep Academic Navy #002147
@@ -100,6 +101,19 @@ def build_theory_focused_presentation():
         p_foot.font.color.rgb = COLOR_TEXT_MUTED
 
         return slide
+
+    def add_slide_picture(slide, default_filename, ppt_filename=None):
+        target = None
+        if ppt_filename and os.path.exists(ppt_filename):
+            target = ppt_filename
+        elif os.path.exists(default_filename):
+            target = default_filename
+        if target:
+            pic = slide.shapes.add_picture(target, Inches(6.5), Inches(1.4), width=Inches(6.1))
+            pic.line.color.rgb = COLOR_BORDER
+            pic.line.width = Pt(1)
+            return pic
+        return None
 
     # ── SLIDE 1: Title Slide ──────────────────────────────────────────────────
     slide1 = prs.slides.add_slide(blank_layout)
@@ -234,7 +248,7 @@ def build_theory_focused_presentation():
         "Overcoming Confirmation Bias and Overconfidence in Automated Advising",
         2
     )
-    tbox2 = slide2.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
+    tbox2 = slide2.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.4), Inches(5.4))
     tf2 = tbox2.text_frame
     tf2.word_wrap = True
     tf2.margin_left = tf2.margin_top = tf2.margin_right = tf2.margin_bottom = 0
@@ -274,10 +288,7 @@ def build_theory_focused_presentation():
         p_t.font.color.rgb = COLOR_TEXT_MAIN
         p_t.space_before = Pt(6)
 
-    if os.path.exists("figures/capstone_debate_architecture.png"):
-        pic = slide2.shapes.add_picture("figures/capstone_debate_architecture.png", Inches(6.7), Inches(1.5), width=Inches(5.8))
-        pic.line.color.rgb = COLOR_BORDER
-        pic.line.width = Pt(1)
+    add_slide_picture(slide2, "figures/capstone_debate_architecture.png", "figures/ppt_capstone_debate_architecture.png")
 
     # ── SLIDE 3: Unit 3 — PCA & Latent Variable Theory ────────────────────────
     slide3 = add_content_slide(
@@ -285,7 +296,7 @@ def build_theory_focused_presentation():
         "Dimensionality Reduction, Orthogonal Subspaces, and Latent Factor Theory",
         3
     )
-    tbox3 = slide3.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
+    tbox3 = slide3.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.4), Inches(5.4))
     tf3 = tbox3.text_frame
     tf3.word_wrap = True
     tf3.margin_left = tf3.margin_top = tf3.margin_right = tf3.margin_bottom = 0
@@ -312,10 +323,7 @@ def build_theory_focused_presentation():
         p_b.font.color.rgb = COLOR_TEXT_MAIN
         p_b.space_before = Pt(8)
 
-    if os.path.exists("figures/unit3_pca_scree.png"):
-        pic = slide3.shapes.add_picture("figures/unit3_pca_scree.png", Inches(6.7), Inches(1.5), width=Inches(5.8))
-        pic.line.color.rgb = COLOR_BORDER
-        pic.line.width = Pt(1)
+    add_slide_picture(slide3, "figures/unit3_pca_scree.png", "figures/ppt_unit3_pca_scree.png")
 
     # ── SLIDE 4: Unit 3 — GMM & Expectation-Maximization Theory ───────────────
     slide4 = add_content_slide(
@@ -323,7 +331,7 @@ def build_theory_focused_presentation():
         "Soft Responsibilities and Information-Theoretic Uncertainty Quantification",
         4
     )
-    tbox4 = slide4.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
+    tbox4 = slide4.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.4), Inches(5.4))
     tf4 = tbox4.text_frame
     tf4.word_wrap = True
     tf4.margin_left = tf4.margin_top = tf4.margin_right = tf4.margin_bottom = 0
@@ -350,10 +358,7 @@ def build_theory_focused_presentation():
         p_b.font.color.rgb = COLOR_TEXT_MAIN
         p_b.space_before = Pt(8)
 
-    if os.path.exists("figures/unit3_gmm_responsibilities_heatmap.png"):
-        pic = slide4.shapes.add_picture("figures/unit3_gmm_responsibilities_heatmap.png", Inches(6.7), Inches(1.5), width=Inches(5.8))
-        pic.line.color.rgb = COLOR_BORDER
-        pic.line.width = Pt(1)
+    add_slide_picture(slide4, "figures/unit3_gmm_responsibilities_heatmap.png", "figures/ppt_unit3_gmm_responsibilities_heatmap.png")
 
     # ── SLIDE 5: Unit 3 — Mahalanobis Distance & Outlier Theory ───────────────
     slide5 = add_content_slide(
@@ -361,7 +366,7 @@ def build_theory_focused_presentation():
         "Covariance Whitening vs Euclidean Distance for Multivariate Outlier Detection",
         5
     )
-    tbox5 = slide5.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
+    tbox5 = slide5.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.4), Inches(5.4))
     tf5 = tbox5.text_frame
     tf5.word_wrap = True
     tf5.margin_left = tf5.margin_top = tf5.margin_right = tf5.margin_bottom = 0
@@ -387,10 +392,7 @@ def build_theory_focused_presentation():
         p_b.font.color.rgb = COLOR_TEXT_MAIN
         p_b.space_before = Pt(9)
 
-    if os.path.exists("figures/unit3_clustering_comparison.png"):
-        pic = slide5.shapes.add_picture("figures/unit3_clustering_comparison.png", Inches(6.7), Inches(1.5), width=Inches(5.8))
-        pic.line.color.rgb = COLOR_BORDER
-        pic.line.width = Pt(1)
+    add_slide_picture(slide5, "figures/unit3_clustering_comparison.png", "figures/ppt_unit3_clustering_comparison.png")
 
     # ── SLIDE 6: Unit 4 — Markov Chains & Transition Dynamics ────────────────
     slide6 = add_content_slide(
@@ -398,7 +400,7 @@ def build_theory_focused_presentation():
         "Stochastic State Transitions, Chapman-Kolmogorov Dynamics, and Equilibrium",
         6
     )
-    tbox6 = slide6.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
+    tbox6 = slide6.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.4), Inches(5.4))
     tf6 = tbox6.text_frame
     tf6.word_wrap = True
     tf6.margin_left = tf6.margin_top = tf6.margin_right = tf6.margin_bottom = 0
@@ -425,10 +427,7 @@ def build_theory_focused_presentation():
         p_b.font.color.rgb = COLOR_TEXT_MAIN
         p_b.space_before = Pt(8)
 
-    if os.path.exists("figures/unit4_markov_transition_dynamics.png"):
-        pic = slide6.shapes.add_picture("figures/unit4_markov_transition_dynamics.png", Inches(6.7), Inches(1.5), width=Inches(5.8))
-        pic.line.color.rgb = COLOR_BORDER
-        pic.line.width = Pt(1)
+    add_slide_picture(slide6, "figures/unit4_markov_transition_dynamics.png", "figures/ppt_unit4_markov_transition_dynamics.png")
 
     # ── SLIDE 7: Unit 4 — Hidden Markov Models & Viterbi Decoding ─────────────
     slide7 = add_content_slide(
@@ -436,7 +435,7 @@ def build_theory_focused_presentation():
         "Decoupling Hidden Competency Maturity from Noisy Academic Observations",
         7
     )
-    tbox7 = slide7.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
+    tbox7 = slide7.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.4), Inches(5.4))
     tf7 = tbox7.text_frame
     tf7.word_wrap = True
     tf7.margin_left = tf7.margin_top = tf7.margin_right = tf7.margin_bottom = 0
@@ -463,10 +462,7 @@ def build_theory_focused_presentation():
         p_b.font.color.rgb = COLOR_TEXT_MAIN
         p_b.space_before = Pt(8)
 
-    if os.path.exists("figures/unit4_workflow.png"):
-        pic = slide7.shapes.add_picture("figures/unit4_workflow.png", Inches(6.7), Inches(1.5), width=Inches(5.8))
-        pic.line.color.rgb = COLOR_BORDER
-        pic.line.width = Pt(1)
+    add_slide_picture(slide7, "figures/unit4_workflow.png", "figures/ppt_unit4_workflow.png")
 
     # ── SLIDE 8: Unit 4 — Kalman Filtering for Skill Tracking ─────────────────
     slide8 = add_content_slide(
@@ -474,7 +470,7 @@ def build_theory_focused_presentation():
         "Continuous Capability Tracking and Recursive State-Space Filtering",
         8
     )
-    tbox8 = slide8.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
+    tbox8 = slide8.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.4), Inches(5.4))
     tf8 = tbox8.text_frame
     tf8.word_wrap = True
     tf8.margin_left = tf8.margin_top = tf8.margin_right = tf8.margin_bottom = 0
@@ -501,10 +497,7 @@ def build_theory_focused_presentation():
         p_b.font.color.rgb = COLOR_TEXT_MAIN
         p_b.space_before = Pt(8)
 
-    if os.path.exists("figures/unit4_kalman_filter.png"):
-        pic = slide8.shapes.add_picture("figures/unit4_kalman_filter.png", Inches(6.7), Inches(1.5), width=Inches(5.8))
-        pic.line.color.rgb = COLOR_BORDER
-        pic.line.width = Pt(1)
+    add_slide_picture(slide8, "figures/unit4_kalman_filter.png", "figures/ppt_unit4_kalman_filter.png")
 
     # ── SLIDE 9: Unit 5 — Decision Trees & Pruning Theory ────────────────────
     slide9 = add_content_slide(
@@ -512,7 +505,7 @@ def build_theory_focused_presentation():
         "Recursive Space Partitioning, Impurity Criteria, and the Bias-Variance Tradeoff",
         9
     )
-    tbox9 = slide9.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
+    tbox9 = slide9.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.4), Inches(5.4))
     tf9 = tbox9.text_frame
     tf9.word_wrap = True
     tf9.margin_left = tf9.margin_top = tf9.margin_right = tf9.margin_bottom = 0
@@ -539,10 +532,7 @@ def build_theory_focused_presentation():
         p_b.font.color.rgb = COLOR_TEXT_MAIN
         p_b.space_before = Pt(8)
 
-    if os.path.exists("figures/unit5_workflow.png"):
-        pic = slide9.shapes.add_picture("figures/unit5_workflow.png", Inches(6.7), Inches(1.5), width=Inches(5.8))
-        pic.line.color.rgb = COLOR_BORDER
-        pic.line.width = Pt(1)
+    add_slide_picture(slide9, "figures/unit5_workflow.png", "figures/ppt_unit5_workflow.png")
 
     # ── SLIDE 10: Unit 5 — Bagging vs Boosting (RF vs AdaBoost) ──────────────
     slide10 = add_content_slide(
@@ -624,7 +614,7 @@ def build_theory_focused_presentation():
         "Functional Gradient Descent in Function Space and Shrinkage Regularization",
         11
     )
-    tbox11 = slide11.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
+    tbox11 = slide11.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.4), Inches(5.4))
     tf11 = tbox11.text_frame
     tf11.word_wrap = True
     tf11.margin_left = tf11.margin_top = tf11.margin_right = tf11.margin_bottom = 0
@@ -651,10 +641,7 @@ def build_theory_focused_presentation():
         p_b.font.color.rgb = COLOR_TEXT_MAIN
         p_b.space_before = Pt(8)
 
-    if os.path.exists("figures/unit5_ensemble_comparison.png"):
-        pic = slide11.shapes.add_picture("figures/unit5_ensemble_comparison.png", Inches(6.7), Inches(1.5), width=Inches(5.8))
-        pic.line.color.rgb = COLOR_BORDER
-        pic.line.width = Pt(1)
+    add_slide_picture(slide11, "figures/unit5_ensemble_comparison.png", "figures/ppt_unit5_ensemble_comparison.png")
 
     # ── SLIDE 12: Capstone — Dialectical Multi-Persona Architecture ───────────
     slide12 = add_content_slide(

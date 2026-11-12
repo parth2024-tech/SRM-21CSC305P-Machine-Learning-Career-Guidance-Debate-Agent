@@ -1,23 +1,23 @@
 """
 generate_defense_presentation.py
 ─────────────────────────────────
-Generates a clean, classic, generic academic PowerPoint presentation for:
-  Course: 21CSC305P Machine Learning
-  Topic: Debate-Based Career Guidance Agent with Complementary Personas
-  Focus: Units 3, 4, 5, and Capstone Multi-Persona Architecture
-Format:
-  - 16:9 Widescreen (13.333 in x 7.500 in)
-  - Generic clean academic slide design: Solid Navy header bar, crisp white background
-  - Clean bullet points, no emojis, professional typography (Calibri/Arial)
-  - Real embedded plots from figures/ directory
-  - Author credentials: Parth Gupta (RA2411003010019)
+Professional, Generic Academic Presentation for SRMIST 21CSC305P Machine Learning.
+Topic: Debate-Based Career Guidance Agent with Complementary Personas
+Scope: Units 3, 4, 5, and Capstone Multi-Persona Architecture
+
+Key Features:
+  - Theory-Focused & Conceptually Rich: Emphasizes mathematical intuition, algorithmic mechanics, and rationale.
+  - Minimal Numericals: Eliminates distracting statistics, percentages, and dense decimals.
+  - Generic Academic Template: Clean solid navy header bar (#002147), gold divider, crisp white background.
+  - Zero Emojis: Clean standard bullet points and professional typography (Calibri).
+  - High-Resolution Figures: Real diagrams embedded from figures/ directory.
+  - Student Authors: Parth Gupta (RA2411003010019), Mokshith Penna (RA2411003010044), Ishu Gurtu (RA2411003010015).
 """
 
 import os
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
-from pptx.enum.text import PP_ALIGN
 from pptx.enum.shapes import MSO_SHAPE
 
 # ── Standard Academic Color Palette ───────────────────────────────────────────
@@ -33,7 +33,7 @@ SLIDE_WIDTH  = Inches(13.333)
 SLIDE_HEIGHT = Inches(7.500)
 
 
-def build_generic_presentation():
+def build_theory_focused_presentation():
     prs = Presentation()
     prs.slide_width = SLIDE_WIDTH
     prs.slide_height = SLIDE_HEIGHT
@@ -101,7 +101,7 @@ def build_generic_presentation():
 
         return slide
 
-    # ── SLIDE 1: Standard Academic Title Slide ────────────────────────────────
+    # ── SLIDE 1: Title Slide ──────────────────────────────────────────────────
     slide1 = prs.slides.add_slide(blank_layout)
 
     # Clean White Background
@@ -155,7 +155,7 @@ def build_generic_presentation():
     p_main.font.color.rgb = COLOR_NAVY_DARK
 
     p_sub = ttf.add_paragraph()
-    p_sub.text = "Comprehensive Algorithmic Synthesis & Capstone Defense (Units 3, 4, and 5)"
+    p_sub.text = "Theoretical Foundations and Algorithmic Synthesis across Units 3, 4, and 5"
     p_sub.font.name = "Calibri"
     p_sub.font.size = Pt(16)
     p_sub.font.color.rgb = COLOR_GOLD
@@ -228,64 +228,61 @@ def build_generic_presentation():
     bot_strip.fill.fore_color.rgb = COLOR_NAVY_DARK
     bot_strip.line.fill.background()
 
-    # ── SLIDE 2: Project Overview & System Architecture ──────────────────────
+    # ── SLIDE 2: Conceptual Problem & Theoretical Motivation ──────────────────
     slide2 = add_content_slide(
-        "Project Overview & System Architecture",
-        "Integration of Curricular Units 3, 4, and 5 into an Adversarial Debate System",
+        "Theoretical Motivation & Multi-Persona Architecture",
+        "Overcoming Confirmation Bias and Overconfidence in Automated Advising",
         2
     )
-    # Left text column
     tbox2 = slide2.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
     tf2 = tbox2.text_frame
     tf2.word_wrap = True
     tf2.margin_left = tf2.margin_top = tf2.margin_right = tf2.margin_bottom = 0
 
     p = tf2.paragraphs[0]
-    p.text = "Problem Statement & Motivation:"
+    p.text = "Limitations of Single-Model Classifiers:"
     p.font.name = "Calibri"
     p.font.size = Pt(14)
     p.font.bold = True
     p.font.color.rgb = COLOR_NAVY_DARK
 
     p_desc = tf2.add_paragraph()
-    p_desc.text = "Conventional career advisement systems rely on static single-model classifications that provide no uncertainty estimates, cannot explain decisions, and frequently fail on borderline students."
+    p_desc.text = "Standard ML classifiers predict a single class label without quantifying whether the student lies on an ambiguous boundary or whether prerequisites are truly met. This leads to overconfident and uncalibrated recommendations."
     p_desc.font.name = "Calibri"
     p_desc.font.size = Pt(12)
     p_desc.font.color.rgb = COLOR_TEXT_MAIN
     p_desc.space_before = Pt(4)
 
     p_arch = tf2.add_paragraph()
-    p_arch.text = "Curricular Unit Integration:"
+    p_arch.text = "Dialectical Game-Theoretic Solution:"
     p_arch.font.name = "Calibri"
     p_arch.font.size = Pt(14)
     p_arch.font.bold = True
     p_arch.font.color.rgb = COLOR_NAVY_DARK
     p_arch.space_before = Pt(10)
 
-    units_data = [
-        ("Unit 3 (Unsupervised Learning)", "PCA dimensionality reduction (6 factors) + GMM Expectation-Maximization soft clustering + Mahalanobis distance outlier detection."),
-        ("Unit 4 (Sequential Dynamics)", "5-state longitudinal Markov chain (A^3) + Scaled HMM with Viterbi MAP path decoding + Kalman filter growth tracking."),
-        ("Unit 5 (Ensemble Learning)", "CART decision trees with pruning + Random Forest bagging + AdaBoost sequential reweighting + GBDT gradient descent."),
-        ("Capstone Architecture", "Feeds outputs into 3 adversarial personas (Planner, Critic, Sentinel) adjudicated by a mathematical Arbiter.")
+    theory_bullets = [
+        ("Thesis (Strategic Planner)", "Optimistic persona that identifies student potential, projects upward mobility, and constructs an ambitious career path."),
+        ("Antithesis (Empirical Critic)", "Skeptical persona that cross-examines feasibility against verified alumni skill distributions and flags skill deficits."),
+        ("Synthesis (Ethics Sentinel & Arbiter)", "Audits assignment entropy; halts autonomy when ambiguity is high and mediates a balanced consensus recommendation.")
     ]
-    for u_t, u_d in units_data:
-        p_u = tf2.add_paragraph()
-        p_u.text = f"• {u_t}: {u_d}"
-        p_u.font.name = "Calibri"
-        p_u.font.size = Pt(11.5)
-        p_u.font.color.rgb = COLOR_TEXT_MAIN
-        p_u.space_before = Pt(6)
+    for t_title, t_desc in theory_bullets:
+        p_t = tf2.add_paragraph()
+        p_t.text = f"• {t_title}:\n  {t_desc}"
+        p_t.font.name = "Calibri"
+        p_t.font.size = Pt(11.5)
+        p_t.font.color.rgb = COLOR_TEXT_MAIN
+        p_t.space_before = Pt(6)
 
-    # Right Image
     if os.path.exists("figures/capstone_debate_architecture.png"):
         pic = slide2.shapes.add_picture("figures/capstone_debate_architecture.png", Inches(6.7), Inches(1.5), width=Inches(5.8))
         pic.line.color.rgb = COLOR_BORDER
         pic.line.width = Pt(1)
 
-    # ── SLIDE 3: Unit 3 — PCA & Dimensionality Reduction ─────────────────────
+    # ── SLIDE 3: Unit 3 — PCA & Latent Variable Theory ────────────────────────
     slide3 = add_content_slide(
         "Unit 3: Principal Component Analysis (PCA)",
-        "Dimensionality Reduction and Latent Competency Factor Extraction",
+        "Dimensionality Reduction, Orthogonal Subspaces, and Latent Factor Theory",
         3
     )
     tbox3 = slide3.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
@@ -294,17 +291,18 @@ def build_generic_presentation():
     tf3.margin_left = tf3.margin_top = tf3.margin_right = tf3.margin_bottom = 0
 
     p = tf3.paragraphs[0]
-    p.text = "Mathematical Formulation:"
+    p.text = "Theoretical Foundations:"
     p.font.name = "Calibri"
     p.font.size = Pt(14)
     p.font.bold = True
     p.font.color.rgb = COLOR_NAVY_DARK
 
     bullets3 = [
-        ("Eigen-System Decomposition", "Computes covariance matrix across 14 standardized competency variables and solves Sigma * v_i = lambda_i * v_i."),
-        ("Kaiser Criterion (lambda > 1.0)", "Retains exclusively components with eigenvalues greater than 1.0, eliminating uninformative noise dimensions."),
-        ("Identified Latent Factors (6 Components)", "Six principal components capture 43.89% cumulative variance across 20,000 student records:\n- PC1 (20.3%): Core Computer Science & Algorithms\n- PC2 (8.4%): Mathematics & Analytical Reasoning\n- PC3 (5.1%): Hardware & Computer Architecture\n- PC4-PC6 (10.1%): Networking, Soft Skills, Leadership"),
-        ("Role in Agent Architecture", "The Strategic Career Planner projects raw student vectors into PC1-PC2 coordinates to visualize alignment with career benchmarks.")
+        ("The Multicollinearity Problem", "Academic subjects (e.g., Operating Systems, Programming, and Algorithms) are heavily correlated. Treating them as independent leads to redundant dimensions and distorted distance metrics."),
+        ("Orthogonal Coordinate Transformation", "PCA computes the sample covariance matrix and solves the eigen-system Sigma * v = lambda * v. Eigenvectors define uncorrelated axes of maximum variance, while eigenvalues represent variance magnitude."),
+        ("The Kaiser Criterion Rationale", "Retains only components with eigenvalues greater than 1.0. Theoretically, a component must explain more variance than a single standardized original variable to be considered informative."),
+        ("Latent Competency Extraction", "Condenses high-dimensional academic records into core latent dimensions: Systems Proficiency, Theoretical Logic, and Communication Quotient."),
+        ("Practical Role in Guidance", "Allows the Planner persona to map candidates onto an intuitive 2D latent coordinate system without losing core signal.")
     ]
     for b_t, b_d in bullets3:
         p_b = tf3.add_paragraph()
@@ -319,10 +317,10 @@ def build_generic_presentation():
         pic.line.color.rgb = COLOR_BORDER
         pic.line.width = Pt(1)
 
-    # ── SLIDE 4: Unit 3 — Gaussian Mixture Models & EM Algorithm ─────────────
+    # ── SLIDE 4: Unit 3 — GMM & Expectation-Maximization Theory ───────────────
     slide4 = add_content_slide(
-        "Unit 3: Gaussian Mixture Models & EM Algorithm",
-        "Soft Probabilistic Clustering and Assignment Uncertainty Quantification",
+        "Unit 3: Gaussian Mixture Models & EM Theory",
+        "Soft Responsibilities and Information-Theoretic Uncertainty Quantification",
         4
     )
     tbox4 = slide4.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
@@ -331,18 +329,18 @@ def build_generic_presentation():
     tf4.margin_left = tf4.margin_top = tf4.margin_right = tf4.margin_bottom = 0
 
     p = tf4.paragraphs[0]
-    p.text = "Expectation-Maximization Formulation (Bishop §9.2):"
+    p.text = "Why GMM-EM Outperforms K-Means:"
     p.font.name = "Calibri"
     p.font.size = Pt(14)
     p.font.bold = True
     p.font.color.rgb = COLOR_NAVY_DARK
 
     bullets4 = [
-        ("Mixture Model Setup", "Assumes K=4 latent career archetypes governed by hidden categorical indicator Z ~ Categorical(pi) with full covariance matrices Sigma_k."),
-        ("Expectation Step (E-Step)", "Computes soft posterior responsibilities:\ngamma_nk = P(Z_k=1 | x_n) = [pi_k * N(x_n | mu_k, Sigma_k)] / [sum pi_j * N(x_n | mu_j, Sigma_j)]."),
-        ("Maximization Step (M-Step)", "Iteratively updates cluster centers mu_k, covariance matrices Sigma_k, and mixing coefficients pi_k to maximize log-likelihood."),
-        ("Shannon Assignment Entropy", "H(gamma) = - sum gamma_nk * ln(gamma_nk). Directly measures classification ambiguity across career tracks."),
-        ("Ethics Sentinel Safety Guardrail", "When H(gamma) exceeds threshold tau = 1.20 nats, candidate profile is deemed ambiguous, triggering Human Counselor Override.")
+        ("Failure of Hard Partitioning (K-Means)", "K-Means enforces rigid 0/1 assignments and assumes spherical clusters. Student competency is inherently continuous—students often exhibit overlapping traits across multiple disciplines."),
+        ("Generative Mixture Formulation", "Models the student population as a mixture of K Gaussians, each characterized by its own mean vector and full covariance matrix to capture non-spherical, correlated skills."),
+        ("Expectation-Maximization (EM) Principles", "Iteratively optimizes the incomplete log-likelihood: the E-step estimates soft posterior probabilities (responsibilities), and the M-step updates distribution parameters."),
+        ("Quantifying Ambiguity with Shannon Entropy", "Entropy H(gamma) measures how evenly spread a student's responsibilities are. Low entropy indicates a clear career archetype; high entropy flags multi-track ambiguity."),
+        ("Ethics Sentinel Guardrail", "When entropy exceeds the safety threshold, algorithmic decision-making halts and the candidate is redirected to a human academic counselor.")
     ]
     for b_t, b_d in bullets4:
         p_b = tf4.add_paragraph()
@@ -350,17 +348,17 @@ def build_generic_presentation():
         p_b.font.name = "Calibri"
         p_b.font.size = Pt(12)
         p_b.font.color.rgb = COLOR_TEXT_MAIN
-        p_b.space_before = Pt(7)
+        p_b.space_before = Pt(8)
 
     if os.path.exists("figures/unit3_gmm_responsibilities_heatmap.png"):
         pic = slide4.shapes.add_picture("figures/unit3_gmm_responsibilities_heatmap.png", Inches(6.7), Inches(1.5), width=Inches(5.8))
         pic.line.color.rgb = COLOR_BORDER
         pic.line.width = Pt(1)
 
-    # ── SLIDE 5: Unit 3 — Mahalanobis Distance & Outlier Detection ───────────
+    # ── SLIDE 5: Unit 3 — Mahalanobis Distance & Outlier Theory ───────────────
     slide5 = add_content_slide(
-        "Unit 3: Mahalanobis Distance & Cluster Benchmark",
-        "Covariance-Whitened Anomaly Detection and Separation Metrics",
+        "Unit 3: Distance Metrics & Anomaly Detection Theory",
+        "Covariance Whitening vs Euclidean Distance for Multivariate Outlier Detection",
         5
     )
     tbox5 = slide5.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
@@ -369,17 +367,17 @@ def build_generic_presentation():
     tf5.margin_left = tf5.margin_top = tf5.margin_right = tf5.margin_bottom = 0
 
     p = tf5.paragraphs[0]
-    p.text = "Mathematical Formulation & Benchmarking:"
+    p.text = "Geometric Intuition & Mathematical Rationale:"
     p.font.name = "Calibri"
     p.font.size = Pt(14)
     p.font.bold = True
     p.font.color.rgb = COLOR_NAVY_DARK
 
     bullets5 = [
-        ("Mahalanobis Distance Metric", "D_M(x, mu) = sqrt((x - mu)^T * Sigma^-1 * (x - mu)). Accounts for correlations and variances across competency dimensions."),
-        ("Why Euclidean Distance Fails", "Euclidean distance assumes independent, spherical variance, double-counting highly correlated skills (e.g., Operating Systems and Algorithms)."),
-        ("Empirical Critic Outlier Threshold", "Cutoff threshold set at tau = 3.50. Profiles with D_M > 3.50 are flagged as anomaly outliers, preventing inaccurate career recommendations."),
-        ("Unsupervised Benchmark Comparison", "Evaluated across 20,000 instances:\n- K-Means: Silhouette = 0.0482, Calinski-Harabasz = 874.2\n- GMM (EM): Silhouette = 0.0431, Calinski-Harabasz = 812.5 (enables soft entropy)\n- Hierarchical (Ward): Silhouette = 0.0115, Calinski-Harabasz = 645.1")
+        ("The Euclidean Flaw in Correlated Data", "Euclidean distance measures straight-line distance assuming all axes are independent. It treats a drop in correlated subjects (e.g. OS and Algorithms) as two independent penalties, exaggerating true divergence."),
+        ("Mahalanobis Covariance Whitening", "Incorporates the inverse covariance matrix Sigma^-1. Geometrically rotates into the principal axes and scales by eigenvalue variances, measuring distance in standard deviations from the cluster centroid."),
+        ("Statistical Anomaly Detection", "Detects atypical competency shapes. For example, a student with high communication but near-zero programming diverges strongly from software engineering norms, even if their overall average seems acceptable."),
+        ("Empirical Critic Integration", "The Critic uses Mahalanobis distance as an objective feasibility gate: candidates lying too far from successful alumni centroids are flagged for prerequisite remediation.")
     ]
     for b_t, b_d in bullets5:
         p_b = tf5.add_paragraph()
@@ -387,7 +385,7 @@ def build_generic_presentation():
         p_b.font.name = "Calibri"
         p_b.font.size = Pt(12)
         p_b.font.color.rgb = COLOR_TEXT_MAIN
-        p_b.space_before = Pt(8)
+        p_b.space_before = Pt(9)
 
     if os.path.exists("figures/unit3_clustering_comparison.png"):
         pic = slide5.shapes.add_picture("figures/unit3_clustering_comparison.png", Inches(6.7), Inches(1.5), width=Inches(5.8))
@@ -397,7 +395,7 @@ def build_generic_presentation():
     # ── SLIDE 6: Unit 4 — Markov Chains & Transition Dynamics ────────────────
     slide6 = add_content_slide(
         "Unit 4: Sequential Career Modeling with Markov Chains",
-        "Multi-Step Chapman-Kolmogorov Transitions and Bottleneck Analysis",
+        "Stochastic State Transitions, Chapman-Kolmogorov Dynamics, and Equilibrium",
         6
     )
     tbox6 = slide6.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
@@ -406,18 +404,18 @@ def build_generic_presentation():
     tf6.margin_left = tf6.margin_top = tf6.margin_right = tf6.margin_bottom = 0
 
     p = tf6.paragraphs[0]
-    p.text = "Discrete Markovian Dynamics:"
+    p.text = "Stochastic Career Modeling Principles:"
     p.font.name = "Calibri"
     p.font.size = Pt(14)
     p.font.bold = True
     p.font.color.rgb = COLOR_NAVY_DARK
 
     bullets6 = [
-        ("5-State Career Hierarchy", "S1: Junior Associate -> S2: Mid-Level Engineer -> S3: Senior Specialist -> S4: Lead Architect -> S5: Director / CTO."),
-        ("Multi-Step Transition Matrix (A^3)", "Computes 3-year cumulative transition probabilities P(X_{t+3} = j | X_t = i) via matrix power A^3 = A x A x A."),
-        ("Stationary Distribution (pi*)", "Solves the balance equation pi* A = pi* subject to sum pi_i = 1, verifying long-term absorbing characteristics."),
-        ("Empirical Critic Bottleneck Audit", "Identifies a 40% retention plateau at the Mid-to-Senior transition (P_stay = 0.40). Students lacking project experience risk early career stagnation."),
-        ("Remedial Action", "The system recommends targeted technical portfolio development during Semesters 3 and 4 to overcome this plateau.")
+        ("Career as a Stochastic Process", "Career mobility is not static; it is a sequence of transitions across discrete professional tiers: Junior Associate, Mid-Level Engineer, Senior Specialist, Lead Architect, and Executive."),
+        ("The First-Order Markov Property", "Assumes that the probability of transitioning to the next career stage depends strictly on the current state, encapsulating career momentum without historical baggage."),
+        ("Multi-Step Prediction via Matrix Powers", "By Chapman-Kolmogorov equations, the k-step transition matrix A^k yields long-term forecasts of where candidates will be after multiple evaluation cycles."),
+        ("Stationary Distribution & Absorbing States", "Solving pi* A = pi* reveals the long-term equilibrium distribution, ensuring the model possesses realistic career absorption rather than infinite cycling."),
+        ("Career Plateau & Bottleneck Detection", "Identifies transition bottlenecks (e.g., the mid-career plateau where promotion stalls), allowing the system to recommend targeted skill interventions early.")
     ]
     for b_t, b_d in bullets6:
         p_b = tf6.add_paragraph()
@@ -435,7 +433,7 @@ def build_generic_presentation():
     # ── SLIDE 7: Unit 4 — Hidden Markov Models & Viterbi Decoding ─────────────
     slide7 = add_content_slide(
         "Unit 4: Hidden Markov Models & Viterbi Decoding",
-        "Maximum A Posteriori (MAP) Career Progression Sequence Estimation",
+        "Decoupling Hidden Competency Maturity from Noisy Academic Observations",
         7
     )
     tbox7 = slide7.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
@@ -444,18 +442,18 @@ def build_generic_presentation():
     tf7.margin_left = tf7.margin_top = tf7.margin_right = tf7.margin_bottom = 0
 
     p = tf7.paragraphs[0]
-    p.text = "HMM Formulation & Trellis Decoding:"
+    p.text = "Latent State Formulation & Dynamic Programming:"
     p.font.name = "Calibri"
     p.font.size = Pt(14)
     p.font.bold = True
     p.font.color.rgb = COLOR_NAVY_DARK
 
     bullets7 = [
-        ("Latent State Setup", "Hidden competency maturity states Z_t in {Novice, Competent, Expert} emit observable quarterly evaluation scores X_t."),
-        ("Scaled Forward-Backward Algorithm", "Computes sequence log-likelihood ln P(X | lambda) = -4.410 using dynamic scaling to eliminate numerical underflow."),
-        ("Viterbi Dynamic Programming Recursion", "Computes MAP path:\nv_t(j) = max_i [v_{t-1}(i) * a_ij] * b_j(x_t), with back-pointers psi_t(j) = argmax_i [v_{t-1}(i) * a_ij]."),
-        ("Optimal Progression Trajectory", "Decoded optimal milestone sequence:\nSem 1 (Novice) -> Sem 2 (Competent) -> Sem 3 (Competent) -> Sem 4 (Expert) -> Sem 5 (Expert)."),
-        ("Role in Guidance Agent", "Supplies the Strategic Career Planner with an objective, step-by-step roadmap to guide student skill acquisition.")
+        ("The Latent Competency Concept", "True student mastery (Novice, Competent, Expert) is unobservable directly. What we measure are noisy indicators: semester marks, hackathons, and project assessments."),
+        ("The Dual Stochastic Process", "An underlying hidden Markov process dictates student maturity progression, while an emission probability distribution governs the observable grades generated at each stage."),
+        ("Evaluation via Scaled Forward-Backward", "Calculates sequence likelihood while utilizing dynamic scale factors to avoid numerical underflow across long academic sequences."),
+        ("Viterbi Maximum A Posteriori (MAP) Decoding", "Utilizes Bellman's Principle of Optimality to find the single most probable trajectory of hidden states without evaluating exponentially many paths."),
+        ("Actionable Roadmap Generation", "Produces an interpretable progression path (e.g. Novice -> Competent -> Expert) that the Strategic Planner translates into semester milestones.")
     ]
     for b_t, b_d in bullets7:
         p_b = tf7.add_paragraph()
@@ -473,7 +471,7 @@ def build_generic_presentation():
     # ── SLIDE 8: Unit 4 — Kalman Filtering for Skill Tracking ─────────────────
     slide8 = add_content_slide(
         "Unit 4: Linear Dynamical Systems & Kalman Filter",
-        "Recursive State-Space Estimation of True Latent Competency Velocity",
+        "Continuous Capability Tracking and Recursive State-Space Filtering",
         8
     )
     tbox8 = slide8.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
@@ -482,18 +480,18 @@ def build_generic_presentation():
     tf8.margin_left = tf8.margin_top = tf8.margin_right = tf8.margin_bottom = 0
 
     p = tf8.paragraphs[0]
-    p.text = "Kalman Filter Mathematical Mechanics (Murphy §18):"
+    p.text = "Continuous State-Space Estimation Theory:"
     p.font.name = "Calibri"
     p.font.size = Pt(14)
     p.font.bold = True
     p.font.color.rgb = COLOR_NAVY_DARK
 
     bullets8 = [
-        ("State Formulation", "State vector x_t = [Proficiency_t, Velocity_t]^T with transition matrix F = [[1, Delta_t], [0, 1]]."),
-        ("Measurement Model", "Observations z_t = H x_t + v_t, where H = [1, 0] and observation noise v_t ~ N(0, R)."),
-        ("State Prediction & Covariance", "x_pred = F * x_hat_{t-1}, P_pred = F * P_{t-1} * F^T + Q."),
-        ("Kalman Gain & Measurement Update", "K_t = P_pred * H^T * (H * P_pred * H^T + R)^-1.\nx_hat_t = x_pred + K_t * (z_t - H * x_pred), P_t = (I - K_t * H) * P_pred."),
-        ("Academic Rationale", "Filters temporary semester score fluctuations, providing the Planner persona with estimated growth velocity (+1.2 proficiency units/quarter).")
+        ("Beyond Discrete Stages", "Student capability is not merely discrete states; it evolves continuously with a true underlying proficiency level and a growth rate (velocity)."),
+        ("State-Space Modeling Framework", "Formulates system dynamics: state transition projects future capability with process uncertainty Q; measurement matrix maps true capability to noisy exam scores with review noise R."),
+        ("The Predict-Update Operating Cycle", "Prediction propagates state ahead in time; Measurement Update uses new exam scores to correct predictions via the mathematically optimal Kalman Gain."),
+        ("Optimal LMMSE Estimator", "Under Gaussian assumptions, the Kalman filter is proven to be the optimal Linear Minimum Mean Squared Error estimator, balancing prior model confidence against measurement noise."),
+        ("Filtering Academic Transients", "Smooths out temporary dips caused by exam anxiety or illness, revealing the true underlying capability growth trajectory.")
     ]
     for b_t, b_d in bullets8:
         p_b = tf8.add_paragraph()
@@ -508,10 +506,10 @@ def build_generic_presentation():
         pic.line.color.rgb = COLOR_BORDER
         pic.line.width = Pt(1)
 
-    # ── SLIDE 9: Unit 5 — Decision Trees (CART) & Pruning ────────────────────
+    # ── SLIDE 9: Unit 5 — Decision Trees & Pruning Theory ────────────────────
     slide9 = add_content_slide(
-        "Unit 5: Decision Trees & Minimal Cost-Complexity Pruning",
-        "Controlling High Variance via Regularized Tree Pruning",
+        "Unit 5: Decision Trees & Regularization Theory",
+        "Recursive Space Partitioning, Impurity Criteria, and the Bias-Variance Tradeoff",
         9
     )
     tbox9 = slide9.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
@@ -520,18 +518,18 @@ def build_generic_presentation():
     tf9.margin_left = tf9.margin_top = tf9.margin_right = tf9.margin_bottom = 0
 
     p = tf9.paragraphs[0]
-    p.text = "Tree Splitting & Pruning Mechanics:"
+    p.text = "CART Splitting & Regularization Principles:"
     p.font.name = "Calibri"
     p.font.size = Pt(14)
     p.font.bold = True
     p.font.color.rgb = COLOR_NAVY_DARK
 
     bullets9 = [
-        ("Gini Impurity Splitting", "I_G(t) = 1 - sum p_tk^2. Greedily selects feature j and split threshold s maximizing impurity drop Delta I_G."),
-        ("Variance in Deep Trees", "Unconstrained decision trees achieve near-zero training error but exhibit severe overfitting on test datasets."),
-        ("Minimal Cost-Complexity Pruning", "R_alpha(T) = R(T) + alpha * |T|. Penalizes the total number of terminal leaves |T| using regularizer alpha >= 0."),
-        ("Pruning Path Optimization", "Evaluates effective alphas along the pruning path, identifying optimal maximum depth = 5 to maximize generalization accuracy."),
-        ("Interpretability Value", "Generates human-auditable decision rules, allowing academic counselors to verify recommendations directly.")
+        ("Recursive Binary Partitioning", "CART partitions the multidimensional feature space into orthogonal rectangular regions using greedy, top-down recursive binary splits."),
+        ("Gini Impurity vs Information Gain", "Gini measures the expected error rate if instances were randomly labeled according to node class distribution. Minimizing Gini isolates pure, single-track subsets."),
+        ("The High Variance Problem", "Unconstrained decision trees grow deep branches to fit every training anomaly, achieving near-zero training error but high test variance."),
+        ("Minimal Cost-Complexity Pruning", "Introduces an explicit complexity penalty alpha * |T| penalizing tree size. Balances misclassification loss against leaf count to prune subtrees that fail to generalize."),
+        ("Interpretability Advantage", "Produces transparent, rule-based decision logic that human counselors and students can inspect, audit, and understand.")
     ]
     for b_t, b_d in bullets9:
         p_b = tf9.add_paragraph()
@@ -546,13 +544,12 @@ def build_generic_presentation():
         pic.line.color.rgb = COLOR_BORDER
         pic.line.width = Pt(1)
 
-    # ── SLIDE 10: Unit 5 — Random Forest vs AdaBoost ─────────────────────────
+    # ── SLIDE 10: Unit 5 — Bagging vs Boosting (RF vs AdaBoost) ──────────────
     slide10 = add_content_slide(
         "Unit 5: Bagging vs Boosting Paradigms",
-        "Random Forest Variance Reduction vs AdaBoost Sequential Loss Minimization",
+        "Variance Reduction via Independent Trees vs Sequential Bias Reduction",
         10
     )
-    # 2 Comparison Columns
     col_w = Inches(5.6)
 
     # Box 1: Random Forest
@@ -573,20 +570,20 @@ def build_generic_presentation():
     p1.font.bold = True
     p1.font.color.rgb = COLOR_NAVY_DARK
 
-    rf_bullets = [
-        "Bootstrap Aggregation: Builds B=100 trees on bootstrap samples with replacement (~63.2% unique instances).",
-        "Feature Subspacing: Evaluates m = sqrt(D) ~ 3 random features at each split to decorrelate individual trees.",
-        "Variance Reduction: Var(T_bar) = rho * sigma^2 + [(1 - rho)/B] * sigma^2. Tree decorrelation drives total variance down.",
-        "Out-Of-Bag (OOB) Validation: Evaluates generalization on unused instances (OOB Score = 28.5%).",
-        "Performance: Achieved 34.90% weighted precision, making it the most reliable predictor across all 5 macro tracks."
+    rf_pts = [
+        "Core Philosophy: Combines many deep, low-bias, high-variance trees independently to drive variance down.",
+        "Bootstrap Sampling: Each tree trains on a random subset with replacement, exposing each model to different data variations.",
+        "Feature Subspacing (sqrt(D)): Randomly restricts candidate features at each node split, decorrelating individual tree errors so errors cancel out upon averaging.",
+        "Out-of-Bag (OOB) Generalization: Unused instances serve as an internal validation set, providing unbiased error estimates without data leakage.",
+        "Practical Behavior: Highly robust to label noise, feature correlation, and outlier profiles."
     ]
-    for pt in rf_bullets:
-        p_pt = btf1.add_paragraph()
-        p_pt.text = f"• {pt}"
-        p_pt.font.name = "Calibri"
-        p_pt.font.size = Pt(11.5)
-        p_pt.font.color.rgb = COLOR_TEXT_MAIN
-        p_pt.space_before = Pt(8)
+    for pt in rf_pts:
+        p = btf1.add_paragraph()
+        p.text = f"• {pt}"
+        p.font.name = "Calibri"
+        p.font.size = Pt(11.5)
+        p.font.color.rgb = COLOR_TEXT_MAIN
+        p.space_before = Pt(8)
 
     # Box 2: AdaBoost
     b2 = slide10.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(6.8), Inches(1.5), col_w, Inches(5.2))
@@ -606,25 +603,25 @@ def build_generic_presentation():
     p2.font.bold = True
     p2.font.color.rgb = COLOR_GOLD
 
-    ada_bullets = [
-        "Sequential Stumps: Iteratively trains weak decision stumps focusing on previously misclassified student profiles.",
-        "Exponential Loss: Minimizes L(y, f) = exp(-y * f(x)) across training iterations.",
-        "Sample Reweighting: Increases weights of misclassified instances: w_i^(m+1) = w_i^(m) * exp(alpha_m * I(y_i != h_m(x_i))).",
-        "Weak Learner Weight: alpha_m = 0.5 * ln[(1 - eps_m) / eps_m].",
-        "Sensitivity to Outliers: High sensitivity to noisy boundary profiles; sample weights explode on ambiguous student records."
+    ada_pts = [
+        "Core Philosophy: Sequentially trains simple, shallow, high-bias stumps to progressively reduce systematic bias.",
+        "Iterative Sample Reweighting: Instances misclassified in round m receive higher weights in round m+1, forcing subsequent models to focus on hard cases.",
+        "Exponential Loss Minimization: Formulates boosting as coordinate descent minimizing an upper bound on classification error.",
+        "Model Aggregation: Assigns higher voting weights to accurate classifiers and lower weights to weak ones.",
+        "Practical Vulnerability: In noisy educational records, ambiguous or mislabeled border cases cause sample weights to explode, degrading generalization."
     ]
-    for pt in ada_bullets:
-        p_pt = btf2.add_paragraph()
-        p_pt.text = f"• {pt}"
-        p_pt.font.name = "Calibri"
-        p_pt.font.size = Pt(11.5)
-        p_pt.font.color.rgb = COLOR_TEXT_MAIN
-        p_pt.space_before = Pt(8)
+    for pt in ada_pts:
+        p = btf2.add_paragraph()
+        p.text = f"• {pt}"
+        p.font.name = "Calibri"
+        p.font.size = Pt(11.5)
+        p.font.color.rgb = COLOR_TEXT_MAIN
+        p.space_before = Pt(8)
 
-    # ── SLIDE 11: Unit 5 — GBDT & Algorithmic Benchmark ──────────────────────
+    # ── SLIDE 11: Unit 5 — Gradient Boosted Trees (GBDT Theory) ──────────────
     slide11 = add_content_slide(
-        "Unit 5: Gradient Boosting & Algorithmic Benchmark",
-        "Functional Gradient Descent and Comprehensive Multi-Model Evaluation",
+        "Unit 5: Gradient Boosted Trees & Model Benchmarking",
+        "Functional Gradient Descent in Function Space and Shrinkage Regularization",
         11
     )
     tbox11 = slide11.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
@@ -633,17 +630,18 @@ def build_generic_presentation():
     tf11.margin_left = tf11.margin_top = tf11.margin_right = tf11.margin_bottom = 0
 
     p = tf11.paragraphs[0]
-    p.text = "Gradient Boosted Decision Trees (GBDT):"
+    p.text = "Functional Gradient Descent Theory:"
     p.font.name = "Calibri"
     p.font.size = Pt(14)
     p.font.bold = True
     p.font.color.rgb = COLOR_NAVY_DARK
 
     bullets11 = [
-        ("Pseudo-Residual Optimization", "Fits regression trees directly to the negative gradients of multi-class log loss: r_ikm = -[dL(y_i, f_k(x_i)) / df_k(x_i)]."),
-        ("Shrinkage Regularization (eta = 0.1)", "Dampens step sizes in function space to prevent overfitting training anomalies."),
-        ("Multi-Model Comparative Benchmark", "Tested on 4,000 held-out student records across 5 macro tracks:\n- Single Decision Tree: Accuracy 27.84%, F1 0.1540\n- AdaBoost: Accuracy 28.24%, F1 0.1308\n- Random Forest: Accuracy 28.66%, Precision 34.90% (Top Performer)\n- Gradient Boosted Trees: Accuracy 26.50%, F1 0.1721"),
-        ("Key Influential Competencies", "Algorithms (0.135), Operating Systems (0.128), and Programming Concepts (0.121) have highest Gini feature importance.")
+        ("Optimization in Function Space", "Unlike standard gradient descent which optimizes parameter weights, GBDT optimizes entire decision functions by stepping along the negative gradient of the loss surface."),
+        ("Fitting Pseudo-Residuals", "Each new tree is trained directly on the pseudo-residuals (unexplained errors) of previous trees, iteratively refining decision boundaries."),
+        ("Loss Function Generalization", "Applicable to any differentiable loss function (e.g. multi-class cross-entropy deviance), providing calibrated probability outputs."),
+        ("Shrinkage Regularization (Learning Rate)", "Dampens each tree's step size with a shrinkage factor, requiring more trees but drastically preventing greedy overshooting."),
+        ("Architectural Selection", "Random Forest provided the most stable generalization across career tracks, while GBDT offered valuable probability estimates for debate arbitration.")
     ]
     for b_t, b_d in bullets11:
         p_b = tf11.add_paragraph()
@@ -658,13 +656,12 @@ def build_generic_presentation():
         pic.line.color.rgb = COLOR_BORDER
         pic.line.width = Pt(1)
 
-    # ── SLIDE 12: Capstone — Multi-Persona Debate Architecture ────────────────
+    # ── SLIDE 12: Capstone — Dialectical Multi-Persona Architecture ───────────
     slide12 = add_content_slide(
         "Integrated Capstone: Multi-Persona Guidance Architecture",
         "Adversarial Personas with Mathematical Safety Guardrails",
         12
     )
-    # 3 Persona Cards
     p_w = Inches(3.7)
     x_coords = [Inches(0.8), Inches(4.8), Inches(8.8)]
 
@@ -679,16 +676,16 @@ def build_generic_presentation():
     ctf1.margin_left = ctf1.margin_right = Inches(0.2)
     ctf1.margin_top = Inches(0.15)
     p = ctf1.paragraphs[0]
-    p.text = "Strategic Career Planner\n(Growth & Trajectory)"
+    p.text = "Strategic Career Planner\n(Growth & Ambition)"
     p.font.name = "Calibri"
     p.font.size = Pt(14)
     p.font.bold = True
     p.font.color.rgb = COLOR_NAVY_DARK
     pts1 = [
-        "Unit 2: Analytical Bayesian Regression predicted compensation (mu_N) with 95% credible intervals.",
-        "Unit 3: GMM component membership probability fit.",
-        "Unit 4: Viterbi MAP career advancement trajectory.",
-        "Role: Charts ambitious upward career path for qualified students."
+        "Theoretical Role: Acts as the student's champion; maximizes career potential and earnings.",
+        "Bayesian Prediction: Utilizes analytical Bayesian regression to project salary with credible intervals.",
+        "Viterbi Progression: Decodes optimal multi-semester milestones to reach the target tier.",
+        "Guiding Philosophy: Ambitious upward mobility based on latent capabilities."
     ]
     for pt in pts1:
         p_pt = ctf1.add_paragraph()
@@ -709,16 +706,16 @@ def build_generic_presentation():
     ctf2.margin_left = ctf2.margin_right = Inches(0.2)
     ctf2.margin_top = Inches(0.15)
     p = ctf2.paragraphs[0]
-    p.text = "Empirical Critic\n(Feasibility & Metrics)"
+    p.text = "Empirical Critic\n(Feasibility & Metric Audit)"
     p.font.name = "Calibri"
     p.font.size = Pt(14)
     p.font.bold = True
     p.font.color.rgb = COLOR_GOLD
     pts2 = [
-        "Unit 3: Mahalanobis distance D_M vs outlier threshold tau = 3.50.",
-        "Unit 4: Markov multi-step transition A^3 retention bottleneck audit.",
-        "Prerequisite verification: flags specific deficient competency dimensions.",
-        "Role: Prevents student failure by challenging unrealistic goals."
+        "Theoretical Role: Acts as the reality check; minimizes risk of academic failure or burnout.",
+        "Mahalanobis Gate: Checks multivariate distance against verified alumni distributions.",
+        "Transition Audit: Examines Markov retention plateaus to spot stagnation risks early.",
+        "Guiding Philosophy: Strict feasibility verification and prerequisite enforcement."
     ]
     for pt in pts2:
         p_pt = ctf2.add_paragraph()
@@ -745,10 +742,10 @@ def build_generic_presentation():
     p.font.bold = True
     p.font.color.rgb = RGBColor(220, 38, 38)
     pts3 = [
-        "Unit 3: GMM Assignment Shannon Entropy H(gamma) vs cutoff tau = 1.20 nats.",
-        "Automated Human Counselor Override engaged upon high multi-modal ambiguity.",
-        "Demographic parity audit across all career tracks.",
-        "Role: Protects students from biased or ambiguous algorithmic recommendations."
+        "Theoretical Role: Guarantees algorithmic safety and fairness.",
+        "Shannon Entropy Audit: Measures classification ambiguity across cluster responsibilities.",
+        "Human Counselor Fallback: Halts autonomous AI advisement when entropy is high.",
+        "Guiding Philosophy: Never allow an algorithm to make blind guesses on student futures."
     ]
     for pt in pts3:
         p_pt = ctf3.add_paragraph()
@@ -769,26 +766,25 @@ def build_generic_presentation():
     atf.margin_left = atf.margin_right = Inches(0.25)
     atf.margin_top = Inches(0.12)
     p = atf.paragraphs[0]
-    p.text = "Arbiter Consensus Synthesis"
+    p.text = "Arbiter Consensus Adjudication"
     p.font.name = "Calibri"
     p.font.size = Pt(14)
     p.font.bold = True
     p.font.color.rgb = RGBColor(22, 163, 74)
 
     p_a = atf.add_paragraph()
-    p_a.text = "Balances the Strategic Planner's growth trajectory against the Empirical Critic's feasibility checks and the Ethics Sentinel's uncertainty guardrails. Synthesizes a calibrated confidence score (65% to 96%), target career milestone, and a personalized 4-semester remedial coursework plan."
+    p_a.text = "Acts as the impartial judge that balances ambition against feasibility and safety. Weighs all three persona arguments to deliver a calibrated confidence score, final milestone recommendation, and customized 4-semester skill development roadmap."
     p_a.font.name = "Calibri"
     p_a.font.size = Pt(11)
     p_a.font.color.rgb = COLOR_TEXT_MAIN
     p_a.space_before = Pt(3)
 
-    # ── SLIDE 13: Capstone — Case Studies & Guardrail Verification ────────────
+    # ── SLIDE 13: Capstone — Scenario Evaluation & Guardrails ─────────────────
     slide13 = add_content_slide(
         "Capstone: Case Studies & Guardrail Verification",
-        "Empirical Validation Across 4 Representative Student Profiles",
+        "Empirical Validation of Dialectical Personas across Representative Archetypes",
         13
     )
-    # 4 generic cards
     card_w13 = Inches(5.7)
     card_h13 = Inches(2.4)
     coords = [
@@ -799,19 +795,19 @@ def build_generic_presentation():
     ]
     scenarios = [
         ("Case Study 1: High Achiever (Parth Gupta - RA2411003010019)",
-         "Academic Profile: Algorithms 96%, Operating Systems 95%, Coding 10/10.\n- Mahalanobis Distance: D_M = 1.82 (Well within alumni core)\n- Shannon Entropy: H = 0.42 nats (Very sharp classification)\n- Result: Unanimous Dialectical Consensus (96% Confidence)\n- Action: Accelerated track into AI / Machine Learning Specialist.",
+         "Conceptual Dynamics: Strong core competencies in Algorithms, OS, and Coding.\n• Planner: Recommends accelerated AI / Machine Learning Specialist track.\n• Critic: Confirms profile lies firmly within alumni distribution.\n• Sentinel: Confirms sharp, unambiguous classification.\n• Verdict: Unanimous Dialectical Consensus with maximum confidence.",
          COLOR_NAVY_DARK),
 
         ("Case Study 2: Skill Deficit Anomaly",
-         "Academic Profile: Mathematics 51%, Algorithms 52%, Logic 4/10.\n- Mahalanobis Distance: D_M = 4.50 > 3.50 (Outlier Anomaly)\n- Critic Stance: Risk Flagged — Critical Prerequisite Deficit\n- Result: Conditional Advancement (81% Confidence)\n- Action: Mandatory 2-semester prerequisite skill remediation.",
+         "Conceptual Dynamics: High interest in AI, but foundational Math and Algorithm scores lag.\n• Planner: Identifies target milestone role.\n• Critic: Flags severe Mahalanobis distance outlier anomaly.\n• Verdict: Conditional Advancement. Student must complete 2 semesters of prerequisite remedial bootcamps before specialization.",
          COLOR_GOLD),
 
         ("Case Study 3: Ambiguous Boundary Profile",
-         "Academic Profile: Uniform 74% across all subjects.\n- Shannon Entropy: H = 1.35 > 1.20 nats (High Epistemic Ambiguity)\n- Ethics Sentinel: Human Counselor Override Engaged\n- Result: Hybrid Counselor Mediation (65% Confidence)\n- Action: Referral to Department Academic Counseling Cell.",
+         "Conceptual Dynamics: Uniformly moderate performance across all competency areas.\n• Planner & Critic: Unable to decisively separate tracks.\n• Sentinel: Detects high Shannon entropy across multiple clusters.\n• Verdict: Human Counselor Override. Autonomous guidance is halted; candidate is escalated to an Academic Counselor.",
          RGBColor(220, 38, 38)),
 
         ("Case Study 4: Cloud & Systems Architect",
-         "Academic Profile: Computer Networks 96%, Operating Systems 92%.\n- Mahalanobis Distance: D_M = 2.30, Shannon Entropy: H = 0.72 nats\n- All Personas Validate Competency Fit\n- Result: Full Consensus (91% Confidence)\n- Action: Enterprise cloud architecture certification & placement.",
+         "Conceptual Dynamics: High aptitude in Computer Networks, Systems, and Architecture.\n• All Personas: Unanimous agreement on Enterprise Infrastructure Engineer.\n• Verdict: Full consensus with specialized cloud deployment milestones.",
          RGBColor(22, 163, 74))
     ]
 
@@ -846,25 +842,24 @@ def build_generic_presentation():
         "Key Project Takeaways and Verified Theoretical Literature",
         14
     )
-    # Left column: Conclusions
     tbox14 = slide14.shapes.add_textbox(Inches(0.8), Inches(1.4), Inches(5.6), Inches(5.3))
     tf14 = tbox14.text_frame
     tf14.word_wrap = True
     tf14.margin_left = tf14.margin_top = tf14.margin_right = tf14.margin_bottom = 0
 
     p = tf14.paragraphs[0]
-    p.text = "Key Project Conclusions:"
+    p.text = "Core Theoretical Contributions:"
     p.font.name = "Calibri"
     p.font.size = Pt(14)
     p.font.bold = True
     p.font.color.rgb = COLOR_NAVY_DARK
 
     conclusions = [
-        ("Multi-Persona Guidance", "Adversarial dialectical debate successfully eliminates single-model overconfidence by balancing ambition, feasibility, and safety."),
-        ("Full Curricular Coverage", "Rigorously implemented Units 3, 4, and 5 (PCA, GMM, Markov, HMM, Kalman, CART, Random Forest, AdaBoost, GBDT)."),
-        ("Mathematical Grounding", "Every persona decision is derived from first-principles statistical equations from Bishop and Murphy rather than black-box models."),
-        ("Interactive Demonstration", "Built a production Streamlit web application with scenario simulation, polar competency radar charts, and downloadable dossiers."),
-        ("Reproducible Artifacts", "Codebase fully tested (pytest passed), strictly typed (mypy passed), and synchronized on GitHub.")
+        ("Multi-Agent Dialectical Robustness", "Adversarial cross-examination replaces brittle single-model overconfidence with explainable, balanced career guidance."),
+        ("Comprehensive Curricular Unification", "Successfully harmonized Unsupervised Learning (Unit 3), Sequential Modeling (Unit 4), and Ensemble Methods (Unit 5)."),
+        ("Mathematical Auditability", "Every recommendation is grounded in first-principles statistical equations rather than opaque, uncalibrated black boxes."),
+        ("Safety & Human-in-the-Loop", "Entropy-triggered counselor overrides ensure automated systems recognize their own uncertainty and protect student welfare."),
+        ("Reproducible Open-Source Delivery", "Delivered complete codebase with unit test validation, executed notebooks, and an interactive demonstration platform.")
     ]
     for c_t, c_d in conclusions:
         p_c = tf14.add_paragraph()
@@ -874,23 +869,22 @@ def build_generic_presentation():
         p_c.font.color.rgb = COLOR_TEXT_MAIN
         p_c.space_before = Pt(7)
 
-    # Right column: References
     rbox14 = slide14.shapes.add_textbox(Inches(6.8), Inches(1.4), Inches(5.6), Inches(5.3))
     rtf14 = rbox14.text_frame
     rtf14.word_wrap = True
     rtf14.margin_left = rtf14.margin_top = rtf14.margin_right = rtf14.margin_bottom = 0
 
     p = rtf14.paragraphs[0]
-    p.text = "Academic References (IEEE Format):"
+    p.text = "Primary Theoretical References (IEEE Format):"
     p.font.name = "Calibri"
     p.font.size = Pt(14)
     p.font.bold = True
     p.font.color.rgb = COLOR_NAVY_DARK
 
     refs = [
-        "[1] C. M. Bishop, Pattern Recognition and Machine Learning. New York: Springer, 2006. (Bayesian Regression, GMM Expectation-Maximization, Hidden Markov Models).",
-        "[2] K. P. Murphy, Machine Learning: A Probabilistic Perspective. Cambridge, MA: MIT Press, 2012. (Kalman Filter State-Space Tracking, Markov Chains).",
-        "[3] T. Hastie, R. Tibshirani, and J. Friedman, The Elements of Statistical Learning, 2nd ed. New York: Springer, 2009. (Decision Trees, AdaBoost, Random Forests).",
+        "[1] C. M. Bishop, Pattern Recognition and Machine Learning. New York: Springer, 2006. (Bayesian Linear Regression, GMM Expectation-Maximization, Hidden Markov Models).",
+        "[2] K. P. Murphy, Machine Learning: A Probabilistic Perspective. Cambridge, MA: MIT Press, 2012. (Kalman Filter State-Space Tracking, Markov Chains, Ensemble Methods).",
+        "[3] T. Hastie, R. Tibshirani, and J. Friedman, The Elements of Statistical Learning, 2nd ed. New York: Springer, 2009. (Decision Trees, AdaBoost, Random Forests, GBDT).",
         "[4] L. Breiman, 'Random Forests,' Machine Learning, vol. 45, no. 1, pp. 5–32, 2001.",
         "[5] Y. Freund and R. E. Schapire, 'A Decision-Theoretic Generalization of On-Line Learning,' Journal of Computer and System Sciences, vol. 55, no. 1, 1997.",
         "[6] SRMIST Department of Computing Technologies, Course Curriculum for 21CSC305P Machine Learning, 2026."
@@ -906,8 +900,8 @@ def build_generic_presentation():
     # Save
     output_pptx = "presentation_unit3_unit4_unit5.pptx"
     prs.save(output_pptx)
-    print(f"Generic academic presentation created: {output_pptx} (14 slides, clean standard template).")
+    print(f"Theory-focused generic presentation created: {output_pptx} (14 slides).")
 
 
 if __name__ == "__main__":
-    build_generic_presentation()
+    build_theory_focused_presentation()

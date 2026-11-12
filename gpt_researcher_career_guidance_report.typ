@@ -57,7 +57,7 @@
   
   #v(0.15in)
   #text(10.5pt)[
-    *Investigators / Team:* Parth Gupta [RA2311026010001], Mokshith Penna [RA2411003010044], Ishu Gurtu [RA2411003010015]\
+    *Investigators / Team:* Parth Gupta [RA2411003010019], Mokshith Penna [RA2411003010044], Ishu Gurtu [RA2411003010015]\
     *Under the Guidance of:* Dr. Divya Mohan (Assistant Professor, Department of Computing Technologies)\
     *Head of Department:* Dr. G. Niranjana (Professor and Head, Department of Computing Technologies)\
     *Institution:* SRM Institute of Science and Technology, Kattankulathur\

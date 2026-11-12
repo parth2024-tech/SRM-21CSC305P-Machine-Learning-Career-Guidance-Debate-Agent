@@ -52,7 +52,7 @@ def create_deck():
         bg.line.fill.background()
 
         # Header Box
-        header_box = slide.shapes.add_textbox(Inches(0.8), Inches(0.4), Inches(10.5), Inches(1.1))
+        header_box = slide.shapes.add_textbox(Inches(0.8), Inches(0.4), Inches(11.733), Inches(1.1))
         tf = header_box.text_frame
         tf.word_wrap = True
         tf.margin_left = tf.margin_top = tf.margin_right = tf.margin_bottom = 0
@@ -78,10 +78,6 @@ def create_deck():
         divider.fill.fore_color.rgb = CARD_BORDER
         divider.line.fill.background()
 
-        # SRM Logo at top right
-        if os.path.exists("figures/srm_logo.jpeg"):
-            slide.shapes.add_picture("figures/srm_logo.jpeg", Inches(11.6), Inches(0.35), height=Inches(1.05))
-
         # Bottom Footer Bar
         footer_box = slide.shapes.add_textbox(Inches(0.8), Inches(7.05), Inches(11.733), Inches(0.35))
         ftf = footer_box.text_frame
@@ -101,12 +97,8 @@ def create_deck():
     bg1.fill.fore_color.rgb = NAVY_PRIMARY
     bg1.line.fill.background()
 
-    # Logo
-    if os.path.exists("figures/srm_logo.jpeg"):
-        slide1.shapes.add_picture("figures/srm_logo.jpeg", Inches(0.9), Inches(0.7), height=Inches(1.1))
-
-    # University header text
-    uni_box = slide1.shapes.add_textbox(Inches(2.5), Inches(0.7), Inches(10.0), Inches(1.1))
+    # University header text (No Logo)
+    uni_box = slide1.shapes.add_textbox(Inches(0.9), Inches(0.7), Inches(11.5), Inches(1.1))
     utf = uni_box.text_frame
     utf.word_wrap = True
     p_u1 = utf.paragraphs[0]
@@ -162,7 +154,7 @@ def create_deck():
     p_tm_lbl.font.color.rgb = AMBER_ACCENT
 
     p_m1 = tt_tf.add_paragraph()
-    p_m1.text = "• Parth Gupta [RA2311026010001]"
+    p_m1.text = "• Parth Gupta [RA2411003010019]"
     p_m1.font.size = Pt(13)
     p_m1.font.bold = True
     p_m1.font.color.rgb = WHITE_PURE
@@ -740,7 +732,7 @@ def create_deck():
         (Inches(6.8), Inches(4.45))
     ]
     scenarios = [
-        ("🌟 Scenario A: AI Elite (Parth Gupta)",
+        ("🌟 Scenario A: AI Elite (Parth Gupta - RA2411003010019)",
          "Algorithms 96%, OS 95%, Coding 10/10.\n• D_M = 1.82 (In-distribution core)\n• H(γ) = 0.42 nats (Very sharp confidence)\n• Verdict: Unanimous Dialectical Consensus (96% Confidence)\n• Action: Accelerated progression into AI/ML Specialist track.",
          RGBColor(0xEF, 0xF6, 0xFF), NAVY_SECONDARY),
 

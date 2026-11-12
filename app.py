@@ -235,7 +235,7 @@ st.sidebar.title("21CSC305P ML Project")
 st.sidebar.markdown("""
 **Topic:** Debate-Based Career Guidance Agent  
 **Team Members:**  
-• **Parth Gupta** [RA2311026010001]  
+• **Parth Gupta** [RA2411003010019]  
 • **Mokshith Penna** [RA2411003010044]  
 • **Ishu Gurtu** [RA2411003010015]  
 **Faculty Guide:** Dr. Divya Mohan  

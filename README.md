@@ -14,7 +14,7 @@
 * **Course Code:** `21CSC305P` — Machine Learning
 * **Project Component:** Final Integrated Project (PBL-1, PBL-2, PBL-3 & Viva-Voce)
 * **Student Team:**
-  - **Parth Gupta** (`RA2311026010001`) — Lead Engineer & Mathematical Modelling
+  - **Parth Gupta** (`RA2411003010019`) — Lead Engineer & Mathematical Modelling
   - **Mokshith Penna** (`RA2411003010044`) — Unsupervised Clustering & Sequential Formulations
   - **Ishu Gurtu** (`RA2411003010015`) — Ensemble Architecture & Empirical Evaluation
 * **Faculty Supervisor:** **Dr. Divya Mohan** (Assistant Professor, Department of Computing Technologies)

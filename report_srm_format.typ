@@ -99,7 +99,7 @@
   
   #v(0.08in)
   #text(11pt, weight: "bold")[
-    PARTH GUPTA [RA2311026010001]\
+    PARTH GUPTA [RA2411003010019]\
     MOKSHITH PENNA [RA2411003010044]\
     ISHU GURTU [RA2411003010015]
   ]
@@ -155,7 +155,7 @@
 ]
 #v(0.3in)
 
-Certified that this project report titled *"DEBATE-BASED CAREER GUIDANCE AGENT WITH COMPLEMENTARY PERSONAS"* is the bonafide work of *PARTH GUPTA* [RA2311026010001], *MOKSHITH PENNA* [RA2411003010044], and *ISHU GURTU* [RA2411003010015] who carried out the project work under my supervision for the course *21CSC305P - Machine Learning* during the Academic Year 2026–2027.
+Certified that this project report titled *"DEBATE-BASED CAREER GUIDANCE AGENT WITH COMPLEMENTARY PERSONAS"* is the bonafide work of *PARTH GUPTA* [RA2411003010019], *MOKSHITH PENNA* [RA2411003010044], and *ISHU GURTU* [RA2411003010015] who carried out the project work under my supervision for the course *21CSC305P - Machine Learning* during the Academic Year 2026–2027.
 
 #v(1.0in)
 #grid(

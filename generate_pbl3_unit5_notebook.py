@@ -36,7 +36,7 @@ cells.append(nbf.v4.new_markdown_cell("""# 🌲 SRMIST 21CSC305P Machine Learnin
 **Project Topic:** Debate-Based Career Guidance Agent with Complementary Personas  
 **Assigned Scope:** **Unit 5 (Decision Trees, Bagging, Random Forest, AdaBoost, GBDT, Ensemble Stacking & Capstone Integration)**  
 **Student Authors:**  
-* **Parth Gupta** (RA2311026010001)  
+* **Parth Gupta** (RA2411003010019)  
 * **Mokshith Penna** (RA2411003010044)  
 * **Ishu Gurtu** (RA2411003010015)  
 **Academic Supervisors:** Dr. Divya Mohan, Dr. G. Niranjana  
@@ -467,7 +467,7 @@ engine = DialecticalDebateEngine()
 
 # Test Case 1: High-Achieving AI Specialist (Parth)
 candidate_1 = [95, 96, 98, 92, 90, 80, 86, 96, 85, 10, 10, 8, 10, 8]
-engine.evaluate_candidate("Parth Gupta (RA2311026010001) - AI Specialist", candidate_1, rf_model, scaler, class_names)
+engine.evaluate_candidate("Parth Gupta (RA2411003010019) - AI Specialist", candidate_1, rf_model, scaler, class_names)
 
 # Test Case 2: Boundary Profile (Triggers Ethics Override)
 candidate_2 = [74, 74, 75, 75, 74, 73, 74, 74, 75, 7, 6, 2, 6, 6]

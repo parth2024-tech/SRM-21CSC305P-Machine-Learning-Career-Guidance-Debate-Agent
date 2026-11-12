@@ -30,7 +30,7 @@ cells.append(nbf.v4.new_markdown_cell("""# 🎓 SRMIST - 21CSC305P Machine Learn
 * **Course:** 21CSC305P - Machine Learning (PBL-1, PBL-2, PBL-3 & Final Integrated Project)
 * **Project Title:** Debate-Based Career Guidance Agent with Complementary Personas
 * **Student Team:**
-  - **Parth Gupta** (RA2311026010001)
+  - **Parth Gupta** (RA2411003010019)
   - **Mokshith Penna** (RA2411003010044)
   - **Ishu Gurtu** (RA2411003010015)
 * **Faculty Supervisor:** Dr. Divya Mohan (Assistant Professor)

@@ -6,7 +6,8 @@ exclude = [
     "__pycache__",
     "build_full_notebook.py",
     "generate_notebook.py",
-    "generate_unit3_unit4_notebook.py"
+    "generate_unit3_unit4_notebook.py",
+    "generate_pbl3_unit5_notebook.py"
 ]
 
 [tool.ruff.lint]
@@ -24,7 +25,8 @@ exclude = [
     ".venv",
     "build_full_notebook.py",
     "generate_notebook.py",
-    "generate_unit3_unit4_notebook.py"
+    "generate_unit3_unit4_notebook.py",
+    "generate_pbl3_unit5_notebook.py"
 ]
 
 [tool.pytest.ini_options]

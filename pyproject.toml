@@ -7,7 +7,8 @@ exclude = [
     "build_full_notebook.py",
     "generate_notebook.py",
     "generate_unit3_unit4_notebook.py",
-    "generate_pbl3_unit5_notebook.py"
+    "generate_pbl3_unit5_notebook.py",
+    "generate_defense_presentation.py"
 ]
 
 [tool.ruff.lint]
@@ -26,7 +27,8 @@ exclude = [
     "build_full_notebook.py",
     "generate_notebook.py",
     "generate_unit3_unit4_notebook.py",
-    "generate_pbl3_unit5_notebook.py"
+    "generate_pbl3_unit5_notebook.py",
+    "generate_defense_presentation.py"
 ]
 
 [tool.pytest.ini_options]
